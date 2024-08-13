@@ -28,4 +28,9 @@ public class CardService {
     public void deleteCardById(Long id) {
         cardRepository.deleteById(id);
     }
+
+    // testing
+    public long countCards() {
+        return cardRepository.count();
+    }
 }

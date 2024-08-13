@@ -1,5 +1,6 @@
 package com.competition.competition.controller;
 
+import com.competition.competition.dto.CardRequest;
 import com.competition.competition.entity.Card;
 import com.competition.competition.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +21,17 @@ public class CardController {
         return cardService.getAllCards();
     }
 
-    @GetMapping
-    public Card getCardById(Long id) {
+    @GetMapping("/{id}")
+    public Card getCardById(@PathVariable Long id) {
         return cardService.getCardById(id);
     }
 
-    @PostMapping
-    public Card addCard(String name, String set) {
+    // take in a JSON body with card details
+    @PostMapping("/add")
+    public Card addCard(@RequestBody CardRequest cardRequest) {
         Card card = new Card();
-        card.setName(name);
-        card.setSet(set);
+        card.setName(cardRequest.getName());
+        card.setSet(cardRequest.getSet());
         return cardService.addCard(card);
     }
 
