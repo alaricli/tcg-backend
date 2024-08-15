@@ -1,7 +1,15 @@
 package com.competition.competition.enums;
 
 public enum Stage {
-    Basic,
-    Stage1,
-    Stage2
+    BASIC,
+    STAGE1,
+    STAGE2,
+    V,
+    VMAX,
+    ex,
+    EX,
+    RADIANT,
+    TRAINER,
+    ENERGY,
+    ACESPEC
 }
