@@ -1,7 +1,11 @@
-export default function page() {
+const page = () => {
   return (
     <section className="py-24">
-      <h1 className="text-3xl font-bold">Starter</h1>
+      <div className="container">
+        <h1 className="text-3xl font-bold">Starter</h1>
+      </div>
     </section>
-  )
-}
+  );
+};
+
+export default page;
