@@ -1,5 +1,6 @@
 package com.competition.competition.controller;
 
+import com.competition.competition.dto.CardRequest;
 import com.competition.competition.entity.Card;
 import com.competition.competition.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class CardController {
     @GetMapping("/getCard")
     public Card getCardById(@RequestParam Long id) {
         return cardService.getCardById(id);
+    }
+
+    @PostMapping("/addCard")
+    public ResponseEntity<Card> addCard(@RequestBody CardRequest cardRequest) {
+        Card newCard = cardService.createCard(cardRequest);
+        return ResponseEntity.ok(newCard);
     }
 
     @DeleteMapping
