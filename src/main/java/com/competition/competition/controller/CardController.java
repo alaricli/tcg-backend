@@ -15,9 +15,14 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
-    @GetMapping
+    @GetMapping("/getAll")
     public List<Card> getAllCards() {
         return cardService.getAllCards();
+    }
+
+    @GetMapping("/getCard")
+    public Card getCardById(@RequestParam Long id) {
+        return cardService.getCardById(id);
     }
 
     @DeleteMapping

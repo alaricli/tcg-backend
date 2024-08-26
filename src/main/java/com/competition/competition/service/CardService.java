@@ -14,6 +14,7 @@ public class CardService {
     @Autowired
     private CardRepository cardRepository;
 
+    // GET
     public List<Card> getAllCards() {
         return cardRepository.findAll();
     }
@@ -22,10 +23,17 @@ public class CardService {
         return cardRepository.findById(id).orElse(null);
     }
 
+    // POST
     public Card addCard(Card Card) {
         return cardRepository.save(Card);
     }
 
+    // PUT
+    public Card updateCard(Card Card) {
+        return cardRepository.save(Card);
+    }
+
+    // DELETE
     public ResponseEntity<Void> deleteCardById(Long id) {
         cardRepository.deleteById(id);
         return null;
