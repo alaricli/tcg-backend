@@ -16,8 +16,7 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())  // Disable CSRF protection if not needed
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/card/**").permitAll()  // Allow access to /api/card/add
-                        .requestMatchers("/api/card/**").authenticated()  // Require authentication for other card-related endpoints
+                        .requestMatchers("/api/**").permitAll()  // Allow access to /api/card/add
                         .anyRequest().authenticated()  // Require authentication for any other requests
                 )
                 .httpBasic(Customizer.withDefaults());  // Enable HTTP Basic authentication

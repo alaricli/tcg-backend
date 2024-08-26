@@ -1,17 +1,27 @@
 package com.competition.competition.entity;
 
+import com.competition.competition.enums.Series;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table(name = "expansion")
+@Table(name = "expansion", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"series", "name"})
+})
 public class Expansion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "series", nullable = false)
+    private Series series;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
     @OneToMany(mappedBy = "expansion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Card> cards;
 
@@ -37,5 +47,13 @@ public class Expansion {
 
     public void setCards(List<Card> cards) {
         this.cards = cards;
+    }
+
+    public Series getSeries() {
+        return series;
+    }
+
+    public void setSeries(Series series) {
+        this.series = series;
     }
 }

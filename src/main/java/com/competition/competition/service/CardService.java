@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CardService {
@@ -32,6 +33,13 @@ public class CardService {
     public Card createCard(CardRequest cardRequest) {
         Card card = makeCard(cardRequest);
         return cardRepository.save(card);
+    }
+
+    public List<Card> createCards(List<CardRequest> cardRequests) {
+        List<Card> newCards = cardRequests.stream()
+                .map(this::makeCard)
+                .collect(Collectors.toList());
+        return cardRepository.saveAll(newCards);
     }
 
     // PUT

@@ -26,4 +26,4 @@ replay_pid*
 src/main/resources/application.properties
 target/classes/application.properties
 docker-compose.yml
-.idea/
+.idea/!/src/main/java/com/competition/competition/controller/TestController.java
