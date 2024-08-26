@@ -35,8 +35,13 @@ public class CardService {
     }
 
     // PUT
-    public Card updateCard(Card Card) {
-        return cardRepository.save(Card);
+    public Card updateCard(Long cardId, CardRequest cardRequest) {
+        Card target = cardRepository.findById(cardId).orElse(null);
+        if (target != null) {
+            updateEntityFromRequest(target, cardRequest);
+            return cardRepository.save(target);
+        }
+        return cardRepository.save(target);
     }
 
     // DELETE
@@ -57,8 +62,8 @@ public class CardService {
 
         card.setHp(cardRequest.getHp());
         card.setRetreatCost(cardRequest.getRetreatCost());
-        card.setName(cardRequest.getName());
         card.setArtist(cardRequest.getArtist());
+        card.setName(cardRequest.getName());
         card.setPicUrl(cardRequest.getPicUrl());
         card.setAbility(cardRequest.getAbility());
         card.setPrice(cardRequest.getPrice());

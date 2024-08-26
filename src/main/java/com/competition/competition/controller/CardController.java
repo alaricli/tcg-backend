@@ -16,23 +16,28 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
-    @GetMapping("/getAll")
-    public List<Card> getAllCards() {
-        return cardService.getAllCards();
-    }
-
-    @GetMapping("/getCard")
-    public Card getCardById(@RequestParam Long id) {
-        return cardService.getCardById(id);
-    }
-
     @PostMapping("/addCard")
     public ResponseEntity<Card> addCard(@RequestBody CardRequest cardRequest) {
         Card newCard = cardService.createCard(cardRequest);
         return ResponseEntity.ok(newCard);
     }
 
-    @DeleteMapping
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Card>> getAllCards() {
+        return ResponseEntity.ok(cardService.getAllCards());
+    }
+
+    @GetMapping("/getCard/{id}")
+    public ResponseEntity<Card> getCardById(@PathVariable Long id) {
+        return ResponseEntity.ok(cardService.getCardById(id));
+    }
+
+    @PutMapping("/updateCard/{id}")
+    public ResponseEntity<Card> updateCard(@PathVariable Long id, @RequestBody CardRequest cardRequest) {
+        return ResponseEntity.ok(cardService.updateCard(id, cardRequest));
+    }
+
+    @DeleteMapping("/deleteCard/{id}")
     public ResponseEntity<Void> deleteCard(@PathVariable Long id) {
         return cardService.deleteCardById(id);
     }
