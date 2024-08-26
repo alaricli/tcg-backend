@@ -1,6 +1,6 @@
 package com.competition.competition.enums;
 
-public enum Type {
+public enum EnergyType {
     FIRE,
     WATER,
     GRASS,

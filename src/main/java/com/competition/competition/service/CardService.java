@@ -3,6 +3,7 @@ package com.competition.competition.service;
 import com.competition.competition.entity.Card;
 import com.competition.competition.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +26,8 @@ public class CardService {
         return cardRepository.save(Card);
     }
 
-    public void deleteCardById(Long id) {
+    public ResponseEntity<Void> deleteCardById(Long id) {
         cardRepository.deleteById(id);
-    }
-
-    // testing
-    public long countCards() {
-        return cardRepository.count();
+        return null;
     }
 }

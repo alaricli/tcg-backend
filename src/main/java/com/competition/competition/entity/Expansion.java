@@ -5,22 +5,14 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "deck")
-public class Deck {
+@Table(name = "expansion")
+public class Expansion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     private String name;
-    private Float totalPrice;
-    private Integer wins;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "deck_card",
-            joinColumns = @JoinColumn(name = "deck_id"),
-            inverseJoinColumns = @JoinColumn(name = "card_id")
-    )
+    @OneToMany(mappedBy = "expansion", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Card> cards;
 
     public Long getId() {
@@ -37,22 +29,6 @@ public class Deck {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public Integer getWins() {
-        return wins;
-    }
-
-    public void setWins(Integer wins) {
-        this.wins = wins;
     }
 
     public List<Card> getCards() {
