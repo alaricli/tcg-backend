@@ -2,7 +2,7 @@ package com.competition.competition.dto.cardrequest;
 
 import com.competition.competition.enums.TrainerCardType;
 
-public class TrainerCardRequest {
+public class TrainerCardRequest extends CardRequest {
     private TrainerCardType trainerCardType;
 
     public TrainerCardType getTrainerCardType() {

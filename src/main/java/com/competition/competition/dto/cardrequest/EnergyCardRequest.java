@@ -3,7 +3,7 @@ package com.competition.competition.dto.cardrequest;
 import com.competition.competition.enums.EnergyCardType;
 import com.competition.competition.enums.EnergyType;
 
-public class EnergyCardRequest {
+public class EnergyCardRequest extends CardRequest {
     private EnergyCardType energyCardType;
     private EnergyType energyType;
 

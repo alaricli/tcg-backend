@@ -8,7 +8,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "pokemon_card")
 public class PokemonCard extends Card {
 
     private Boolean ability;
