@@ -1,6 +1,6 @@
 package com.competition.competition.dto;
 
-import com.competition.competition.entity.Card;
+import com.competition.competition.entity.card.Card;
 import com.competition.competition.enums.Series;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package com.competition.competition.entity;
 
+import com.competition.competition.entity.card.Card;
 import com.competition.competition.enums.Series;
 import jakarta.persistence.*;
 
