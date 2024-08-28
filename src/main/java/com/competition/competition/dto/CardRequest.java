@@ -6,9 +6,9 @@ import java.util.List;
 
 public class CardRequest {
     private Long id;
+    private String name;
     private Integer hp;
     private Integer retreatCost;
-    private String name;
     private String artist;
     private String picUrl;
     private Boolean ability;

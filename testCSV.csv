@@ -1,0 +1,2 @@
+﻿name,hp,retreatCost,artist,picUrl,ability,price,cardType,pokemonCardType,trainerCardType,energyCardType,energyType,attackEnergyType,weakness,resistance,rarity,format,expansionId
+"""test""",60,1,"""andy""",http://example.com/pikachu.png,FALSE,0.5,POKEMON,BASIC,null,null,COLORLESS,COLORLESS,COLORLESS,COLORLESS,COMMON,STANDARD,10
