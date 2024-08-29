@@ -24,58 +24,57 @@ public class CardService {
     private ExpansionRepository expansionRepository;
 
     public Card createCard(CardRequest cardRequest) {
-        Card card = null;
-        CardType cardType = cardRequest.getCardType();
+        Card card;
 
-        card = switch (cardType) {
-            case POKEMON -> createPokemonCard((PokemonCardRequest) cardRequest);
-            case TRAINER -> createTrainerCard((TrainerCardRequest) cardRequest);
-            case ENERGY -> createEnergyCard((EnergyCardRequest) cardRequest);
-            default -> throw new IllegalArgumentException("Unknown card type: " + cardType);
+        switch (cardRequest.getCardType()) {
+            case POKEMON -> card = createPokemonCard(cardRequest);
+            case TRAINER -> card = createTrainerCard(cardRequest);
+            case ENERGY -> card = createEnergyCard(cardRequest);
+            default -> throw new IllegalArgumentException("Unknown card type: " + cardRequest.getCardType());
         };
 
         return cardRepository.save(card);
     }
 
-    private Card createPokemonCard(PokemonCardRequest pokemonCardRequest) {
+    private Card createPokemonCard(CardRequest cardRequest) {
         PokemonCard pokemonCard = new PokemonCard();
-        updatePokemonFields(pokemonCard, pokemonCardRequest);
+        updatePokemonCard(pokemonCard, cardRequest);
         return pokemonCard;
     }
 
-    private Card createTrainerCard(TrainerCardRequest trainerCardRequest) {
+    private Card createTrainerCard(CardRequest cardRequest) {
         TrainerCard trainerCard = new TrainerCard();
-        updateTrainerCard(trainerCard, trainerCardRequest);
+        updateTrainerCard(trainerCard, cardRequest);
         return trainerCard;
     }
 
-    private Card createEnergyCard(EnergyCardRequest energyCardRequest) {
+    private Card createEnergyCard(CardRequest cardRequest) {
         EnergyCard energyCard = new EnergyCard();
-        updateEnergyCard(energyCard, energyCardRequest);
+        updateEnergyCard(energyCard, cardRequest);
         return energyCard;
     }
 
-    private void updatePokemonFields(PokemonCard pokemonCard, PokemonCardRequest pokemonCardRequest) {
-        updateCommonFields(pokemonCard, pokemonCardRequest);
-        pokemonCard.setAbility(pokemonCardRequest.getAbility());
-        pokemonCard.setPokemonCardType(pokemonCardRequest.getPokemonCardType());
-        pokemonCard.setHp(pokemonCardRequest.getHp());
-        pokemonCard.setRetreatCost(pokemonCardRequest.getRetreatCost());
-        pokemonCard.setWeakness(pokemonCardRequest.getWeakness());
-        pokemonCard.setResistance(pokemonCardRequest.getResistance());
-        pokemonCard.setEnergyType(pokemonCardRequest.getEnergyType());
-        pokemonCard.setAttackEnergyType(pokemonCardRequest.getAttackEnergyType());
+    private void updatePokemonCard(PokemonCard pokemonCard, CardRequest cardRequest) {
+        updateCommonFields(pokemonCard, cardRequest);
+        pokemonCard.setAbility(cardRequest.getAbility());
+        pokemonCard.setPokemonCardType(cardRequest.getPokemonCardType());
+        pokemonCard.setHp(cardRequest.getHp());
+        pokemonCard.setRetreatCost(cardRequest.getRetreatCost());
+        pokemonCard.setWeakness(cardRequest.getWeakness());
+        pokemonCard.setResistance(cardRequest.getResistance());
+        pokemonCard.setEnergyType(cardRequest.getEnergyType());
+        pokemonCard.setAttackEnergyType(cardRequest.getAttackEnergyType());
     }
 
-    private void updateEnergyCard(EnergyCard energyCard, EnergyCardRequest energyCardRequest) {
-        updateCommonFields(energyCard, energyCardRequest);
-        energyCard.setEnergyType(energyCardRequest.getEnergyType());
-        energyCard.setEnergyCardType(energyCardRequest.getEnergyCardType());
+    private void updateEnergyCard(EnergyCard energyCard, CardRequest cardRequest) {
+        updateCommonFields(energyCard, cardRequest);
+        energyCard.setEnergyType(cardRequest.getEnergyType());
+        energyCard.setEnergyCardType(cardRequest.getEnergyCardType());
     }
 
-    private void updateTrainerCard(TrainerCard trainerCard, TrainerCardRequest trainerCardRequest) {
-        updateCommonFields(trainerCard, trainerCardRequest);
-        trainerCard.setTrainerCardType(trainerCardRequest.getTrainerCardType());
+    private void updateTrainerCard(TrainerCard trainerCard, CardRequest cardRequest) {
+        updateCommonFields(trainerCard, cardRequest);
+        trainerCard.setTrainerCardType(cardRequest.getTrainerCardType());
     }
 
     private void updateCommonFields(Card card, CardRequest cardRequest) {

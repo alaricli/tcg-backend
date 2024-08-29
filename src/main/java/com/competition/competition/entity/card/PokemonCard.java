@@ -5,7 +5,6 @@ import com.competition.competition.enums.PokemonCardType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
 
 @Entity
 public class PokemonCard extends Card {
