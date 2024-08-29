@@ -1,4 +1,4 @@
-package com.competition.competition.dto.cardrequest;
+package com.competition.competition.dto;
 
 import com.competition.competition.enums.*;
 

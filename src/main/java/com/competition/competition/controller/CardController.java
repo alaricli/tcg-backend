@@ -1,6 +1,8 @@
 package com.competition.competition.controller;
 
-import com.competition.competition.dto.cardrequest.CardRequest;
+import com.competition.competition.dto.CardRequest;
+import com.competition.competition.dto.CardResponse;
+import com.competition.competition.entity.card.Card;
 import com.competition.competition.service.CardService;
 import com.competition.competition.util.CSVProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +26,27 @@ public class CardController {
             cardService.createCard(cardRequest);
         }
         return ResponseEntity.ok("Cards imported successfully");
+    }
+
+    @GetMapping("/getCardTest/{id}")
+    public ResponseEntity<Card> getCardTest(@PathVariable("id") Long id) {
+        Card card = cardService.getCardById(id);
+        return ResponseEntity.ok(card);
+    }
+
+    @GetMapping("/getCard/{id}")
+    public ResponseEntity<CardResponse> getCardById(@PathVariable Long id) {
+        Card card = cardService.getCardById(id);
+
+        if (card == null) {
+            return ResponseEntity.notFound().build();
+        }
+        CardResponse cardResponse = cardService.getCardResponse(card);
+        return ResponseEntity.ok(cardResponse);
+    }
+
+    @GetMapping("/getAll")
+    public ResponseEntity<List<Card>> getAllCards() {
+        return ResponseEntity.ok(cardService.getAllCards());
     }
 }

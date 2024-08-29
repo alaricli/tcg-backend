@@ -1,4 +1,4 @@
 ﻿name,hp,retreatCost,artist,picUrl,ability,price,cardType,pokemonCardType,trainerCardType,energyCardType,energyType,attackEnergyType,weakness,resistance,rarity,format,expansionId
-testpkm,60,1,andy,http://example.com/pikachu.png,TRUE,1.25,POKEMON,STAGE1,,,COLORLESS,COLORLESS,COLORLESS,COLORLESS,COMMON,STANDARD,10
-testtrainer,,,billy,http://example.com/pikachu.png,,0.5,TRAINER,,TRAINER_SUPPORTER,,,,,,UNCOMMON,STANDARD,10
-testenergy,,,richard,http://example.com/pikachu.png,,0.1,ENERGY,,,BASIC,GRASS,,,,RARE,STANDARD,10
+testpkm2,120,2,andy,http://example.com/pikachu.png,TRUE,2.4,POKEMON,STAGE2,,,FIRE,FIRE,WATER,GRASS,RARE,STANDARD,10
+testtrainer2,,,billy,http://example.com/pikachu.png,,0.5,TRAINER,,TRAINER_SUPPORTER,,,,,,UNCOMMON,STANDARD,10
+testenergy2,,,richard,http://example.com/pikachu.png,,0.1,ENERGY,,,BASIC,GRASS,,,,RARE,STANDARD,10
