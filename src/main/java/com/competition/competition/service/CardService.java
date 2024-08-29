@@ -1,16 +1,19 @@
 package com.competition.competition.service;
 
-import com.competition.competition.dto.CardRequest;
-import com.competition.competition.entity.Card;
+import com.competition.competition.dto.cardrequest.CardRequest;
+import com.competition.competition.dto.cardrequest.EnergyCardRequest;
+import com.competition.competition.dto.cardrequest.PokemonCardRequest;
+import com.competition.competition.dto.cardrequest.TrainerCardRequest;
 import com.competition.competition.entity.Expansion;
+import com.competition.competition.entity.card.Card;
+import com.competition.competition.entity.card.EnergyCard;
+import com.competition.competition.entity.card.PokemonCard;
+import com.competition.competition.entity.card.TrainerCard;
+import com.competition.competition.enums.CardType;
 import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class CardService {
@@ -20,71 +23,70 @@ public class CardService {
     @Autowired
     private ExpansionRepository expansionRepository;
 
-    // GET
-    public List<Card> getAllCards() {
-        return cardRepository.findAll();
-    }
-
-    public Card getCardById(Long id) {
-        return cardRepository.findById(id).orElse(null);
-    }
-
-    // POST
     public Card createCard(CardRequest cardRequest) {
-        Card card = makeCard(cardRequest);
+        Card card;
+
+        switch (cardRequest.getCardType()) {
+            case POKEMON -> card = createPokemonCard(cardRequest);
+            case TRAINER -> card = createTrainerCard(cardRequest);
+            case ENERGY -> card = createEnergyCard(cardRequest);
+            default -> throw new IllegalArgumentException("Unknown card type: " + cardRequest.getCardType());
+        };
+
         return cardRepository.save(card);
     }
 
-    public List<Card> createCards(List<CardRequest> cardRequests) {
-        List<Card> newCards = cardRequests.stream()
-                .map(this::makeCard)
-                .collect(Collectors.toList());
-        return cardRepository.saveAll(newCards);
+    private Card createPokemonCard(CardRequest cardRequest) {
+        PokemonCard pokemonCard = new PokemonCard();
+        updatePokemonCard(pokemonCard, cardRequest);
+        return pokemonCard;
     }
 
-    // PUT
-    public Card updateCard(Long cardId, CardRequest cardRequest) {
-        Card target = cardRepository.findById(cardId).orElse(null);
-        if (target != null) {
-            updateEntityFromRequest(target, cardRequest);
-            return cardRepository.save(target);
-        }
-        return cardRepository.save(target);
+    private Card createTrainerCard(CardRequest cardRequest) {
+        TrainerCard trainerCard = new TrainerCard();
+        updateTrainerCard(trainerCard, cardRequest);
+        return trainerCard;
     }
 
-    // DELETE
-    public ResponseEntity<Void> deleteCardById(Long id) {
-        cardRepository.deleteById(id);
-        return null;
+    private Card createEnergyCard(CardRequest cardRequest) {
+        EnergyCard energyCard = new EnergyCard();
+        updateEnergyCard(energyCard, cardRequest);
+        return energyCard;
     }
 
-    // HELPERS
-    private Card makeCard(CardRequest cardRequest) {
-        Card newCard = new Card();
-        updateEntityFromRequest(newCard, cardRequest);
-        return newCard;
+    private void updatePokemonCard(PokemonCard pokemonCard, CardRequest cardRequest) {
+        updateCommonFields(pokemonCard, cardRequest);
+        pokemonCard.setAbility(cardRequest.getAbility());
+        pokemonCard.setPokemonCardType(cardRequest.getPokemonCardType());
+        pokemonCard.setHp(cardRequest.getHp());
+        pokemonCard.setRetreatCost(cardRequest.getRetreatCost());
+        pokemonCard.setWeakness(cardRequest.getWeakness());
+        pokemonCard.setResistance(cardRequest.getResistance());
+        pokemonCard.setEnergyType(cardRequest.getEnergyType());
+        pokemonCard.setAttackEnergyType(cardRequest.getAttackEnergyType());
     }
 
-    private void updateEntityFromRequest(Card card, CardRequest cardRequest) {
+    private void updateEnergyCard(EnergyCard energyCard, CardRequest cardRequest) {
+        updateCommonFields(energyCard, cardRequest);
+        energyCard.setEnergyType(cardRequest.getEnergyType());
+        energyCard.setEnergyCardType(cardRequest.getEnergyCardType());
+    }
+
+    private void updateTrainerCard(TrainerCard trainerCard, CardRequest cardRequest) {
+        updateCommonFields(trainerCard, cardRequest);
+        trainerCard.setTrainerCardType(cardRequest.getTrainerCardType());
+    }
+
+    private void updateCommonFields(Card card, CardRequest cardRequest) {
         Expansion expansion = expansionRepository.findById(cardRequest.getExpansionId()).orElseThrow(() -> new RuntimeException("Expansion not found"));
 
-        card.setHp(cardRequest.getHp());
-        card.setRetreatCost(cardRequest.getRetreatCost());
-        card.setArtist(cardRequest.getArtist());
         card.setName(cardRequest.getName());
-        card.setPicUrl(cardRequest.getPicUrl());
-        card.setAbility(cardRequest.getAbility());
-        card.setPrice(cardRequest.getPrice());
         card.setCardType(cardRequest.getCardType());
-        card.setPokemonCardType(cardRequest.getPokemonCardType());
-        card.setTrainerCardType(cardRequest.getTrainerCardType());
-        card.setEnergyCardType(cardRequest.getEnergyCardType());
-        card.setEnergyCardType(cardRequest.getEnergyCardType());
-        card.setAttackEnergyType(cardRequest.getAttackEnergyType());
-        card.setWeakness(cardRequest.getWeakness());
-        card.setResistance(cardRequest.getResistance());
-        card.setRarity(cardRequest.getRarity());
-        card.setFormat(cardRequest.getFormat());
         card.setExpansion(expansion);
+        card.setArtist(cardRequest.getArtist());
+        card.setFormat(cardRequest.getFormat());
+        card.setPicUrl(cardRequest.getPicUrl());
+        card.setPrice(cardRequest.getPrice());
+        card.setRarity(cardRequest.getRarity());
     }
 }

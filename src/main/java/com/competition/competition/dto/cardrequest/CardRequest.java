@@ -1,4 +1,4 @@
-package com.competition.competition.dto;
+package com.competition.competition.dto.cardrequest;
 
 import com.competition.competition.enums.*;
 
@@ -27,36 +27,12 @@ public class CardRequest {
     private Long expansionId;
     private String expansionName;
 
-    public Boolean getAbility() {
-        return ability;
-    }
-
-    public void setAbility(Boolean ability) {
-        this.ability = ability;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getHp() {
-        return hp;
-    }
-
-    public void setHp(Integer hp) {
-        this.hp = hp;
-    }
-
-    public Integer getRetreatCost() {
-        return retreatCost;
-    }
-
-    public void setRetreatCost(Integer retreatCost) {
-        this.retreatCost = retreatCost;
     }
 
     public String getName() {
@@ -97,6 +73,70 @@ public class CardRequest {
 
     public void setCardType(CardType cardType) {
         this.cardType = cardType;
+    }
+
+    public Rarity getRarity() {
+        return rarity;
+    }
+
+    public void setRarity(Rarity rarity) {
+        this.rarity = rarity;
+    }
+
+    public Format getFormat() {
+        return format;
+    }
+
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    public List<Long> getDeckIds() {
+        return deckIds;
+    }
+
+    public void setDeckIds(List<Long> deckIds) {
+        this.deckIds = deckIds;
+    }
+
+    public Long getExpansionId() {
+        return expansionId;
+    }
+
+    public void setExpansionId(Long expansionId) {
+        this.expansionId = expansionId;
+    }
+
+    public String getExpansionName() {
+        return expansionName;
+    }
+
+    public void setExpansionName(String expansionName) {
+        this.expansionName = expansionName;
+    }
+
+    public Integer getHp() {
+        return hp;
+    }
+
+    public void setHp(Integer hp) {
+        this.hp = hp;
+    }
+
+    public Integer getRetreatCost() {
+        return retreatCost;
+    }
+
+    public void setRetreatCost(Integer retreatCost) {
+        this.retreatCost = retreatCost;
+    }
+
+    public Boolean getAbility() {
+        return ability;
+    }
+
+    public void setAbility(Boolean ability) {
+        this.ability = ability;
     }
 
     public PokemonCardType getPokemonCardType() {
@@ -153,45 +193,5 @@ public class CardRequest {
 
     public void setResistance(EnergyType resistance) {
         this.resistance = resistance;
-    }
-
-    public Rarity getRarity() {
-        return rarity;
-    }
-
-    public void setRarity(Rarity rarity) {
-        this.rarity = rarity;
-    }
-
-    public Format getFormat() {
-        return format;
-    }
-
-    public void setFormat(Format format) {
-        this.format = format;
-    }
-
-    public List<Long> getDeckIds() {
-        return deckIds;
-    }
-
-    public void setDeckIds(List<Long> deckIds) {
-        this.deckIds = deckIds;
-    }
-
-    public Long getExpansionId() {
-        return expansionId;
-    }
-
-    public void setExpansionId(Long expansionId) {
-        this.expansionId = expansionId;
-    }
-
-    public String getExpansionName() {
-        return expansionName;
-    }
-
-    public void setExpansionName(String expansionName) {
-        this.expansionName = expansionName;
     }
 }

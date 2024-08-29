@@ -1,6 +1,6 @@
 package com.competition.competition.repository;
 
-import com.competition.competition.entity.Card;
+import com.competition.competition.entity.card.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

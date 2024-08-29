@@ -1,6 +1,6 @@
 package com.competition.competition.util;
 
-import com.competition.competition.dto.CardRequest;
+import com.competition.competition.dto.cardrequest.CardRequest;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.web.multipart.MultipartFile;
