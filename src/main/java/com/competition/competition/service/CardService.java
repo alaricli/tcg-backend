@@ -1,15 +1,11 @@
 package com.competition.competition.service;
 
 import com.competition.competition.dto.cardrequest.CardRequest;
-import com.competition.competition.dto.cardrequest.EnergyCardRequest;
-import com.competition.competition.dto.cardrequest.PokemonCardRequest;
-import com.competition.competition.dto.cardrequest.TrainerCardRequest;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.entity.card.Card;
 import com.competition.competition.entity.card.EnergyCard;
 import com.competition.competition.entity.card.PokemonCard;
 import com.competition.competition.entity.card.TrainerCard;
-import com.competition.competition.enums.CardType;
 import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;

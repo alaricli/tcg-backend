@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "commonjs": true
   },
   "extends": [
     "eslint:recommended",
@@ -12,7 +13,7 @@
     "ecmaFeatures": {
       "jsx": true
     },
-    "ecmaVersion": 12,
+    "ecmaVersion": 2022,
     "sourceType": "module"
   },
   "rules": {
@@ -20,5 +21,10 @@
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off"
   },
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

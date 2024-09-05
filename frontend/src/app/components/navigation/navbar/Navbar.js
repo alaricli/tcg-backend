@@ -2,22 +2,32 @@ import Link from 'next/link';
 
 const Navbar = () => {
   return (
-    <nav>
-      <ul>
+    <nav className="bg-gray-900 p-4">
+      <ul className="flex justify-center space-x-4 text-white">
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/" className="hover:text-gray-400">
+            Home
+          </Link>
         </li>
         <li>
-          <Link href="/pages/cards">Decks</Link>
+          <Link href="/cards" className="hover:text-gray-400">
+            Cards
+          </Link>
         </li>
         <li>
-          <Link href="/pages/cards">Cards</Link>
+          <Link href="/decks" className="hover:text-gray-400">
+            Decks
+          </Link>
         </li>
         <li>
-          <Link href="/pages/cards">Tournaments</Link>
+          <Link href="/tournaments" className="hover:text-gray-400">
+            Tournaments
+          </Link>
         </li>
         <li>
-          <Link href="/pages/cards">Blog</Link>
+          <Link href="/blog" className="hover:text-gray-400">
+            Blog
+          </Link>
         </li>
       </ul>
     </nav>
