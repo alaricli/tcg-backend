@@ -37,10 +37,8 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF protection if not needed
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/get/**").permitAll()
-                        .requestMatchers("/api/**").permitAll()  // Allow access to /api/card/add
-                        .anyRequest().authenticated()  // Require authentication for any other requests
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults());  // Enable HTTP Basic authentication
         return http.build();

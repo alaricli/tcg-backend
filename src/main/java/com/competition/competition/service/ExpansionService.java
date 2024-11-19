@@ -42,6 +42,20 @@ public class ExpansionService {
         return expansionRepository.save(expansion);
     }
 
+//    public Expansion updateExpansion(Long id, ExpansionRequest expansionRequest) {
+//        Expansion expansion = expansionRepository.findById(id).orElse(null);
+//        throw new UnsupportedOperationException("not implemented yet");
+//    }
+
+    public boolean deleteExpansion(Long id) {
+        Expansion expansion = expansionRepository.findById(id).orElse(null);
+        if (expansion == null) {
+            return false;
+        }
+        expansionRepository.delete(expansion);
+        return true;
+    }
+
     // Helper Functions
     private Expansion makeExpansion(ExpansionRequest expansionRequest) {
         Expansion newExpansion = new Expansion();

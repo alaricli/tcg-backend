@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping("/api/expansion")
 public class ExpansionController {
 
-    // TODO: delete expansion by ID
+    // TODO: edit expansion by ID
 
     @Autowired
     private ExpansionService expansionService;
@@ -41,12 +41,29 @@ public class ExpansionController {
         return ResponseEntity.ok(expansion);
     }
 
-    @PutMapping("/put/{id}")
+//    @PutMapping("/put/{id}")
+//    public ResponseEntity<ExpansionResponse> updateExpansion(@PathVariable("id") Long id, @RequestBody ExpansionRequest expansionRequest) {
+//        try {
+//            ExpansionResponse updatedExpansion = expansionService.updateExpansion(id, expansionRequest);
+//            if (updatedExpansion == null) {
+//                return ResponseEntity.notFound().build();
+//            }
+//            return ResponseEntity.ok(updatedExpansion);
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.badRequest().build();
+//        }
+//    }
 
     @DeleteMapping("/delete/{id}")
-
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("Hello World");
+    public ResponseEntity<Void> deleteExpansionById(@PathVariable("id") Long id) {
+        try {
+            boolean deleted = expansionService.deleteExpansion(id);
+            if (!deleted) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 }

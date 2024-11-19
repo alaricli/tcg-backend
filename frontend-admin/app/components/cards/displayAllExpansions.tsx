@@ -1,8 +1,16 @@
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
+import { useState } from "react";
+import DeleteButton from "../common/DeleteButton";
 
 const DisplayAllExpansions = () => {
-  const expansions =
+  const initialExpansions =
     useLoaderData<{ id: number; series: string; name: string }[]>() || [];
+
+  const [expansions, setExpansions] = useState(initialExpansions);
+
+  const handleDeleteSuccess = (id: number) => {
+    setExpansions((prev) => prev.filter((expansion) => expansion.id !== id));
+  };
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-lg mt-4">
@@ -26,15 +34,16 @@ const DisplayAllExpansions = () => {
                 <strong>name:</strong> {expansion.name}
               </p>
               <div>
-                <button className="mr-2">
+                <Link to={`/expansions/${expansion.id}`} className="mr-2">
                   <p className="hover:underline">view</p>
-                </button>
+                </Link>
                 <button className="mr-2">
                   <p className="hover:underline">edit</p>
                 </button>
-                <button className="">
-                  <p className="text-red-700 hover:underline">delete</p>
-                </button>
+                <DeleteButton
+                  expansionId={expansion.id}
+                  onSuccess={() => handleDeleteSuccess(expansion.id)}
+                />
               </div>
             </li>
           ))}
@@ -42,7 +51,6 @@ const DisplayAllExpansions = () => {
       )}
       <p>click view to go to dedicated expansion page</p>
       <p>click edit to dropdown textbox to quickly edit series or name</p>
-      <p>click delete to quickly delete</p>
     </div>
   );
 };
