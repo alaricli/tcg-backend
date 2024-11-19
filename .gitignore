@@ -28,3 +28,4 @@ target/classes/application.properties
 docker-compose.yml
 .idea/!/src/main/java/com/competition/competition/controller/TestController.java
 .vscode
+frontend-admin/node_modules

@@ -17,6 +17,10 @@ public class CardController {
     @Autowired
     private CardService cardService;
 
+    // TODO: Get All Cards
+    // TODO: Get Card by ID
+    // TODO: Delete Card
+
     @PostMapping("/import")
     public ResponseEntity<String> importCards(@RequestParam("file") MultipartFile file) {
         List<CardRequest> cardRequests = CSVProcessor.csvToCards(file);
