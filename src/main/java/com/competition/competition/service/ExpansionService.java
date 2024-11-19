@@ -18,30 +18,19 @@ public class ExpansionService {
 
     @Autowired
     private ExpansionRepository expansionRepository;
-    @Autowired
-    private CardRepository cardRepository;
-
-    public List<Expansion> getAllExpansionsWorking() {
-        return expansionRepository.findAll();
-    }
 
     public List<ExpansionResponse> getAllExpansions() {
-        return expansionRepository.findAll().stream().map(expansion -> {
-            ExpansionResponse expansionResponse = new ExpansionResponse();
-            expansionResponse.setId(expansion.getId());
-            expansionResponse.setName(expansion.getName());
-            expansionResponse.setSeries(expansion.getSeries());
-
-            List<CardResponse> cardResponses = expansion.getCards().stream().map(CardResponseMapper::toCardResponse).collect(Collectors.toList());
-
-            expansionResponse.setCards(cardResponses);
-            return expansionResponse;
-        })
+        return expansionRepository.findAll().stream()
+                .map(this::mapExpansionToResponse)
                 .collect(Collectors.toList());
     }
 
-    public Expansion getExpansionById(Long id) {
-        return expansionRepository.findById(id).orElse(null);
+    public ExpansionResponse getExpansionById(Long id) {
+        Expansion expansion = expansionRepository.findById(id).orElse(null);
+        if (expansion == null) {
+            return null;
+        }
+        return mapExpansionToResponse(expansion);
     }
 
     public Expansion createExpansion(ExpansionRequest expansionRequest) {
@@ -63,5 +52,19 @@ public class ExpansionService {
     private void updateExpansionFromRequest(Expansion expansion, ExpansionRequest expansionRequest) {
         expansion.setSeries(expansionRequest.getSeries());
         expansion.setName(expansionRequest.getName());
+    }
+
+    private ExpansionResponse mapExpansionToResponse(Expansion expansion) {
+        ExpansionResponse expansionResponse = new ExpansionResponse();
+        expansionResponse.setId(expansion.getId());
+        expansionResponse.setName(expansion.getName());
+        expansionResponse.setSeries(expansion.getSeries());
+
+        List<CardResponse> cardResponses = expansion.getCards().stream()
+                .map(CardResponseMapper::toCardResponse)
+                .collect(Collectors.toList());
+
+        expansionResponse.setCards(cardResponses);
+        return expansionResponse;
     }
 }

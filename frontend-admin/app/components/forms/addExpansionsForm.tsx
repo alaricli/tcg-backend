@@ -1,38 +1,13 @@
-import { ActionFunction } from "@remix-run/node";
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { useState } from "react";
-
-export const action: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const series = formData.get("series");
-  const name = formData.get("name");
-
-  try {
-    const response = await fetch("http://localhost:8080/api/expansion/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ series, name }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to add expansion");
-    }
-
-    const data = await response.json();
-    return { success: true, data };
-  } catch (err) {
-    return { success: false, err: "Failed to add expansion" };
-  }
-};
+import { ActionData } from "~/routes/expansions";
 
 const AddExpansionsForm = () => {
   const [series, setSeries] = useState("");
   const [name, setName] = useState("");
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  const actionData = useActionData<typeof action>();
+  const actionData = useActionData<ActionData>();
 
   const seriesOptions = ["SCARLET_VIOLET", "SWORD_SHIELD", "SUN_MOON"];
 
