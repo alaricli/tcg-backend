@@ -11,5 +11,6 @@ public enum EnergyType {
     PSYCHIC,
     DRAGON,
     FAIRY,
-    COLORLESS
+    COLORLESS,
+    SPECIAL
 }

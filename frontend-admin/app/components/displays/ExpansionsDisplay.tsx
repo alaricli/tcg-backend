@@ -1,10 +1,10 @@
 import { Link, useLoaderData } from "@remix-run/react";
 import { useState } from "react";
-import DeleteButton from "../common/DeleteButton";
+import DeleteButton from "../common/DeleteExpansionButton";
+import { Expansion } from "~/types";
 
 const DisplayAllExpansions = () => {
-  const initialExpansions =
-    useLoaderData<{ id: number; series: string; name: string }[]>() || [];
+  const initialExpansions = useLoaderData<Expansion[]>() || [];
 
   const [expansions, setExpansions] = useState(initialExpansions);
 
@@ -49,8 +49,6 @@ const DisplayAllExpansions = () => {
           ))}
         </ul>
       )}
-      <p>click view to go to dedicated expansion page</p>
-      <p>click edit to dropdown textbox to quickly edit series or name</p>
     </div>
   );
 };

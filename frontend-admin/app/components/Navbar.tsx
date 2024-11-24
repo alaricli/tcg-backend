@@ -15,6 +15,7 @@ const Navbar = () => {
       <div className="flex items-center place-content-center p-2 bg-gray-900 text-white">
         {navigationLinks.map((link) => (
           <Link
+            key={link.href}
             to={link.href}
             className="transition-colors duration-200 hover:text-gray-400 mx-2"
           >

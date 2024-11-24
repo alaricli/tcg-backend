@@ -1,6 +1,6 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
-import { Outlet, useLocation, useMatches } from "@remix-run/react";
-import DisplayAllExpansions from "~/components/cards/displayAllExpansions";
+import { Outlet, useMatches } from "@remix-run/react";
+import DisplayAllExpansions from "~/components/displays/ExpansionsDisplay";
 import AddExpansionsForm from "~/components/forms/addExpansionsForm";
 import { ActionData, Expansion } from "~/types";
 
@@ -54,9 +54,9 @@ const ExpansionsManagementPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
+      <h1 className="text-3xl font-semibold p-4">Expansions Management</h1>
       {!isChildRoute && (
         <>
-          <h1 className="text-3xl font-semibold p-4">Expansions Management</h1>
           <div className="flex flex-col md:flex-row gap-4 justify-center items-start">
             <div className="w-full md:w-1/2 max-w-lg">
               <AddExpansionsForm />

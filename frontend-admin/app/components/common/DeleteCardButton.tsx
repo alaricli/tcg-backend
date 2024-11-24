@@ -21,7 +21,6 @@ const DeleteCardButton: React.FC<DeleteCardButtonProps> = ({ cardId }) => {
       }
     } catch (err) {
       console.error("Delete failed", err);
-      alert("Failed to delete card");
     }
   };
 

@@ -3,7 +3,6 @@ package com.competition.competition.entity.card;
 import com.competition.competition.entity.Deck;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.enums.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;

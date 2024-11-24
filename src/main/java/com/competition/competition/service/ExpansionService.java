@@ -4,6 +4,7 @@ import com.competition.competition.dto.ExpansionRequest;
 import com.competition.competition.dto.ExpansionResponse;
 import com.competition.competition.dto.cardresponse.CardResponse;
 import com.competition.competition.dto.mapper.CardResponseMapper;
+import com.competition.competition.dto.mapper.ExpansionResponseMapper;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
@@ -21,7 +22,7 @@ public class ExpansionService {
 
     public List<ExpansionResponse> getAllExpansions() {
         return expansionRepository.findAll().stream()
-                .map(this::mapExpansionToResponse)
+                .map(ExpansionResponseMapper::toExpansionResponse)
                 .collect(Collectors.toList());
     }
 
@@ -30,7 +31,7 @@ public class ExpansionService {
         if (expansion == null) {
             return null;
         }
-        return mapExpansionToResponse(expansion);
+        return ExpansionResponseMapper.toExpansionResponse(expansion);
     }
 
     public Expansion createExpansion(ExpansionRequest expansionRequest) {
@@ -66,19 +67,5 @@ public class ExpansionService {
     private void updateExpansionFromRequest(Expansion expansion, ExpansionRequest expansionRequest) {
         expansion.setSeries(expansionRequest.getSeries());
         expansion.setName(expansionRequest.getName());
-    }
-
-    private ExpansionResponse mapExpansionToResponse(Expansion expansion) {
-        ExpansionResponse expansionResponse = new ExpansionResponse();
-        expansionResponse.setId(expansion.getId());
-        expansionResponse.setName(expansion.getName());
-        expansionResponse.setSeries(expansion.getSeries());
-
-        List<CardResponse> cardResponses = expansion.getCards().stream()
-                .map(CardResponseMapper::toCardResponse)
-                .collect(Collectors.toList());
-
-        expansionResponse.setCards(cardResponses);
-        return expansionResponse;
     }
 }

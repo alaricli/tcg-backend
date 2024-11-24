@@ -58,7 +58,7 @@ public class ExpansionController {
     public ResponseEntity<Void> deleteExpansionById(@PathVariable("id") Long id) {
         try {
             boolean deleted = expansionService.deleteExpansion(id);
-            if (!deleted) {
+            if (deleted) {
                 return ResponseEntity.notFound().build();
             }
             return ResponseEntity.noContent().build();

@@ -1,6 +1,8 @@
 package com.competition.competition.service;
 
 import com.competition.competition.dto.cardrequest.CardRequest;
+import com.competition.competition.dto.cardresponse.CardResponse;
+import com.competition.competition.dto.mapper.CardResponseMapper;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.entity.card.Card;
 import com.competition.competition.entity.card.EnergyCard;
@@ -10,6 +12,9 @@ import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CardService {
@@ -32,6 +37,28 @@ public class CardService {
         return cardRepository.save(card);
     }
 
+    public List<CardResponse> getAllCards() {
+        return cardRepository.findAll().stream().map(CardResponseMapper::toCardResponse).collect(Collectors.toList());
+    }
+
+    public CardResponse getCardById(Long id) {
+        Card card = cardRepository.findById(id).orElse(null);
+        if (card == null) {
+            return null;
+        }
+        return CardResponseMapper.toCardResponse(card);
+    }
+
+    public boolean deleteCard(Long id) {
+        Card card = cardRepository.findById(id).orElse(null);
+        if (card == null) {
+            return false;
+        }
+        cardRepository.delete(card);
+        return true;
+    }
+
+//    helper functions
     private Card createPokemonCard(CardRequest cardRequest) {
         PokemonCard pokemonCard = new PokemonCard();
         updatePokemonCard(pokemonCard, cardRequest);

@@ -1,6 +1,6 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { useState } from "react";
-import { ActionData } from "~/routes/expansions";
+import { ActionData } from "~/types";
 
 const AddExpansionsForm = () => {
   const [series, setSeries] = useState("");
