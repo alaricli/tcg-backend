@@ -3,11 +3,13 @@ package com.competition.competition.dto.cardresponse;
 import com.competition.competition.enums.EnergyType;
 import com.competition.competition.enums.PokemonCardType;
 
+import java.util.List;
+
 public class PokemonCardResponse extends CardResponse {
     private Boolean ability;
     private Integer hp;
     private Integer retreatCost;
-    private PokemonCardType pokemonCardType;
+    private List<PokemonCardType> pokemonCardTypes;
     private EnergyType energyType;
     private EnergyType attackEnergyType;
     private EnergyType weakness;
@@ -35,14 +37,6 @@ public class PokemonCardResponse extends CardResponse {
 
     public void setRetreatCost(Integer retreatCost) {
         this.retreatCost = retreatCost;
-    }
-
-    public PokemonCardType getPokemonCardType() {
-        return pokemonCardType;
-    }
-
-    public void setPokemonCardType(PokemonCardType pokemonCardType) {
-        this.pokemonCardType = pokemonCardType;
     }
 
     public EnergyType getEnergyType() {
@@ -75,5 +69,15 @@ public class PokemonCardResponse extends CardResponse {
 
     public void setResistance(EnergyType resistance) {
         this.resistance = resistance;
+    }
+
+    @Override
+    public List<PokemonCardType> getPokemonCardTypes() {
+        return pokemonCardTypes;
+    }
+
+    @Override
+    public void setPokemonCardTypes(List<PokemonCardType> pokemonCardTypes) {
+        this.pokemonCardTypes = pokemonCardTypes;
     }
 }

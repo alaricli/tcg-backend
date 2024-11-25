@@ -18,21 +18,22 @@ public class CardResponseMapper {
         cardResponse.setFormat(card.getFormat());
         cardResponse.setCardType(card.getCardType());
         cardResponse.setExpansionName(card.getExpansion().getName());
+        cardResponse.setCardNumber(card.getCardNumber());
 
         if (card instanceof PokemonCard pokemonCard) {
             cardResponse.setAbility(pokemonCard.getAbility());
             cardResponse.setHp(pokemonCard.getHp());
             cardResponse.setRetreatCost(pokemonCard.getRetreatCost());
-            cardResponse.setPokemonCardType(pokemonCard.getPokemonCardType());
+            cardResponse.setPokemonCardTypes(pokemonCard.getPokemonCardTypes());
             cardResponse.setEnergyType(pokemonCard.getEnergyType());
             cardResponse.setAttackEnergyType(pokemonCard.getAttackEnergyType());
             cardResponse.setWeakness(pokemonCard.getWeakness());
             cardResponse.setResistance(pokemonCard.getResistance());
         } else if (card instanceof TrainerCard trainerCard) {
-            cardResponse.setTrainerCardType(trainerCard.getTrainerCardType());
+            cardResponse.setTrainerCardTypes(trainerCard.getTrainerCardTypes());
         } else if (card instanceof EnergyCard energyCard) {
             cardResponse.setEnergyType(energyCard.getEnergyType());
-            cardResponse.setEnergyCardType(energyCard.getEnergyCardType());
+            cardResponse.setEnergyCardTypes(energyCard.getEnergyCardTypes());
         }
 
         return cardResponse;

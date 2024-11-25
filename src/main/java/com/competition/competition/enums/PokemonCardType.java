@@ -6,8 +6,8 @@ public enum PokemonCardType {
     STAGE2,
     LEVEL_UP,
     EX,
-    ex,
-    TERA_POKEMON,
+    EX_SMALL,
+    TERA,
     MEGA,
     SP,
     LEGEND,
@@ -18,5 +18,7 @@ public enum PokemonCardType {
     V,
     VMAX,
     V_UNION,
-    VSTAR
+    VSTAR,
+    ANCIENT,
+    FUTURE
 }

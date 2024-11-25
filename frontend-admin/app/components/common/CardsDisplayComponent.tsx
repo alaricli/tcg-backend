@@ -55,7 +55,8 @@ const CardsDisplayComponent = ({ card }: CardDisplayProps) => {
             <strong>Format:</strong> {card.format || "N/A"}
           </p>
           <p>
-            <strong>Expansion:</strong> {card.expansionName || "N/A"}
+            <strong>Expansion:</strong> {card.expansionName || "N/A"} #
+            {card.cardNumber}
           </p>
         </div>
       </div>

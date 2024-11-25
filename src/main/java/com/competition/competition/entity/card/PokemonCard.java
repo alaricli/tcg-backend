@@ -2,9 +2,9 @@ package com.competition.competition.entity.card;
 
 import com.competition.competition.enums.EnergyType;
 import com.competition.competition.enums.PokemonCardType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class PokemonCard extends Card {
@@ -13,8 +13,11 @@ public class PokemonCard extends Card {
     private Integer hp;
     private Integer retreatCost;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "pokemon_card_subtypes", joinColumns = @JoinColumn(name= "pokemon_card_id"))
     @Enumerated(EnumType.STRING)
-    private PokemonCardType pokemonCardType;
+    @Column(name = "subtypes")
+    private List<PokemonCardType> pokemonCardTypes;
 
     @Enumerated(EnumType.STRING)
     private EnergyType energyType;
@@ -34,14 +37,6 @@ public class PokemonCard extends Card {
 
     public void setAbility(Boolean ability) {
         this.ability = ability;
-    }
-
-    public PokemonCardType getPokemonCardType() {
-        return pokemonCardType;
-    }
-
-    public void setPokemonCardType(PokemonCardType pokemonCardType) {
-        this.pokemonCardType = pokemonCardType;
     }
 
     public EnergyType getEnergyType() {
@@ -90,5 +85,13 @@ public class PokemonCard extends Card {
 
     public void setRetreatCost(Integer retreatCost) {
         this.retreatCost = retreatCost;
+    }
+
+    public List<PokemonCardType> getPokemonCardTypes() {
+        return pokemonCardTypes;
+    }
+
+    public void setPokemonCardTypes(List<PokemonCardType> pokemonCardTypes) {
+        this.pokemonCardTypes = pokemonCardTypes;
     }
 }

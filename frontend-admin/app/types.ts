@@ -23,6 +23,7 @@ export type Card = {
   rarity: Rarity | null;
   format: Format | null;
   expansionName: string | null;
+  cardNumber: number | null;
 };
 
 export enum CardType {

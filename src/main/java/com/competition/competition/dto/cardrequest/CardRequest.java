@@ -14,9 +14,9 @@ public class CardRequest {
     private Boolean ability;
     private Float price;
     private CardType cardType;
-    private PokemonCardType pokemonCardType;
-    private TrainerCardType trainerCardType;
-    private EnergyCardType energyCardType;
+    private List<PokemonCardType> pokemonCardTypes;
+    private List<TrainerCardType> trainerCardTypes;
+    private List<EnergyCardType> energyCardTypes;
     private EnergyType energyType;
     private EnergyType attackEnergyType;
     private EnergyType weakness;
@@ -26,6 +26,7 @@ public class CardRequest {
     private List<Long> deckIds;
     private Long expansionId;
     private String expansionName;
+    private Integer cardNumber;
 
     public Long getId() {
         return id;
@@ -139,30 +140,6 @@ public class CardRequest {
         this.ability = ability;
     }
 
-    public PokemonCardType getPokemonCardType() {
-        return pokemonCardType;
-    }
-
-    public void setPokemonCardType(PokemonCardType pokemonCardType) {
-        this.pokemonCardType = pokemonCardType;
-    }
-
-    public TrainerCardType getTrainerCardType() {
-        return trainerCardType;
-    }
-
-    public void setTrainerCardType(TrainerCardType trainerCardType) {
-        this.trainerCardType = trainerCardType;
-    }
-
-    public EnergyCardType getEnergyCardType() {
-        return energyCardType;
-    }
-
-    public void setEnergyCardType(EnergyCardType energyCardType) {
-        this.energyCardType = energyCardType;
-    }
-
     public EnergyType getEnergyType() {
         return energyType;
     }
@@ -193,5 +170,45 @@ public class CardRequest {
 
     public void setResistance(EnergyType resistance) {
         this.resistance = resistance;
+    }
+
+    public Integer getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(Integer cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public CardType getSuperType() {
+        return cardType;
+    }
+
+    public void setSuperType(CardType cardType) {
+        this.cardType = cardType;
+    }
+
+    public List<PokemonCardType> getPokemonCardTypes() {
+        return pokemonCardTypes;
+    }
+
+    public void setPokemonCardTypes(List<PokemonCardType> pokemonCardTypes) {
+        this.pokemonCardTypes = pokemonCardTypes;
+    }
+
+    public List<TrainerCardType> getTrainerCardTypes() {
+        return trainerCardTypes;
+    }
+
+    public void setTrainerCardTypes(List<TrainerCardType> trainerCardTypes) {
+        this.trainerCardTypes = trainerCardTypes;
+    }
+
+    public List<EnergyCardType> getEnergyCardTypes() {
+        return energyCardTypes;
+    }
+
+    public void setEnergyCardTypes(List<EnergyCardType> energyCardTypes) {
+        this.energyCardTypes = energyCardTypes;
     }
 }

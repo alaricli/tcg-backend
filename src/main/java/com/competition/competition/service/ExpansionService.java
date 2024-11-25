@@ -2,11 +2,8 @@ package com.competition.competition.service;
 
 import com.competition.competition.dto.ExpansionRequest;
 import com.competition.competition.dto.ExpansionResponse;
-import com.competition.competition.dto.cardresponse.CardResponse;
-import com.competition.competition.dto.mapper.CardResponseMapper;
 import com.competition.competition.dto.mapper.ExpansionResponseMapper;
 import com.competition.competition.entity.Expansion;
-import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,11 +39,6 @@ public class ExpansionService {
         Expansion expansion = makeExpansion(expansionRequest);
         return expansionRepository.save(expansion);
     }
-
-//    public Expansion updateExpansion(Long id, ExpansionRequest expansionRequest) {
-//        Expansion expansion = expansionRepository.findById(id).orElse(null);
-//        throw new UnsupportedOperationException("not implemented yet");
-//    }
 
     public boolean deleteExpansion(Long id) {
         Expansion expansion = expansionRepository.findById(id).orElse(null);

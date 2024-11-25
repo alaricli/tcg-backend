@@ -2,5 +2,6 @@ package com.competition.competition.enums;
 
 public enum EnergyCardType {
     BASIC,
-    SPECIAL
+    SPECIAL,
+    ACE_SPEC
 }
