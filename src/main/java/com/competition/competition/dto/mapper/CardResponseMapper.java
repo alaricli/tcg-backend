@@ -16,6 +16,7 @@ public class CardResponseMapper {
         cardResponse.setPrice(card.getPrice());
         cardResponse.setRarity(card.getRarity());
         cardResponse.setFormat(card.getFormat());
+        cardResponse.setCardType(card.getCardType());
         cardResponse.setExpansionName(card.getExpansion().getName());
 
         if (card instanceof PokemonCard pokemonCard) {

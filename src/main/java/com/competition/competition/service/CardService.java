@@ -59,6 +59,10 @@ public class CardService {
         }
 
         updates.forEach((key, value) -> {
+            if (key.equals("id") || key.equals("price")) {
+                return;
+            }
+
             Field field = ReflectionUtils.findField(Card.class, key);
             if (field != null) {
                 field.setAccessible(true);

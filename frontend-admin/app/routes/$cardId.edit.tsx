@@ -1,6 +1,15 @@
 import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
+import DeleteCardButton from "~/components/common/DeleteCardButton";
+import {
+  EnergyCardType,
+  EnergyType,
+  Format,
+  PokemonCardType,
+  Rarity,
+  TrainerCardType,
+} from "~/types";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const cardId = params.cardId;
@@ -21,24 +30,26 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
 export default function EditCard() {
   const { cardData, cardId } = useLoaderData<typeof loader>();
-  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState(cardData);
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSave = async () => {
     try {
+      const { id, price, ...updates } = formData;
       const response = await fetch(
-        `http://localhost:8080/api/card/patch/${formData.id}`,
+        `http://localhost:8080/api/card/put/${cardId}`,
         {
-          method: "PATCH",
+          method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(updates),
         }
       );
 
@@ -46,157 +57,330 @@ export default function EditCard() {
         throw new Error("Failed to save changes.");
       }
 
+      const updatedCard = await response.json();
       alert("Changes saved successfully!");
-      setIsEditing(false);
+      console.log(updatedCard);
     } catch (error) {
       console.error(error);
       alert("An error occurred while saving changes.");
     }
   };
   return (
-    <div className="p-4 border rounded-lg shadow">
-      <h2 className="text-xl font-bold mb-2 text-center">
-        {isEditing ? (
-          <input
-            type="text"
-            name="name"
-            value={formData.name || ""}
-            onChange={handleChange}
-            className="w-full border rounded px-2 py-1"
-          />
-        ) : (
-          formData.name || "Unknown"
-        )}
-      </h2>
+    <div className="p-4 border rounded-lg shadow min-h-screen">
       <div className="flex items-start space-x-4">
         {/* Left side: Image */}
         <div className="flex-shrink-0">
           <img
             src={formData.picUrl || "http://example.com/pikachu.png"}
             alt={formData.name || "Card image"}
-            className="w-full h-auto max-w-xs rounded mb-4"
+            className="w-full h-auto max-w-sm rounded mb-4"
           />
         </div>
         {/* Right side: Details */}
         <div className="flex-grow">
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Name:</strong> {cardData.name || "Unknown"}
+            </p>
+            <input
+              type="text"
+              name="name"
+              value={formData.name || ""}
+              onChange={handleChange}
+              className="w-full border rounded px-2 py-1 max-w-sm"
+            />
+          </div>
+
           <p>
-            <strong>ID:</strong> {formData.id}
+            <strong>ID:</strong> {cardData.id}
           </p>
-          <p>
-            <strong>Artist:</strong>{" "}
-            {isEditing ? (
-              <input
-                type="text"
-                name="artist"
-                value={formData.artist || ""}
-                onChange={handleChange}
-                className="w-full border rounded px-2 py-1"
-              />
-            ) : (
-              formData.artist || "N/A"
-            )}
-          </p>
-          <p>
-            <strong>HP:</strong>{" "}
-            {isEditing ? (
+
+          <div className=" space-x-4 mb-2">
+            <p>
+              <strong>Image:</strong> {formData.picUrl || "N/A"}
+            </p>
+            <input
+              type="text"
+              name="picUrl"
+              value={formData.picUrl || ""}
+              onChange={handleChange}
+              className="w-full border rounded px-2 py-1 max-w-4xl"
+            />
+          </div>
+
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Artist:</strong> {cardData.artist || "N/A"}
+            </p>
+            <input
+              type="text"
+              name="artist"
+              value={formData.artist || ""}
+              onChange={handleChange}
+              className="w-full border rounded px-2 py-1 max-w-sm"
+            />
+          </div>
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>HP:</strong> {cardData.hp || "N/A"}
+              </p>
               <input
                 type="number"
                 name="hp"
                 value={formData.hp || ""}
                 onChange={handleChange}
-                className="w-full border rounded px-2 py-1"
+                className="w-full border rounded px-2 py-1 max-w-sm"
               />
-            ) : (
-              formData.hp || "N/A"
-            )}
-          </p>
-          <p>
-            <strong>Rarity:</strong>{" "}
-            {isEditing ? (
-              <select
-                name="rarity"
-                value={formData.rarity || ""}
-                onChange={handleChange}
-                className="w-full border rounded px-2 py-1"
-              >
-                <option value="COMMON">Common</option>
-                <option value="RARE">Rare</option>
-                <option value="ULTRA_RARE">Ultra Rare</option>
-              </select>
-            ) : (
-              formData.rarity
-            )}
-          </p>
-          <p>
-            <strong>Price:</strong>{" "}
-            {isEditing ? (
+            </div>
+          )}
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Retreat Cost:</strong> {cardData.retreatCost || "N/A"}
+              </p>
               <input
                 type="number"
-                step="0.01"
-                name="price"
-                value={formData.price || ""}
+                name="retreatCost"
+                value={formData.retreatCost || ""}
                 onChange={handleChange}
-                className="w-full border rounded px-2 py-1"
+                className="w-full border rounded px-2 py-1 max-w-sm"
               />
-            ) : (
-              `$${formData.price?.toFixed(2) || "N/A"}`
-            )}
-          </p>
-          <p>
-            <strong>Type:</strong>{" "}
-            {formData.pokemonCardType ||
-              formData.trainerCardType ||
-              formData.energyCardType ||
-              "N/A"}
-          </p>
-          <p>
-            <strong>Energy Type:</strong> {formData.energyType || "N/A"}
-          </p>
-          <p>
-            <strong>Format:</strong> {formData.format || "N/A"}
-          </p>
-          <p>
-            <strong>Expansion:</strong>{" "}
-            {isEditing ? (
-              <input
-                type="text"
-                name="expansionName"
-                value={formData.expansionName || ""}
+            </div>
+          )}
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Ability:</strong> {cardData.ability ? "Yes" : "No"}
+              </p>
+              <select
+                name="ability"
+                value={formData.ability ? "true" : "false"}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    ability: e.target.value === "true",
+                  })
+                }
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </select>
+            </div>
+          )}
+
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Rarity:</strong> {cardData.rarity}
+            </p>
+            <select
+              name="rarity"
+              value={formData.rarity || ""}
+              onChange={handleChange}
+              className="w-full border rounded px-2 py-1 max-w-sm"
+            >
+              {Object.values(Rarity).map((rarity) => (
+                <option key={rarity} value={rarity}>
+                  {rarity}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Price:</strong>{" "}
+              {`$${cardData.price?.toFixed(2) || "N/A"}`}
+            </p>
+          </div>
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Pokemon Card Type:</strong>{" "}
+                {cardData.pokemonCardType || "N/A"}
+              </p>
+              <select
+                name="pokemonCardType"
+                value={formData.pokemonCardType || ""}
                 onChange={handleChange}
-                className="w-full border rounded px-2 py-1"
-              />
-            ) : (
-              formData.expansionName || "N/A"
-            )}
-          </p>
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(PokemonCardType).map((pokemonCardType) => (
+                  <option key={pokemonCardType} value={pokemonCardType}>
+                    {pokemonCardType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {formData.cardType === "TRAINER" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Trainer Card Type:</strong>{" "}
+                {cardData.trainerCardType || "N/A"}
+              </p>
+              <select
+                name="trainerCardType"
+                value={formData.trainerCardType || ""}
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(TrainerCardType).map((trainerCardType) => (
+                  <option key={trainerCardType} value={trainerCardType}>
+                    {trainerCardType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {formData.cardType === "ENERGY" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Energy Card Type:</strong>{" "}
+                {cardData.energyCardType || "N/A"}
+              </p>
+              <select
+                name="energyCardType"
+                value={formData.energyCardType || ""}
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(EnergyCardType).map((energyCardType) => (
+                  <option key={energyCardType} value={energyCardType}>
+                    {energyCardType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {(formData.cardType === "ENERGY" ||
+            formData.cardType === "POKEMON") && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Energy Type:</strong> {cardData.energyType || "N/A"}
+              </p>
+              <select
+                name="energyType"
+                value={formData.energyType || ""}
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(EnergyType).map((energyType) => (
+                  <option key={energyType} value={energyType}>
+                    {energyType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Attack Energy Type:</strong>{" "}
+                {cardData.attackEnergyType || "N/A"}
+              </p>
+              <select
+                name="attackEnergyType"
+                value={formData.attackEnergyType || ""}
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(EnergyType).map((energyType) => (
+                  <option key={energyType} value={energyType}>
+                    {energyType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Weakness:</strong> {cardData.weakness || "N/A"}
+              </p>
+              <select
+                name="weakness"
+                value={formData.weakness || ""}
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(EnergyType).map((energyType) => (
+                  <option key={energyType} value={energyType}>
+                    {energyType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {formData.cardType === "POKEMON" && (
+            <div className="flex items-center space-x-4 mb-2">
+              <p>
+                <strong>Resistance:</strong> {cardData.resistance || "N/A"}
+              </p>
+              <select
+                name="resistance"
+                value={formData.resistance || ""}
+                onChange={handleChange}
+                className="w-full border rounded px-2 py-1 max-w-sm"
+              >
+                {Object.values(EnergyType).map((energyType) => (
+                  <option key={energyType} value={energyType}>
+                    {energyType}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Format:</strong> {cardData.format || "N/A"}
+            </p>
+            <select
+              name="format"
+              value={formData.format || ""}
+              onChange={handleChange}
+              className="w-full border rounded px-2 py-1 max-w-sm"
+            >
+              {Object.values(Format).map((format) => (
+                <option key={format} value={format}>
+                  {format}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Card Type:</strong> {formData.cardType || "N/A"}{" "}
+            </p>
+          </div>
+
+          <div className="flex items-center space-x-4 mb-2">
+            <p>
+              <strong>Expansion:</strong> {cardData.expansionName || "N/A"}{" "}
+            </p>
+          </div>
         </div>
       </div>
-      {/* Actions */}
-      <div className="flex justify-end space-x-2 mt-4">
-        {isEditing ? (
-          <>
-            <button
-              onClick={() => setIsEditing(false)}
-              className="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-600"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSave}
-              className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
-            >
-              Save Changes
-            </button>
-          </>
-        ) : (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="px-4 py-2 text-white bg-indigo-600 rounded hover:bg-indigo-700"
-          >
-            Edit
-          </button>
-        )}
-      </div>
+      <button
+        onClick={handleSave}
+        className="mr-2 bg-blue-500 text-white rounded px-4 py-2"
+      >
+        save changes
+      </button>
+      <DeleteCardButton cardId={Number(cardId)} />
     </div>
   );
 }

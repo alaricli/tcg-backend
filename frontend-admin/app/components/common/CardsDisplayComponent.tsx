@@ -17,7 +17,10 @@ const CardsDisplayComponent = ({ card }: CardDisplayProps) => {
         <div className="flex-shrink-0">
           <img
             // src={card.picUrl || "http://example.com/pikachu.png"}
-            src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV08/SV08_EN_59.png"
+            src={
+              card.picUrl ||
+              "https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/SV08/SV08_EN_192.png"
+            }
             alt={card.name || "Card image"}
             className="w-full h-auto max-w-xs rounded mb-4"
           />

@@ -43,11 +43,21 @@ public class CardController {
         return ResponseEntity.notFound().build();
     }
 
-    @PatchMapping("/patch/{id}")
-    public ResponseEntity<CardResponse> patchCard(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
+//    @PatchMapping("/patch/{id}")
+//    public ResponseEntity<CardResponse> patchCard(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
+//        CardResponse updatedCard = cardService.updateCardById(id, updates);
+//        if (updatedCard != null) {
+//            return ResponseEntity.ok(updatedCard);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
+
+    @PutMapping("/put/{id}")
+    public ResponseEntity<CardResponse> putCard(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
         CardResponse updatedCard = cardService.updateCardById(id, updates);
         if (updatedCard != null) {
             return ResponseEntity.ok(updatedCard);
+
         }
         return ResponseEntity.notFound().build();
     }

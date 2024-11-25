@@ -18,6 +18,7 @@ public class Card {
     private String artist;
     private String picUrl;
     private Float price;
+    private Integer cardNumber;
 
     @Enumerated(EnumType.STRING)
     private CardType cardType;
@@ -114,5 +115,13 @@ public class Card {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(Integer cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }

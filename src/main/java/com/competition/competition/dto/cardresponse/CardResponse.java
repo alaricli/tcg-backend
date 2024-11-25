@@ -24,6 +24,7 @@ public class CardResponse {
     private Rarity rarity;
     private Format format;
     private String expansionName;
+    private Integer cardNumber;
 
     public Long getId() {
         return id;
@@ -175,5 +176,13 @@ public class CardResponse {
 
     public void setResistance(EnergyType resistance) {
         this.resistance = resistance;
+    }
+
+    public Integer getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(Integer cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }
