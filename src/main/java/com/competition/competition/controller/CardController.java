@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/card")
@@ -38,6 +39,15 @@ public class CardController {
         CardResponse cardResponse = cardService.getCardById(id);
         if (cardResponse != null) {
             return ResponseEntity.ok(cardResponse);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PatchMapping("/patch/{id}")
+    public ResponseEntity<CardResponse> patchCard(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
+        CardResponse updatedCard = cardService.updateCardById(id, updates);
+        if (updatedCard != null) {
+            return ResponseEntity.ok(updatedCard);
         }
         return ResponseEntity.notFound().build();
     }

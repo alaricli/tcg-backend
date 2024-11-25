@@ -1,7 +1,6 @@
 import { useLoaderData } from "@remix-run/react";
 import { useState } from "react";
 import { Card } from "~/types";
-import DeleteCardButton from "../common/DeleteCardButton";
 import CardsDisplayComponent from "../common/CardsDisplayComponent";
 
 const CardsDisplay = () => {

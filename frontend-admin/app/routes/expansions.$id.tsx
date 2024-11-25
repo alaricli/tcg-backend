@@ -1,6 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
+import { LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import DeleteCardButton from "~/components/common/DeleteCardButton";
 import CardsDisplayComponent from "~/components/common/CardsDisplayComponent";
 import { Expansion } from "~/types";
 
@@ -16,7 +15,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     }
 
     const data = await response.json();
-    return json(data);
+    return data;
   } catch (err) {
     throw new Response("Error loading expansion", { status: 500 });
   }

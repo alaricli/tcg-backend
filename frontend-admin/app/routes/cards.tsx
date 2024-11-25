@@ -1,7 +1,6 @@
-import { json, LoaderFunction } from "@remix-run/node";
+import { LoaderFunction } from "@remix-run/node";
 import CardsDisplay from "~/components/displays/CardsDisplay";
-import AddCardsForm from "~/components/forms/addCardsForm";
-import { Card } from "~/types";
+import AddCardsForm from "~/components/forms/AddCardsForm";
 
 export const loader: LoaderFunction = async () => {
   try {
@@ -12,7 +11,7 @@ export const loader: LoaderFunction = async () => {
     }
 
     const data = await response.json();
-    return json<Card[]>(data);
+    return data;
   } catch (err) {
     throw new Response("Failed to fetch cards", { status: 500 });
   }

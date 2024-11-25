@@ -1,5 +1,6 @@
 import { Card } from "~/types";
 import DeleteCardButton from "./DeleteCardButton";
+import { Link, useNavigate } from "@remix-run/react";
 
 type CardDisplayProps = {
   card: Card;
@@ -55,7 +56,10 @@ const CardsDisplayComponent = ({ card }: CardDisplayProps) => {
           </p>
         </div>
       </div>
-      <div>
+      <div className="flex">
+        <Link to={`/${card.id}/edit`} className="mr-2 hover:underline">
+          edit
+        </Link>
         <DeleteCardButton cardId={card.id} />
       </div>
     </li>

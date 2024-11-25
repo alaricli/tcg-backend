@@ -1,7 +1,7 @@
 import { ActionFunction, json, LoaderFunction } from "@remix-run/node";
 import { Outlet, useMatches } from "@remix-run/react";
 import DisplayAllExpansions from "~/components/displays/ExpansionsDisplay";
-import AddExpansionsForm from "~/components/forms/addExpansionsForm";
+import AddExpansionsForm from "~/components/forms/AddExpansionsForm";
 import { ActionData, Expansion } from "~/types";
 
 export const action: ActionFunction = async ({ request }) => {
