@@ -22,8 +22,11 @@ public class PokemonCard extends Card {
     @Enumerated(EnumType.STRING)
     private EnergyType energyType;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "pokemon_card_attackEnergyTypes", joinColumns = @JoinColumn(name= "pokemon_card_id"))
     @Enumerated(EnumType.STRING)
-    private EnergyType attackEnergyType;
+    @Column(name = "attack_energy_types")
+    private List<EnergyType> attackEnergyTypes;
 
     @Enumerated(EnumType.STRING)
     private EnergyType weakness;
@@ -45,14 +48,6 @@ public class PokemonCard extends Card {
 
     public void setEnergyType(EnergyType energyType) {
         this.energyType = energyType;
-    }
-
-    public EnergyType getAttackEnergyType() {
-        return attackEnergyType;
-    }
-
-    public void setAttackEnergyType(EnergyType attackEnergyType) {
-        this.attackEnergyType = attackEnergyType;
     }
 
     public EnergyType getWeakness() {
@@ -93,5 +88,13 @@ public class PokemonCard extends Card {
 
     public void setPokemonCardTypes(List<PokemonCardType> pokemonCardTypes) {
         this.pokemonCardTypes = pokemonCardTypes;
+    }
+
+    public List<EnergyType> getAttackEnergyTypes() {
+        return attackEnergyTypes;
+    }
+
+    public void setAttackEnergyTypes(List<EnergyType> attackEnergyTypes) {
+        this.attackEnergyTypes = attackEnergyTypes;
     }
 }

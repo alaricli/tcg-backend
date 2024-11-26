@@ -43,10 +43,13 @@ const CardsDisplayComponent = ({ card }: CardDisplayProps) => {
           </p>
           <p>
             <strong>Type:</strong>{" "}
-            {card.pokemonCardType ||
-              card.trainerCardType ||
-              card.energyCardType ||
-              "N/A"}
+            {card.pokemonCardTypes && card.pokemonCardTypes.length > 0
+              ? card.pokemonCardTypes.join(", ")
+              : card.trainerCardTypes && card.trainerCardTypes.length > 0
+              ? card.trainerCardTypes.join(", ")
+              : card.energyCardTypes && card.energyCardTypes.length > 0
+              ? card.energyCardTypes.join(", ")
+              : "N/A"}
           </p>
           <p>
             <strong>Energy Type:</strong> {card.energyType || "N/A"}

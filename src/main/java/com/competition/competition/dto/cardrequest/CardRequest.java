@@ -1,7 +1,11 @@
 package com.competition.competition.dto.cardrequest;
 
 import com.competition.competition.enums.*;
+import com.opencsv.bean.AbstractBeanField;
+import com.opencsv.bean.CsvCustomBindByName;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CardRequest {
@@ -14,11 +18,15 @@ public class CardRequest {
     private Boolean ability;
     private Float price;
     private CardType cardType;
+    @CsvCustomBindByName(column = "pokemonCardTypes", converter = CardRequest.PokemonCardTypeConverter.class)
     private List<PokemonCardType> pokemonCardTypes;
+    @CsvCustomBindByName(column = "trainerCardTypes", converter = CardRequest.TrainerCardTypeConverter.class)
     private List<TrainerCardType> trainerCardTypes;
+    @CsvCustomBindByName(column = "energyCardTypes", converter = CardRequest.EnergyCardTypeConverter.class)
     private List<EnergyCardType> energyCardTypes;
     private EnergyType energyType;
-    private EnergyType attackEnergyType;
+    @CsvCustomBindByName(column = "attackEnergyTypes", converter = CardRequest.AttackEnergyTypeConverter.class)
+    private List<EnergyType> attackEnergyTypes;
     private EnergyType weakness;
     private EnergyType resistance;
     private Rarity rarity;
@@ -148,14 +156,6 @@ public class CardRequest {
         this.energyType = energyType;
     }
 
-    public EnergyType getAttackEnergyType() {
-        return attackEnergyType;
-    }
-
-    public void setAttackEnergyType(EnergyType attackEnergyType) {
-        this.attackEnergyType = attackEnergyType;
-    }
-
     public EnergyType getWeakness() {
         return weakness;
     }
@@ -210,5 +210,65 @@ public class CardRequest {
 
     public void setEnergyCardTypes(List<EnergyCardType> energyCardTypes) {
         this.energyCardTypes = energyCardTypes;
+    }
+
+    public List<EnergyType> getAttackEnergyTypes() {
+        return attackEnergyTypes;
+    }
+
+    public void setAttackEnergyTypes(List<EnergyType> attackEnergyTypes) {
+        this.attackEnergyTypes = attackEnergyTypes;
+    }
+
+    public static class PokemonCardTypeConverter extends AbstractBeanField<List<PokemonCardType>, String> {
+        @Override
+        protected Object convert(String value) {
+            if (value == null || value.isEmpty()) {
+                return new ArrayList<>();
+            }
+            return Arrays.stream(value.split(","))
+                    .map(String::trim)
+                    .map(PokemonCardType::valueOf)
+                    .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        }
+    }
+
+    public static class TrainerCardTypeConverter extends AbstractBeanField<List<TrainerCardType>, String> {
+        @Override
+        protected Object convert(String value) {
+            if (value == null || value.isEmpty()) {
+                return new ArrayList<>();
+            }
+            return Arrays.stream(value.split(","))
+                    .map(String::trim)
+                    .map(TrainerCardType::valueOf)
+                    .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        }
+    }
+
+    public static class EnergyCardTypeConverter extends AbstractBeanField<List<EnergyCardType>, String> {
+        @Override
+        protected Object convert(String value) {
+            if (value == null || value.isEmpty()) {
+                return new ArrayList<>();
+            }
+            return Arrays.stream(value.split(","))
+                    .map(String::trim)
+                    .map(EnergyCardType::valueOf)
+                    .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        }
+    }
+
+    public static class AttackEnergyTypeConverter extends AbstractBeanField<List<EnergyType>, String> {
+        @Override
+        protected Object convert(String value) {
+            if (value == null || value.isEmpty()) {
+                return new ArrayList<>();
+            }
+            return Arrays.stream(value.split(","))
+                    .map(String::trim)
+                    .map(EnergyType::valueOf)
+                    .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        }
     }
 }

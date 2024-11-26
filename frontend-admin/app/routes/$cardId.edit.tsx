@@ -202,7 +202,7 @@ export default function EditCard() {
             <div className="flex items-center space-x-4 mb-2">
               <p>
                 <strong>Pokemon Card Type:</strong>{" "}
-                {cardData.pokemonCardType || "N/A"}
+                {cardData.pokemonCardTypes.join(", ") || "N/A"}
               </p>
               <select
                 name="pokemonCardType"

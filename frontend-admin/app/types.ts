@@ -13,9 +13,9 @@ export type Card = {
   ability: boolean | null;
   price: number | null;
   cardType: CardType | null;
-  pokemonCardType: PokemonCardType | null;
-  trainerCardType: TrainerCardType | null;
-  energyCardType: EnergyCardType | null;
+  pokemonCardTypes: PokemonCardType[] | null;
+  trainerCardTypes: TrainerCardType[] | null;
+  energyCardTypes: EnergyCardType[] | null;
   energyType: EnergyType | null;
   attackEnergyType: EnergyType | null;
   weakness: EnergyType | null;
@@ -38,8 +38,8 @@ export enum PokemonCardType {
   STAGE2 = "STAGE2",
   LEVEL_UP = "LEVEL_UP",
   EX = "EX",
-  ex = "ex", // Retaining the lowercase "ex" as distinct from "EX"
-  TERA_POKEMON = "TERA_POKEMON",
+  EX_SMALL = "EX_SMALL", // Retaining the lowercase "ex" as distinct from "EX"
+  TERA = "TERA",
   MEGA = "MEGA",
   SP = "SP",
   LEGEND = "LEGEND",
@@ -51,6 +51,8 @@ export enum PokemonCardType {
   VMAX = "VMAX",
   V_UNION = "V_UNION",
   VSTAR = "VSTAR",
+  ANCIENT = "ANCIENT",
+  FUTURE = "FUTURE",
 }
 
 export enum TrainerCardType {
@@ -60,11 +62,13 @@ export enum TrainerCardType {
   TRAINER_SUPPORTER = "TRAINER_SUPPORTER",
   TECHNICAL_MACHINE = "TECHNICAL_MACHINE",
   ROCKETS_SECRET_MACHINE = "ROCKETS_SECRET_MACHINE",
+  ACE_SPEC = "ACE_SPEC",
 }
 
 export enum EnergyCardType {
   BASIC = "BASIC",
   SPECIAL = "SPECIAL",
+  ACE_SPEC = "ACE_SPEC",
 }
 
 export enum EnergyType {
@@ -72,13 +76,13 @@ export enum EnergyType {
   GRASS = "GRASS",
   FIRE = "FIRE",
   WATER = "WATER",
-  ELECTRIC = "ELECTRIC",
+  ELECTRIC = "LIGHTNING",
   PSYCHIC = "PSYCHIC",
-  DARK = "DARK",
+  DARK = "DARKNESS",
   FAIRY = "FAIRY",
   FIGHTING = "FIGHTING",
   DRAGON = "DRAGON",
-  STEEL = "STEEL",
+  STEEL = "METAL",
   SPECIAL = "SPECIAL",
 }
 

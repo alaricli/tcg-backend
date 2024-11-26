@@ -18,7 +18,7 @@ public class CardResponse {
     private List<TrainerCardType> trainerCardTypes;
     private List<EnergyCardType> energyCardTypes;
     private EnergyType energyType;
-    private EnergyType attackEnergyType;
+    private List<EnergyType> attackEnergyType;
     private EnergyType weakness;
     private EnergyType resistance;
     private Rarity rarity;

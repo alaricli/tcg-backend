@@ -21,7 +21,6 @@ public class CardRequestMapper {
             case POKEMON -> createPokemonCard(cardRequest);
             case TRAINER -> createTrainerCard(cardRequest);
             case ENERGY -> createEnergyCard(cardRequest);
-            default -> throw new IllegalArgumentException("Unknown card type: " + cardRequest.getCardType());
         };
     }
 
@@ -52,7 +51,7 @@ public class CardRequestMapper {
         pokemonCard.setWeakness(cardRequest.getWeakness());
         pokemonCard.setResistance(cardRequest.getResistance());
         pokemonCard.setEnergyType(cardRequest.getEnergyType());
-        pokemonCard.setAttackEnergyType(cardRequest.getAttackEnergyType());
+        pokemonCard.setAttackEnergyTypes(cardRequest.getAttackEnergyTypes());
     }
 
     private void updateEnergyCard(EnergyCard energyCard, CardRequest cardRequest) {
