@@ -1,13 +1,10 @@
 package com.competition.competition.entity;
 
-import com.competition.competition.entity.card.Card;
 import com.competition.competition.entity.embeddable.ExpansionImages;
 import com.competition.competition.entity.embeddable.Legalities;
 import com.competition.competition.enums.ExpansionCode;
 import com.competition.competition.enums.Series;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "expansion", uniqueConstraints = {

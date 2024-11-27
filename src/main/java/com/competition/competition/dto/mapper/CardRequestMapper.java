@@ -2,7 +2,7 @@ package com.competition.competition.dto.mapper;
 
 import com.competition.competition.dto.cardrequest.CardRequest;
 import com.competition.competition.entity.Expansion;
-import com.competition.competition.entity.card.Card;
+import com.competition.competition.entity.Card;
 import com.competition.competition.entity.card.EnergyCard;
 import com.competition.competition.entity.card.PokemonCard;
 import com.competition.competition.entity.card.TrainerCard;

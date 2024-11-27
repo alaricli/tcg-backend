@@ -1,6 +1,5 @@
 package com.competition.competition.entity;
 
-import com.competition.competition.entity.card.Card;
 import jakarta.persistence.*;
 
 import java.util.List;

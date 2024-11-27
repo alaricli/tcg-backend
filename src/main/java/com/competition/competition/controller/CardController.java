@@ -2,7 +2,7 @@ package com.competition.competition.controller;
 
 import com.competition.competition.dto.cardrequest.CardRequest;
 import com.competition.competition.dto.cardresponse.CardResponse;
-import com.competition.competition.entity.card.Card;
+import com.competition.competition.entity.Card;
 import com.competition.competition.service.CardService;
 import com.competition.competition.util.CSVProcessor;
 import org.springframework.beans.factory.annotation.Autowired;

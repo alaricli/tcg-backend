@@ -5,7 +5,7 @@ import com.competition.competition.dto.cardresponse.CardResponse;
 import com.competition.competition.dto.mapper.CardRequestMapper;
 import com.competition.competition.dto.mapper.CardResponseMapper;
 import com.competition.competition.entity.Expansion;
-import com.competition.competition.entity.card.Card;
+import com.competition.competition.entity.Card;
 import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
