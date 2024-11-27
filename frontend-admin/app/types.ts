@@ -38,7 +38,7 @@ export enum PokemonCardType {
   STAGE2 = "STAGE2",
   LEVEL_UP = "LEVEL_UP",
   EX = "EX",
-  EX_SMALL = "EX_SMALL", // Retaining the lowercase "ex" as distinct from "EX"
+  EX_SMALL = "EX_SMALL",
   TERA = "TERA",
   MEGA = "MEGA",
   SP = "SP",

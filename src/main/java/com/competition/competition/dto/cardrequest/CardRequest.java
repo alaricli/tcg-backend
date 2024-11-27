@@ -2,6 +2,7 @@ package com.competition.competition.dto.cardrequest;
 
 import com.competition.competition.enums.*;
 import com.opencsv.bean.AbstractBeanField;
+import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvCustomBindByName;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class CardRequest {
     private String picUrl;
     private Boolean ability;
     private Float price;
+    @CsvBindByName
     private CardType cardType;
     @CsvCustomBindByName(column = "pokemonCardTypes", converter = CardRequest.PokemonCardTypeConverter.class)
     private List<PokemonCardType> pokemonCardTypes;
@@ -178,14 +180,6 @@ public class CardRequest {
 
     public void setCardNumber(Integer cardNumber) {
         this.cardNumber = cardNumber;
-    }
-
-    public CardType getSuperType() {
-        return cardType;
-    }
-
-    public void setSuperType(CardType cardType) {
-        this.cardType = cardType;
     }
 
     public List<PokemonCardType> getPokemonCardTypes() {

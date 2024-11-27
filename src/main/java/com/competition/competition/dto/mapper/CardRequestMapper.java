@@ -6,7 +6,6 @@ import com.competition.competition.entity.card.Card;
 import com.competition.competition.entity.card.EnergyCard;
 import com.competition.competition.entity.card.PokemonCard;
 import com.competition.competition.entity.card.TrainerCard;
-import com.competition.competition.repository.CardRepository;
 import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

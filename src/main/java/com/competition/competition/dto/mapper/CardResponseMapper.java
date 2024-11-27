@@ -26,7 +26,7 @@ public class CardResponseMapper {
             cardResponse.setRetreatCost(pokemonCard.getRetreatCost());
             cardResponse.setPokemonCardTypes(pokemonCard.getPokemonCardTypes());
             cardResponse.setEnergyType(pokemonCard.getEnergyType());
-            cardResponse.setAttackEnergyType(pokemonCard.getAttackEnergyType());
+            cardResponse.setAttackEnergyTypes(pokemonCard.getAttackEnergyTypes());
             cardResponse.setWeakness(pokemonCard.getWeakness());
             cardResponse.setResistance(pokemonCard.getResistance());
         } else if (card instanceof TrainerCard trainerCard) {

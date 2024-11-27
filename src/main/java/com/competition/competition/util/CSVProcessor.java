@@ -19,7 +19,14 @@ public class CSVProcessor {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
-            return csvToBean.parse();
+            List<CardRequest> cardRequests = csvToBean.parse();
+
+            // Log each parsed CardRequest
+            for (CardRequest cardRequest : cardRequests) {
+                System.out.println("Parsed CardRequest: " + cardRequest);
+            }
+
+            return cardRequests;
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse CSV file" + e.getMessage());
         }

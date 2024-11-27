@@ -18,7 +18,7 @@ public class CardResponse {
     private List<TrainerCardType> trainerCardTypes;
     private List<EnergyCardType> energyCardTypes;
     private EnergyType energyType;
-    private List<EnergyType> attackEnergyType;
+    private List<EnergyType> attackEnergyTypes;
     private EnergyType weakness;
     private EnergyType resistance;
     private Rarity rarity;
@@ -130,14 +130,6 @@ public class CardResponse {
         this.energyType = energyType;
     }
 
-    public EnergyType getAttackEnergyType() {
-        return attackEnergyType;
-    }
-
-    public void setAttackEnergyType(EnergyType attackEnergyType) {
-        this.attackEnergyType = attackEnergyType;
-    }
-
     public EnergyType getWeakness() {
         return weakness;
     }
@@ -184,5 +176,13 @@ public class CardResponse {
 
     public void setEnergyCardTypes(List<EnergyCardType> energyCardTypes) {
         this.energyCardTypes = energyCardTypes;
+    }
+
+    public List<EnergyType> getAttackEnergyTypes() {
+        return attackEnergyTypes;
+    }
+
+    public void setAttackEnergyTypes(List<EnergyType> attackEnergyTypes) {
+        this.attackEnergyTypes = attackEnergyTypes;
     }
 }
