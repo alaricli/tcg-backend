@@ -1,40 +1,22 @@
-package com.competition.competition.entity;
+package com.competition.competition.dto;
 
+import com.competition.competition.entity.Card;
 import com.competition.competition.entity.embeddable.ExpansionImages;
 import com.competition.competition.entity.embeddable.Legalities;
 import com.competition.competition.enums.ExpansionCode;
 import com.competition.competition.enums.Series;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name = "expansion", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"series", "name"})
-})
-public class Expansion {
-    @Id
-    @Column(name = "id", nullable = false)
+import java.util.List;
+
+public class ExpansionRequestDTO {
     private String id;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "series", nullable = false)
     private Series series;
-
-    @Column(name = "name", nullable = false)
     private String name;
-
-    @Embedded
     private ExpansionImages expansionImages;
-
-    @Embedded
     private Legalities legalities;
-
     private Integer printedTotal;
-
     private Integer total;
-
-    @Enumerated(EnumType.STRING)
     private ExpansionCode expansionCode;
-
     private String releaseDate;
 
     public String getId() {
@@ -45,20 +27,20 @@ public class Expansion {
         this.id = id;
     }
 
-    public Series getSeries() {
-        return series;
-    }
-
-    public void setSeries(Series series) {
-        this.series = series;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Series getSeries() {
+        return series;
+    }
+
+    public void setSeries(Series series) {
+        this.series = series;
     }
 
     public ExpansionImages getExpansionImages() {

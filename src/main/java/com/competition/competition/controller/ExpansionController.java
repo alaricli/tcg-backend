@@ -1,7 +1,7 @@
 package com.competition.competition.controller;
 
-import com.competition.competition.dto.ExpansionRequest;
-import com.competition.competition.dto.ExpansionResponse;
+import com.competition.competition.dto.ExpansionRequestDTO;
+import com.competition.competition.dto.ExpansionResponseDTO;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.service.ExpansionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,20 +18,20 @@ public class ExpansionController {
     private ExpansionService expansionService;
 
     @PostMapping("/add")
-    public ResponseEntity<Expansion> addExpansion(@RequestBody ExpansionRequest expansionRequest) {
+    public ResponseEntity<Expansion> addExpansion(@RequestBody ExpansionRequestDTO expansionRequest) {
         Expansion newExpansion = expansionService.createExpansion(expansionRequest);
         return ResponseEntity.ok(newExpansion);
     }
 
     @GetMapping("/get")
-    public ResponseEntity<List<ExpansionResponse>> getAllExpansions() {
-        List<ExpansionResponse> expansions = expansionService.getAllExpansions();
+    public ResponseEntity<List<ExpansionResponseDTO>> getAllExpansions() {
+        List<ExpansionResponseDTO> expansions = expansionService.getAllExpansions();
         return ResponseEntity.ok(expansions);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ExpansionResponse> getExpansionById(@PathVariable("id") Long id) {
-        ExpansionResponse expansion = expansionService.getExpansionById(id);
+    public ResponseEntity<ExpansionResponseDTO> getExpansionById(@PathVariable("id") Long id) {
+        ExpansionResponseDTO expansion = expansionService.getExpansionById(id);
         if (expansion == null) {
             return ResponseEntity.notFound().build();
         }

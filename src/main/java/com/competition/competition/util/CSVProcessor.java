@@ -1,6 +1,6 @@
 package com.competition.competition.util;
 
-import com.competition.competition.dto.cardrequest.CardRequest;
+import com.competition.competition.dto.CardRequestDTO;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,21 +12,21 @@ import java.util.List;
 
 public class CSVProcessor {
 
-    public static List<CardRequest> csvToCards(MultipartFile file) {
+    public static List<CardRequestDTO> csvToCards(MultipartFile file) {
         try (Reader reader = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
-            CsvToBean<CardRequest> csvToBean = new CsvToBeanBuilder<CardRequest>(reader)
-                    .withType(CardRequest.class)
+            CsvToBean<CardRequestDTO> csvToBean = new CsvToBeanBuilder<CardRequestDTO>(reader)
+                    .withType(CardRequestDTO.class)
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
-            List<CardRequest> cardRequests = csvToBean.parse();
+            List<CardRequestDTO> cardRequestDTOS = csvToBean.parse();
 
-            // Log each parsed CardRequest
-            for (CardRequest cardRequest : cardRequests) {
-                System.out.println("Parsed CardRequest: " + cardRequest);
+            // Log each parsed CardRequestDTO
+            for (CardRequestDTO cardRequestDTO : cardRequestDTOS) {
+                System.out.println("Parsed CardRequestDTO: " + cardRequestDTO);
             }
 
-            return cardRequests;
+            return cardRequestDTOS;
         } catch (Exception e) {
             throw new RuntimeException("Failed to parse CSV file" + e.getMessage());
         }

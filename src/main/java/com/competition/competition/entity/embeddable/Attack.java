@@ -1,20 +1,13 @@
 package com.competition.competition.entity.embeddable;
 
-import com.competition.competition.enums.EnergyType;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-
-import java.util.List;
+import jakarta.persistence.*;
 
 @Embeddable
 public class Attack {
     private String name;
     private String text;
-    @ElementCollection
-    @Enumerated(EnumType.STRING)
-    private List<EnergyType> cost;
+    // flattened list of energy cost in one string
+    private String cost;
     private Integer numericalEnergyCost;
     private Integer damage;
 
@@ -34,11 +27,11 @@ public class Attack {
         this.text = text;
     }
 
-    public List<EnergyType> getCost() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCost(List<EnergyType> cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 

@@ -11,98 +11,89 @@ import java.util.List;
 @Entity
 @Table(name = "card")
 public class Card {
+    // Primary Key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    // Common Information
     private String name;
     private Integer hp;
-    private Integer retreatCost;
-
     private String artist;
     private String regulationMark;
-
     private Double price;
     private Double marketPrice;
-
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "rules", joinColumns = @JoinColumn(name = "card_id"))
+    @Column(name = "rules")
+    private List<String> rules;
     @Column(unique = true)
     private String identifier;
-    private Integer cardNumber;
-    private Integer nationalPokedexNumber;
-
-    private boolean hasRuleBox;
-    private boolean hasAbility;
-
-    private String ability;
-
-    private String trainerCardText;
-
-    @Enumerated(EnumType.STRING)
-    private Rarity rarity;
-
-    @Enumerated(EnumType.STRING)
-    private CardType cardType;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "expansion_id")
     private Expansion expansion;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "pokemon_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
+    private Integer cardNumber;
     @Enumerated(EnumType.STRING)
-    @Column(name = "subtypes")
-    private List<PokemonCardType> pokemonCardTypes;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "energy_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
+    private Rarity rarity;
+    @Embedded
+    private CardImages cardImages;
+    @Embedded
+    private Legalities legalities;
     @Enumerated(EnumType.STRING)
-    @Column(name = "subtypes")
-    private List<EnergyCardType> energyCardTypes;
+    private CardType cardType;
 
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "trainer_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "subtypes")
-    private List<TrainerCardType> trainerCardTypes;
-
+    // Pokemon + Energy Information
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "energy_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "energy_types")
     private List<EnergyType> energyType;
 
+    // Pokemon Information
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "pokemon_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subtypes")
+    private List<PokemonCardType> pokemonCardTypes;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "attack_energy_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "attack_energy_types")
     private List<EnergyType> attackEnergyTypes;
-
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "attacks", joinColumns = @JoinColumn(name = "card_id"))
+    private List<Attack> attacks;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "weakness_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "weakness_types")
     private List<EnergyType> weakness;
-
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "resistance_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "resistance_types")
     private List<EnergyType> resistance;
+    private Integer retreatCost;
+    private Integer nationalPokedexNumber;
+    private boolean hasRuleBox;
+    private boolean hasAbility;
+    private String ability;
 
+    // Trainer Information
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "rules", joinColumns = @JoinColumn(name = "card_id"))
-    @Column(name = "rules")
-    private List<String> rules;
+    @CollectionTable(name = "trainer_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subtypes")
+    private List<TrainerCardType> trainerCardTypes;
+    private String trainerCardText;
 
-    @Embedded
-    private CardImages cardImages;
-
-    @Embedded
-    private Legalities legalities;
-
+    // Energy Information
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "attacks", joinColumns = @JoinColumn(name = "card_id"))
-    private List<Attack> attacks;
+    @CollectionTable(name = "energy_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subtypes")
+    private List<EnergyCardType> energyCardTypes;
 
     public Long getId() {
         return id;
