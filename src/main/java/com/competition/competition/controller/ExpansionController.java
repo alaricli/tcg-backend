@@ -4,7 +4,6 @@ import com.competition.competition.dto.ExpansionRequestDTO;
 import com.competition.competition.dto.ExpansionResponseDTO;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.service.ExpansionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +12,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/expansion")
 public class ExpansionController {
+    private final ExpansionService expansionService;
 
-    @Autowired
-    private ExpansionService expansionService;
+    public ExpansionController(ExpansionService expansionService) {
+        this.expansionService = expansionService;
+    }
 
     @PostMapping("/add")
     public ResponseEntity<Expansion> addExpansion(@RequestBody ExpansionRequestDTO expansionRequest) {
@@ -30,7 +31,7 @@ public class ExpansionController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<ExpansionResponseDTO> getExpansionById(@PathVariable("id") Long id) {
+    public ResponseEntity<ExpansionResponseDTO> getExpansionById(@PathVariable("id") String id) {
         ExpansionResponseDTO expansion = expansionService.getExpansionById(id);
         if (expansion == null) {
             return ResponseEntity.notFound().build();
@@ -39,7 +40,7 @@ public class ExpansionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteExpansionById(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteExpansionById(@PathVariable("id") String id) {
         try {
             boolean deleted = expansionService.deleteExpansion(id);
             if (deleted) {

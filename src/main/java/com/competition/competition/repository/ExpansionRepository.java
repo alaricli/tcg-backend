@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExpansionRepository extends JpaRepository<Expansion, Long> {
+public interface ExpansionRepository extends JpaRepository<Expansion, String> {
     boolean existsBySeriesAndName(Series series, String name);
 }

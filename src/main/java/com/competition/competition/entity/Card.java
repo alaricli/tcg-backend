@@ -43,14 +43,14 @@ public class Card {
     @Enumerated(EnumType.STRING)
     private CardType cardType;
 
-    // Pokemon + Energy Information
+    // Pokémon + Energy Information
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "energy_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "energy_types")
     private List<EnergyType> energyType;
 
-    // Pokemon Information
+    // Pokémon Information
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "pokemon_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)

@@ -24,7 +24,7 @@ public class ExpansionService {
                 .collect(Collectors.toList());
     }
 
-    public ExpansionResponseDTO getExpansionById(Long id) {
+    public ExpansionResponseDTO getExpansionById(String id) {
         Expansion expansion = expansionRepository.findById(id).orElse(null);
         if (expansion == null) {
             return null;
@@ -41,7 +41,7 @@ public class ExpansionService {
         return expansionRepository.save(expansion);
     }
 
-    public boolean deleteExpansion(Long id) {
+    public boolean deleteExpansion(String id) {
         Expansion expansion = expansionRepository.findById(id).orElse(null);
         if (expansion == null) {
             return false;

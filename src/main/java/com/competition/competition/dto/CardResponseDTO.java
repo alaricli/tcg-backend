@@ -14,7 +14,7 @@ public class CardResponseDTO {
     private Double price;
     private Double marketPrice;
     private List<String> rules;
-    private Long expansionId; // Reference to the expansion by ID
+    private String expansionId; // Reference to the expansion by ID
     private String identifier;
     private Integer cardNumber;
     private Rarity rarity;
@@ -96,11 +96,11 @@ public class CardResponseDTO {
         this.rules = rules;
     }
 
-    public Long getExpansionId() {
+    public String getExpansionId() {
         return expansionId;
     }
 
-    public void setExpansionId(Long expansionId) {
+    public void setExpansionId(String expansionId) {
         this.expansionId = expansionId;
     }
 

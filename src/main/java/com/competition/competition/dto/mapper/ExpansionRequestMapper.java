@@ -4,7 +4,7 @@ import com.competition.competition.dto.ExpansionRequestDTO;
 import com.competition.competition.entity.Expansion;
 
 public class ExpansionRequestMapper {
-    public static Expansion requestToExpansion(ExpansionRequestDTO expansionRequestDTO) {
+    public Expansion requestToExpansion(ExpansionRequestDTO expansionRequestDTO) {
         Expansion expansion = new Expansion();
         expansion.setId(expansionRequestDTO.getId());
         expansion.setName(expansionRequestDTO.getName());
@@ -14,6 +14,7 @@ public class ExpansionRequestMapper {
         expansion.setTotal(expansionRequestDTO.getTotal());
         expansion.setExpansionImages(expansionRequestDTO.getExpansionImages());
         expansion.setLegalities(expansionRequestDTO.getLegalities());
+        expansion.setReleaseDate(expansionRequestDTO.getReleaseDate());
 
         return expansion;
     }

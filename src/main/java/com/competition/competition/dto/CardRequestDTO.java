@@ -1,5 +1,6 @@
 package com.competition.competition.dto;
 
+import com.competition.competition.entity.embeddable.Attack;
 import com.competition.competition.entity.embeddable.CardImages;
 import com.competition.competition.entity.embeddable.Legalities;
 import com.competition.competition.enums.*;
@@ -19,7 +20,7 @@ public class CardRequestDTO {
     private Double price;
     private Double marketPrice;
     private List<String> rules;
-    private Long expansionId; // Reference to the expansion by ID
+    private String expansionId; // Reference to the expansion by ID
     private String identifier;
     private Integer cardNumber;
     private Rarity rarity;
@@ -31,6 +32,7 @@ public class CardRequestDTO {
     private List<EnergyType> energyTypes; // Energy types the card can use
 
     private List<PokemonCardType> pokemonCardTypes;
+    private List<Attack> attacks;
     private List<EnergyType> attackEnergyTypes;
     private List<EnergyType> weakness;
     private List<EnergyType> resistance;
@@ -101,11 +103,11 @@ public class CardRequestDTO {
         this.rules = rules;
     }
 
-    public Long getExpansionId() {
+    public String getExpansionId() {
         return expansionId;
     }
 
-    public void setExpansionId(Long expansionId) {
+    public void setExpansionId(String expansionId) {
         this.expansionId = expansionId;
     }
 
@@ -259,5 +261,13 @@ public class CardRequestDTO {
 
     public void setEnergyCardTypes(List<EnergyCardType> energyCardTypes) {
         this.energyCardTypes = energyCardTypes;
+    }
+
+    public List<Attack> getAttacks() {
+        return attacks;
+    }
+
+    public void setAttacks(List<Attack> attacks) {
+        this.attacks = attacks;
     }
 }
