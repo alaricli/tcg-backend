@@ -24,6 +24,12 @@ public class ExpansionController {
         return ResponseEntity.ok(newExpansion);
     }
 
+    @PostMapping("/add/bulk")
+    public ResponseEntity<List<Expansion>> addExpansions(@RequestBody List<ExpansionRequestDTO> expansionRequests) {
+        List<Expansion> newExpansions = expansionService.createExpansions(expansionRequests);
+        return ResponseEntity.ok(newExpansions);
+    }
+
     @GetMapping("/get")
     public ResponseEntity<List<ExpansionResponseDTO>> getAllExpansions() {
         List<ExpansionResponseDTO> expansions = expansionService.getAllExpansions();
@@ -44,7 +50,7 @@ public class ExpansionController {
         try {
             boolean deleted = expansionService.deleteExpansion(id);
             if (deleted) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.noContent().build();
             }
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {

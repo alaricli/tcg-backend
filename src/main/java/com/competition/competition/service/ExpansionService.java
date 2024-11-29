@@ -9,6 +9,7 @@ import com.competition.competition.repository.ExpansionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +40,21 @@ public class ExpansionService {
 
         Expansion expansion = ExpansionRequestMapper.requestToExpansion(expansionRequest);
         return expansionRepository.save(expansion);
+    }
+
+    public List<Expansion> createExpansions(List<ExpansionRequestDTO> expansionRequests) {
+        List<Expansion> expansions = new ArrayList<>();
+
+        for (ExpansionRequestDTO expansionRequest : expansionRequests) {
+            if (expansionRepository.existsBySeriesAndName(expansionRequest.getSeries(), expansionRequest.getName())) {
+                throw new RuntimeException("Expansion already exists");
+            }
+
+            Expansion expansion = ExpansionRequestMapper.requestToExpansion(expansionRequest);
+            expansions.add(expansion);
+        }
+
+        return expansionRepository.saveAll(expansions);
     }
 
     public boolean deleteExpansion(String id) {

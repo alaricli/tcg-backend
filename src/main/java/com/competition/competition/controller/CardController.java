@@ -4,11 +4,8 @@ import com.competition.competition.dto.CardRequestDTO;
 import com.competition.competition.dto.CardResponseDTO;
 import com.competition.competition.entity.Card;
 import com.competition.competition.service.CardService;
-import com.competition.competition.util.CSVProcessor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,24 +19,15 @@ public class CardController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addCard(@RequestBody CardRequestDTO cardRequestDTO) {
-        try {
-            Card createdCard = cardService.createCard(cardRequestDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdCard);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while creating the card.");
-        }
+    public ResponseEntity<Card> addCard(@RequestBody CardRequestDTO cardRequestDTO) {
+        Card createdCard = cardService.createCard(cardRequestDTO);
+        return ResponseEntity.ok(createdCard);
     }
 
-    @PostMapping("/import")
-    public ResponseEntity<String> importCards(@RequestParam("file") MultipartFile file) {
-        List<CardRequestDTO> cardRequestDTOS = CSVProcessor.csvToCards(file);
-        for (CardRequestDTO cardRequestDTO : cardRequestDTOS) {
-            cardService.createCard(cardRequestDTO);
-        }
-        return ResponseEntity.ok("Cards imported successfully");
+    @PostMapping("/add/bulk")
+    public ResponseEntity<List<Card>> addCards(@RequestBody List<CardRequestDTO> cardRequestDTOList) {
+        List<Card> createdCards = cardService.createCards(cardRequestDTOList);
+        return ResponseEntity.ok(createdCards);
     }
 
     @GetMapping("/get")
@@ -61,7 +49,7 @@ public class CardController {
     public ResponseEntity<String> deleteCardById(@PathVariable("id") Long id) {
         try {
             boolean deleted = cardService.deleteCard(id);
-            if (deleted) {
+            if (!deleted) {
                 return ResponseEntity.notFound().build();
             }
             return ResponseEntity.noContent().build();

@@ -9,6 +9,7 @@ import com.competition.competition.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,17 @@ public class CardService {
     public Card createCard(CardRequestDTO cardRequestDTO) {
         Card card = cardRequestMapper.requestToCard(cardRequestDTO);
         return cardRepository.save(card);
+    }
+
+    public List<Card> createCards(List<CardRequestDTO> cardRequestDTOList) {
+        List<Card> cards = new ArrayList<>();
+
+        for (CardRequestDTO cardRequestDTO : cardRequestDTOList) {
+            Card card = cardRequestMapper.requestToCard(cardRequestDTO);
+            cards.add(card);
+        }
+
+        return cardRepository.saveAll(cards);
     }
 
     public List<CardResponseDTO> getAllCards() {
