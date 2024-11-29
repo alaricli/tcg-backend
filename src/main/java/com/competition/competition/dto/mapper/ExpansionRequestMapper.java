@@ -4,7 +4,7 @@ import com.competition.competition.dto.ExpansionRequestDTO;
 import com.competition.competition.entity.Expansion;
 
 public class ExpansionRequestMapper {
-    public Expansion requestToExpansion(ExpansionRequestDTO expansionRequestDTO) {
+    public static Expansion requestToExpansion(ExpansionRequestDTO expansionRequestDTO) {
         Expansion expansion = new Expansion();
         expansion.setId(expansionRequestDTO.getId());
         expansion.setName(expansionRequestDTO.getName());

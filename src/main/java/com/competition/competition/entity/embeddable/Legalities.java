@@ -4,31 +4,40 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Legalities {
-    private String unlimited;
-    private String expanded;
-    private String standard;
+    private boolean unlimited;
+    private boolean expanded;
+    private boolean standard;
+    private boolean mobile;
 
-    public String getUnlimited() {
+    public boolean isUnlimited() {
         return unlimited;
     }
 
-    public void setUnlimited(String unlimited) {
+    public void setUnlimited(boolean unlimited) {
         this.unlimited = unlimited;
     }
 
-    public String getExpanded() {
+    public boolean isExpanded() {
         return expanded;
     }
 
-    public void setExpanded(String expanded) {
+    public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
 
-    public String getStandard() {
+    public boolean isStandard() {
         return standard;
     }
 
-    public void setStandard(String standard) {
+    public void setStandard(boolean standard) {
         this.standard = standard;
+    }
+
+    public boolean isMobile() {
+        return mobile;
+    }
+
+    public void setMobile(boolean mobile) {
+        this.mobile = mobile;
     }
 }

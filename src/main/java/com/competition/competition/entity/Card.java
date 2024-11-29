@@ -48,7 +48,7 @@ public class Card {
     @CollectionTable(name = "energy_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "energy_types")
-    private List<EnergyType> energyType;
+    private List<EnergyType> energyTypes;
 
     // Pokémon Information
     @ElementCollection(fetch = FetchType.LAZY)
@@ -263,12 +263,12 @@ public class Card {
         this.trainerCardTypes = trainerCardTypes;
     }
 
-    public List<EnergyType> getEnergyType() {
-        return energyType;
+    public List<EnergyType> getEnergyTypes() {
+        return energyTypes;
     }
 
-    public void setEnergyType(List<EnergyType> energyType) {
-        this.energyType = energyType;
+    public void setEnergyTypes(List<EnergyType> energyType) {
+        this.energyTypes = energyType;
     }
 
     public List<EnergyType> getAttackEnergyTypes() {

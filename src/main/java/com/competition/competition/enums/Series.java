@@ -9,5 +9,6 @@ public enum Series {
     XY,
     SUN_MOON,
     SWORD_SHIELD,
-    SCARLET_VIOLET
+    SCARLET_VIOLET,
+    POCKET,
 }

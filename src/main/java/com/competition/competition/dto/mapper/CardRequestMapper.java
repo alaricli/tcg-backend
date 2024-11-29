@@ -30,11 +30,17 @@ public class CardRequestMapper {
         card.setRetreatCost(cardRequest.getRetreatCost());
         card.setIdentifier(cardRequest.getIdentifier());
         card.setLegalities(cardRequest.getLegalities());
-        card.setEnergyType(cardRequest.getEnergyTypes());
+        card.setEnergyTypes(cardRequest.getEnergyTypes());
         card.setTrainerCardText(cardRequest.getTrainerCardText());
         card.setTrainerCardTypes(cardRequest.getTrainerCardTypes());
+        card.setNationalPokedexNumber(cardRequest.getNationalPokedexNumber());
         card.setAttacks(cardRequest.getAttacks());
         card.setAttackEnergyTypes(cardRequest.getAttackEnergyTypes());
+        card.setWeakness(cardRequest.getWeakness());
+        card.setResistance(cardRequest.getResistance());
+        card.setPokemonCardTypes(cardRequest.getPokemonCardTypes());
+        card.setHasRuleBox(cardRequest.isHasRuleBox());
+        card.setHasAbility(cardRequest.isHasAbility());
         if (cardRequest.getExpansionId() != null) {
             Expansion expansion = expansionRepository.findById(cardRequest.getExpansionId()).orElse(null);
             card.setExpansion(expansion);

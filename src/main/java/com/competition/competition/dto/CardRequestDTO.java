@@ -24,13 +24,10 @@ public class CardRequestDTO {
     private String identifier;
     private Integer cardNumber;
     private Rarity rarity;
-
     private CardType cardType;
     private CardImages cardImages; // Embedded field
     private Legalities legalities; // Embedded field
-
     private List<EnergyType> energyTypes; // Energy types the card can use
-
     private List<PokemonCardType> pokemonCardTypes;
     private List<Attack> attacks;
     private List<EnergyType> attackEnergyTypes;
