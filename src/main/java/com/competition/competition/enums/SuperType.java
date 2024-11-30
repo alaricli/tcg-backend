@@ -1,6 +1,6 @@
 package com.competition.competition.enums;
 
-public enum CardType {
+public enum SuperType {
     POKEMON,
     TRAINER,
     ENERGY

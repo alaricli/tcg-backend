@@ -19,8 +19,8 @@ public class CardRequestMapper {
         card.setAbility(cardRequest.getAbility());
         card.setArtist(cardRequest.getArtist());
         card.setCardNumber(cardRequest.getCardNumber());
-        card.setCardType(cardRequest.getCardType());
-        card.setEnergyCardTypes(cardRequest.getEnergyCardTypes());
+        card.setSuperType(cardRequest.getSuperType());
+        card.setSubTypes(cardRequest.getSubTypes());
         card.setCardImages(cardRequest.getCardImages());
         card.setRarity(cardRequest.getRarity());
         card.setRegulationMark(cardRequest.getRegulationMark());
@@ -32,13 +32,11 @@ public class CardRequestMapper {
         card.setLegalities(cardRequest.getLegalities());
         card.setEnergyTypes(cardRequest.getEnergyTypes());
         card.setTrainerCardText(cardRequest.getTrainerCardText());
-        card.setTrainerCardTypes(cardRequest.getTrainerCardTypes());
         card.setNationalPokedexNumber(cardRequest.getNationalPokedexNumber());
         card.setAttacks(cardRequest.getAttacks());
         card.setAttackEnergyTypes(cardRequest.getAttackEnergyTypes());
         card.setWeakness(cardRequest.getWeakness());
         card.setResistance(cardRequest.getResistance());
-        card.setPokemonCardTypes(cardRequest.getPokemonCardTypes());
         card.setHasRuleBox(cardRequest.isHasRuleBox());
         card.setHasAbility(cardRequest.isHasAbility());
         if (cardRequest.getExpansionId() != null) {

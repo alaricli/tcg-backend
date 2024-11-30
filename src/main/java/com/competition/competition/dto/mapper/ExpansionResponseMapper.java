@@ -14,6 +14,7 @@ public class ExpansionResponseMapper {
         expansionResponse.setTotal(expansion.getTotal());
         expansionResponse.setExpansionImages(expansion.getExpansionImages());
         expansionResponse.setLegalities(expansion.getLegalities());
+        expansionResponse.setReleaseDate(expansion.getReleaseDate());
 
         return expansionResponse;
     }

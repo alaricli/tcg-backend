@@ -41,7 +41,7 @@ public class Card {
     @Embedded
     private Legalities legalities;
     @Enumerated(EnumType.STRING)
-    private CardType cardType;
+    private SuperType superType;
 
     // Pokémon + Energy Information
     @ElementCollection(fetch = FetchType.LAZY)
@@ -50,12 +50,6 @@ public class Card {
     @Column(name = "energy_types")
     private List<EnergyType> energyTypes;
 
-    // Pokémon Information
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "pokemon_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "subtypes")
-    private List<PokemonCardType> pokemonCardTypes;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "attack_energy_types", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
@@ -78,22 +72,16 @@ public class Card {
     private Integer nationalPokedexNumber;
     private boolean hasRuleBox;
     private boolean hasAbility;
+    private boolean isPocket;
     private String ability;
 
-    // Trainer Information
     @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "trainer_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
+    @CollectionTable(name = "card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
     @Enumerated(EnumType.STRING)
     @Column(name = "subtypes")
-    private List<TrainerCardType> trainerCardTypes;
+    private List<SubType> subTypes;
     private String trainerCardText;
 
-    // Energy Information
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "energy_card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "subtypes")
-    private List<EnergyCardType> energyCardTypes;
 
     public Long getId() {
         return id;
@@ -223,44 +211,12 @@ public class Card {
         this.rarity = rarity;
     }
 
-    public CardType getCardType() {
-        return cardType;
-    }
-
-    public void setCardType(CardType cardType) {
-        this.cardType = cardType;
-    }
-
     public Expansion getExpansion() {
         return expansion;
     }
 
     public void setExpansion(Expansion expansion) {
         this.expansion = expansion;
-    }
-
-    public List<PokemonCardType> getPokemonCardTypes() {
-        return pokemonCardTypes;
-    }
-
-    public void setPokemonCardTypes(List<PokemonCardType> pokemonCardTypes) {
-        this.pokemonCardTypes = pokemonCardTypes;
-    }
-
-    public List<EnergyCardType> getEnergyCardTypes() {
-        return energyCardTypes;
-    }
-
-    public void setEnergyCardTypes(List<EnergyCardType> energyCardTypes) {
-        this.energyCardTypes = energyCardTypes;
-    }
-
-    public List<TrainerCardType> getTrainerCardTypes() {
-        return trainerCardTypes;
-    }
-
-    public void setTrainerCardTypes(List<TrainerCardType> trainerCardTypes) {
-        this.trainerCardTypes = trainerCardTypes;
     }
 
     public List<EnergyType> getEnergyTypes() {
@@ -325,5 +281,29 @@ public class Card {
 
     public void setAttacks(List<Attack> attacks) {
         this.attacks = attacks;
+    }
+
+    public SuperType getSuperType() {
+        return superType;
+    }
+
+    public void setSuperType(SuperType superType) {
+        this.superType = superType;
+    }
+
+    public List<SubType> getSubTypes() {
+        return subTypes;
+    }
+
+    public void setSubTypes(List<SubType> subTypes) {
+        this.subTypes = subTypes;
+    }
+
+    public boolean isPocket() {
+        return isPocket;
+    }
+
+    public void setPocket(boolean pocket) {
+        isPocket = pocket;
     }
 }

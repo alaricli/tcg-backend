@@ -17,11 +17,9 @@ public class CardResponseMapper {
         cardResponseDTO.setIdentifier(card.getIdentifier());
         cardResponseDTO.setCardNumber(card.getCardNumber());
         cardResponseDTO.setRarity(card.getRarity());
-        cardResponseDTO.setCardType(card.getCardType());
         cardResponseDTO.setCardImages(card.getCardImages());
         cardResponseDTO.setLegalities(card.getLegalities());
         cardResponseDTO.setEnergyTypes(card.getEnergyTypes());
-        cardResponseDTO.setPokemonCardTypes(card.getPokemonCardTypes());
         cardResponseDTO.setAttackEnergyTypes(card.getAttackEnergyTypes());
         cardResponseDTO.setWeakness(card.getWeakness());
         cardResponseDTO.setResistance(card.getResistance());
@@ -30,9 +28,9 @@ public class CardResponseMapper {
         cardResponseDTO.setHasRuleBox(card.isHasRuleBox());
         cardResponseDTO.setHasAbility(card.isHasAbility());
         cardResponseDTO.setAbility(card.getAbility());
-        cardResponseDTO.setTrainerCardTypes(card.getTrainerCardTypes());
         cardResponseDTO.setTrainerCardText(card.getTrainerCardText());
-        cardResponseDTO.setEnergyCardTypes(card.getEnergyCardTypes());
+        cardResponseDTO.setSuperType(card.getSuperType());
+        cardResponseDTO.setSubTypes(card.getSubTypes());
 
         return cardResponseDTO;
     }

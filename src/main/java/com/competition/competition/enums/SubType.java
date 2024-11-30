@@ -1,6 +1,6 @@
 package com.competition.competition.enums;
 
-public enum PokemonCardType {
+public enum SubType {
     BASIC,
     STAGE1,
     STAGE2,
@@ -20,5 +20,13 @@ public enum PokemonCardType {
     V_UNION,
     VSTAR,
     ANCIENT,
-    FUTURE
+    FUTURE,
+    SPECIAL,
+    ACE_SPEC,
+    ITEM,
+    TOOL,
+    STADIUM,
+    SUPPORTER,
+    TECHNICAL_MACHINE,
+    ROCKETS_SECRET_MACHINE,
 }

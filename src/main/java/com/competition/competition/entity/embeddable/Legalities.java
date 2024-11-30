@@ -7,7 +7,6 @@ public class Legalities {
     private boolean unlimited;
     private boolean expanded;
     private boolean standard;
-    private boolean mobile;
 
     public boolean isUnlimited() {
         return unlimited;
@@ -31,13 +30,5 @@ public class Legalities {
 
     public void setStandard(boolean standard) {
         this.standard = standard;
-    }
-
-    public boolean isMobile() {
-        return mobile;
-    }
-
-    public void setMobile(boolean mobile) {
-        this.mobile = mobile;
     }
 }

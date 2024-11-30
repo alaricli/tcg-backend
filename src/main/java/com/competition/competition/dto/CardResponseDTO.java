@@ -18,14 +18,11 @@ public class CardResponseDTO {
     private String identifier;
     private Integer cardNumber;
     private Rarity rarity;
-
-    private CardType cardType;
+    private SuperType superType;
     private CardImages cardImages; // Embedded field
     private Legalities legalities; // Embedded field
-
     private List<EnergyType> energyTypes; // Energy types the card can use
-
-    private List<PokemonCardType> pokemonCardTypes;
+    private List<SubType> subTypes;
     private List<EnergyType> attackEnergyTypes;
     private List<EnergyType> weakness;
     private List<EnergyType> resistance;
@@ -34,11 +31,7 @@ public class CardResponseDTO {
     private boolean hasRuleBox;
     private boolean hasAbility;
     private String ability;
-
-    private List<TrainerCardType> trainerCardTypes;
     private String trainerCardText;
-
-    private List<EnergyCardType> energyCardTypes;
 
     public String getName() {
         return name;
@@ -128,12 +121,12 @@ public class CardResponseDTO {
         this.rarity = rarity;
     }
 
-    public CardType getCardType() {
-        return cardType;
+    public SuperType getCardType() {
+        return superType;
     }
 
-    public void setCardType(CardType cardType) {
-        this.cardType = cardType;
+    public void setCardType(SuperType superType) {
+        this.superType = superType;
     }
 
     public CardImages getCardImages() {
@@ -160,12 +153,12 @@ public class CardResponseDTO {
         this.energyTypes = energyTypes;
     }
 
-    public List<PokemonCardType> getPokemonCardTypes() {
-        return pokemonCardTypes;
+    public List<SubType> getPokemonCardTypes() {
+        return subTypes;
     }
 
-    public void setPokemonCardTypes(List<PokemonCardType> pokemonCardTypes) {
-        this.pokemonCardTypes = pokemonCardTypes;
+    public void setPokemonCardTypes(List<SubType> subTypes) {
+        this.subTypes = subTypes;
     }
 
     public List<EnergyType> getAttackEnergyTypes() {
@@ -232,14 +225,6 @@ public class CardResponseDTO {
         this.ability = ability;
     }
 
-    public List<TrainerCardType> getTrainerCardTypes() {
-        return trainerCardTypes;
-    }
-
-    public void setTrainerCardTypes(List<TrainerCardType> trainerCardTypes) {
-        this.trainerCardTypes = trainerCardTypes;
-    }
-
     public String getTrainerCardText() {
         return trainerCardText;
     }
@@ -248,11 +233,19 @@ public class CardResponseDTO {
         this.trainerCardText = trainerCardText;
     }
 
-    public List<EnergyCardType> getEnergyCardTypes() {
-        return energyCardTypes;
+    public SuperType getSuperType() {
+        return superType;
     }
 
-    public void setEnergyCardTypes(List<EnergyCardType> energyCardTypes) {
-        this.energyCardTypes = energyCardTypes;
+    public void setSuperType(SuperType superType) {
+        this.superType = superType;
+    }
+
+    public List<SubType> getSubTypes() {
+        return subTypes;
+    }
+
+    public void setSubTypes(List<SubType> subTypes) {
+        this.subTypes = subTypes;
     }
 }

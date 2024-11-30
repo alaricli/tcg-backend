@@ -9,7 +9,7 @@ public class Attack {
     // flattened list of energy cost in one string
     private String cost;
     private Integer numericalEnergyCost;
-    private Integer damage;
+    private String damage;
 
     public String getName() {
         return name;
@@ -43,11 +43,11 @@ public class Attack {
         this.numericalEnergyCost = numericalEnergyCost;
     }
 
-    public Integer getDamage() {
+    public String getDamage() {
         return damage;
     }
 
-    public void setDamage(Integer damage) {
+    public void setDamage(String damage) {
         this.damage = damage;
     }
 }
