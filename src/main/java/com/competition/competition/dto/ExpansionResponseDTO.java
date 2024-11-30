@@ -2,18 +2,16 @@ package com.competition.competition.dto;
 
 import com.competition.competition.entity.embeddable.ExpansionImages;
 import com.competition.competition.entity.embeddable.Legalities;
-import com.competition.competition.enums.ExpansionCode;
-import com.competition.competition.enums.Series;
 
 public class ExpansionResponseDTO {
     private String id;
-    private Series series;
+    private String series;
     private String name;
     private ExpansionImages expansionImages;
     private Legalities legalities;
     private Integer printedTotal;
     private Integer total;
-    private ExpansionCode expansionCode;
+    private String expansionCode;
     private String releaseDate;
 
     public String getId() {
@@ -30,14 +28,6 @@ public class ExpansionResponseDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Series getSeries() {
-        return series;
-    }
-
-    public void setSeries(Series series) {
-        this.series = series;
     }
 
     public ExpansionImages getExpansionImages() {
@@ -72,19 +62,27 @@ public class ExpansionResponseDTO {
         this.total = total;
     }
 
-    public ExpansionCode getExpansionCode() {
-        return expansionCode;
-    }
-
-    public void setExpansionCode(ExpansionCode expansionCode) {
-        this.expansionCode = expansionCode;
-    }
-
     public String getReleaseDate() {
         return releaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getExpansionCode() {
+        return expansionCode;
+    }
+
+    public void setExpansionCode(String expansionCode) {
+        this.expansionCode = expansionCode;
     }
 }

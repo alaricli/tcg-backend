@@ -2,8 +2,6 @@ package com.competition.competition.entity;
 
 import com.competition.competition.entity.embeddable.ExpansionImages;
 import com.competition.competition.entity.embeddable.Legalities;
-import com.competition.competition.enums.ExpansionCode;
-import com.competition.competition.enums.Series;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,27 +12,17 @@ public class Expansion {
     @Id
     @Column(name = "id", nullable = false)
     private String id;
-
-    @Enumerated(EnumType.STRING)
     @Column(name = "series", nullable = false)
-    private Series series;
-
+    private String series;
     @Column(name = "name", nullable = false)
     private String name;
-
     @Embedded
     private ExpansionImages expansionImages;
-
     @Embedded
     private Legalities legalities;
-
     private Integer printedTotal;
-
     private Integer total;
-
-    @Enumerated(EnumType.STRING)
-    private ExpansionCode expansionCode;
-
+    private String expansionCode;
     private String releaseDate;
 
     public String getId() {
@@ -45,11 +33,11 @@ public class Expansion {
         this.id = id;
     }
 
-    public Series getSeries() {
+    public String getSeries() {
         return series;
     }
 
-    public void setSeries(Series series) {
+    public void setSeries(String series) {
         this.series = series;
     }
 
@@ -93,11 +81,11 @@ public class Expansion {
         this.total = total;
     }
 
-    public ExpansionCode getExpansionCode() {
+    public String getExpansionCode() {
         return expansionCode;
     }
 
-    public void setExpansionCode(ExpansionCode expansionCode) {
+    public void setExpansionCode(String expansionCode) {
         this.expansionCode = expansionCode;
     }
 

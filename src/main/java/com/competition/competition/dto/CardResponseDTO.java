@@ -2,7 +2,6 @@ package com.competition.competition.dto;
 
 import com.competition.competition.entity.embeddable.CardImages;
 import com.competition.competition.entity.embeddable.Legalities;
-import com.competition.competition.enums.*;
 
 import java.util.List;
 
@@ -17,15 +16,15 @@ public class CardResponseDTO {
     private String expansionId; // Reference to the expansion by ID
     private String identifier;
     private Integer cardNumber;
-    private Rarity rarity;
-    private SuperType superType;
+    private String rarity;
+    private String superType;
     private CardImages cardImages; // Embedded field
     private Legalities legalities; // Embedded field
-    private List<EnergyType> energyTypes; // Energy types the card can use
-    private List<SubType> subTypes;
-    private List<EnergyType> attackEnergyTypes;
-    private List<EnergyType> weakness;
-    private List<EnergyType> resistance;
+    private List<String> energyTypes; // Energy types the card can use
+    private List<String> subTypes;
+    private List<String> attackEnergyTypes;
+    private List<String> weakness;
+    private List<String> resistance;
     private Integer nationalPokedexNumber;
     private Integer retreatCost;
     private boolean hasRuleBox;
@@ -113,19 +112,19 @@ public class CardResponseDTO {
         this.cardNumber = cardNumber;
     }
 
-    public Rarity getRarity() {
+    public String getRarity() {
         return rarity;
     }
 
-    public void setRarity(Rarity rarity) {
+    public void setRarity(String rarity) {
         this.rarity = rarity;
     }
 
-    public SuperType getCardType() {
+    public String getSuperType() {
         return superType;
     }
 
-    public void setCardType(SuperType superType) {
+    public void setSuperType(String superType) {
         this.superType = superType;
     }
 
@@ -145,43 +144,43 @@ public class CardResponseDTO {
         this.legalities = legalities;
     }
 
-    public List<EnergyType> getEnergyTypes() {
+    public List<String> getEnergyTypes() {
         return energyTypes;
     }
 
-    public void setEnergyTypes(List<EnergyType> energyTypes) {
+    public void setEnergyTypes(List<String> energyTypes) {
         this.energyTypes = energyTypes;
     }
 
-    public List<SubType> getPokemonCardTypes() {
+    public List<String> getSubTypes() {
         return subTypes;
     }
 
-    public void setPokemonCardTypes(List<SubType> subTypes) {
+    public void setSubTypes(List<String> subTypes) {
         this.subTypes = subTypes;
     }
 
-    public List<EnergyType> getAttackEnergyTypes() {
+    public List<String> getAttackEnergyTypes() {
         return attackEnergyTypes;
     }
 
-    public void setAttackEnergyTypes(List<EnergyType> attackEnergyTypes) {
+    public void setAttackEnergyTypes(List<String> attackEnergyTypes) {
         this.attackEnergyTypes = attackEnergyTypes;
     }
 
-    public List<EnergyType> getWeakness() {
+    public List<String> getWeakness() {
         return weakness;
     }
 
-    public void setWeakness(List<EnergyType> weakness) {
+    public void setWeakness(List<String> weakness) {
         this.weakness = weakness;
     }
 
-    public List<EnergyType> getResistance() {
+    public List<String> getResistance() {
         return resistance;
     }
 
-    public void setResistance(List<EnergyType> resistance) {
+    public void setResistance(List<String> resistance) {
         this.resistance = resistance;
     }
 
@@ -231,21 +230,5 @@ public class CardResponseDTO {
 
     public void setTrainerCardText(String trainerCardText) {
         this.trainerCardText = trainerCardText;
-    }
-
-    public SuperType getSuperType() {
-        return superType;
-    }
-
-    public void setSuperType(SuperType superType) {
-        this.superType = superType;
-    }
-
-    public List<SubType> getSubTypes() {
-        return subTypes;
-    }
-
-    public void setSubTypes(List<SubType> subTypes) {
-        this.subTypes = subTypes;
     }
 }
