@@ -3,10 +3,12 @@ package com.competition.competition.dto;
 import com.competition.competition.entity.embeddable.Attack;
 import com.competition.competition.entity.embeddable.CardImages;
 import com.competition.competition.entity.embeddable.Legalities;
+import com.competition.competition.entity.embeddable.PullRates;
 
 import java.util.List;
 
 public class CardRequestDTO {
+    private String id;
     private String name;
     private Integer hp;
     private String artist;
@@ -15,24 +17,35 @@ public class CardRequestDTO {
     private Double marketPrice;
     private List<String> rules;
     private String expansionId; // Reference to the expansion by ID
-    private String identifier;
     private Integer cardNumber;
     private String rarity;
     private String superType;
     private List<String> subTypes;
     private CardImages cardImages; // Embedded field
     private Legalities legalities; // Embedded field
+    private PullRates pullRates;
     private List<String> energyTypes; // Energy types the card can use
     private List<Attack> attacks;
     private List<String> attackEnergyTypes;
     private List<String> weakness;
     private List<String> resistance;
+    private List<String> foundInPacks;
     private Integer nationalPokedexNumber;
     private Integer retreatCost;
     private boolean hasRuleBox;
     private boolean hasAbility;
+    private boolean isPocket;
     private String ability;
     private String trainerCardText;
+    private Integer dustCost;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -96,14 +109,6 @@ public class CardRequestDTO {
 
     public void setExpansionId(String expansionId) {
         this.expansionId = expansionId;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
     }
 
     public Integer getCardNumber() {
@@ -240,5 +245,37 @@ public class CardRequestDTO {
 
     public void setTrainerCardText(String trainerCardText) {
         this.trainerCardText = trainerCardText;
+    }
+
+    public PullRates getPullRates() {
+        return pullRates;
+    }
+
+    public void setPullRates(PullRates pullRates) {
+        this.pullRates = pullRates;
+    }
+
+    public boolean isPocket() {
+        return isPocket;
+    }
+
+    public void setPocket(boolean pocket) {
+        isPocket = pocket;
+    }
+
+    public Integer getDustCost() {
+        return dustCost;
+    }
+
+    public void setDustCost(Integer dustCost) {
+        this.dustCost = dustCost;
+    }
+
+    public List<String> getFoundInPacks() {
+        return foundInPacks;
+    }
+
+    public void setFoundInPacks(List<String> foundInPacks) {
+        this.foundInPacks = foundInPacks;
     }
 }

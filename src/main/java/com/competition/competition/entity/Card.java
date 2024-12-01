@@ -3,6 +3,7 @@ package com.competition.competition.entity;
 import com.competition.competition.entity.embeddable.Attack;
 import com.competition.competition.entity.embeddable.CardImages;
 import com.competition.competition.entity.embeddable.Legalities;
+import com.competition.competition.entity.embeddable.PullRates;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,9 +12,8 @@ import java.util.List;
 @Table(name = "card")
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Long id;
+    private String id;
     private String name;
     private Integer hp;
     private String artist;
@@ -24,8 +24,6 @@ public class Card {
     @CollectionTable(name = "rules", joinColumns = @JoinColumn(name = "card_id"))
     @Column(name = "rules")
     private List<String> rules;
-    @Column(unique = true)
-    private String identifier;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "expansion_id")
     private Expansion expansion;
@@ -35,6 +33,15 @@ public class Card {
     private CardImages cardImages;
     @Embedded
     private Legalities legalities;
+    @Embedded
+    private PullRates pullRates;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "card_pack", // Join table name
+            joinColumns = @JoinColumn(name = "card_id"), // Foreign key in join table referencing `Card`
+            inverseJoinColumns = @JoinColumn(name = "pack_id") // Foreign key in join table referencing `Pack`
+    )
+    private List<Pack> foundInPacks;
     private String superType;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "energy_types", joinColumns = @JoinColumn(name = "card_id"))
@@ -60,18 +67,29 @@ public class Card {
     private boolean hasRuleBox;
     private boolean hasAbility;
     private boolean isPocket;
+    @Column(length = 1000)
     private String ability;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "card_subtypes", joinColumns = @JoinColumn(name = "card_id"))
     @Column(name = "subtypes")
     private List<String> subTypes;
+    @Column(length = 1000)
     private String trainerCardText;
+    private Integer dustCost;
 
-    public Long getId() {
+    public Integer getDustCost() {
+        return dustCost;
+    }
+
+    public void setDustCost(Integer dustCost) {
+        this.dustCost = dustCost;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -129,14 +147,6 @@ public class Card {
 
     public void setRules(List<String> rules) {
         this.rules = rules;
-    }
-
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
     }
 
     public Expansion getExpansion() {
@@ -289,5 +299,21 @@ public class Card {
 
     public void setTrainerCardText(String trainerCardText) {
         this.trainerCardText = trainerCardText;
+    }
+
+    public PullRates getPullRates() {
+        return pullRates;
+    }
+
+    public void setPullRates(PullRates pullRates) {
+        this.pullRates = pullRates;
+    }
+
+    public List<Pack> getFoundInPacks() {
+        return foundInPacks;
+    }
+
+    public void setFoundInPacks(List<Pack> foundInPacks) {
+        this.foundInPacks = foundInPacks;
     }
 }

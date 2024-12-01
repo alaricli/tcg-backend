@@ -3,17 +3,24 @@ package com.competition.competition.dto.mapper;
 import com.competition.competition.dto.CardRequestDTO;
 import com.competition.competition.entity.Card;
 import com.competition.competition.entity.Expansion;
+import com.competition.competition.entity.Pack;
 import com.competition.competition.repository.ExpansionRepository;
+import com.competition.competition.repository.PackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class CardRequestMapper {
     @Autowired
     private ExpansionRepository expansionRepository;
+    @Autowired
+    private PackRepository packRepository;
 
     public Card requestToCard(CardRequestDTO cardRequest) {
         Card card = new Card();
+        card.setId(cardRequest.getId());
         card.setName(cardRequest.getName());
         card.setHp(cardRequest.getHp());
         card.setAbility(cardRequest.getAbility());
@@ -28,7 +35,6 @@ public class CardRequestMapper {
         card.setMarketPrice(cardRequest.getMarketPrice());
         card.setRules(cardRequest.getRules());
         card.setRetreatCost(cardRequest.getRetreatCost());
-        card.setIdentifier(cardRequest.getIdentifier());
         card.setLegalities(cardRequest.getLegalities());
         card.setEnergyTypes(cardRequest.getEnergyTypes());
         card.setTrainerCardText(cardRequest.getTrainerCardText());
@@ -43,6 +49,12 @@ public class CardRequestMapper {
             Expansion expansion = expansionRepository.findById(cardRequest.getExpansionId()).orElse(null);
             card.setExpansion(expansion);
         }
+        if (cardRequest.getFoundInPacks() != null) {
+            List<Pack> packs = packRepository.findAllById(cardRequest.getFoundInPacks());
+            card.setFoundInPacks(packs);
+        }
+        card.setPullRates(cardRequest.getPullRates());
+        card.setDustCost(cardRequest.getDustCost());
 
         return card;
     }

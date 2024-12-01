@@ -2,10 +2,14 @@ package com.competition.competition.dto.mapper;
 
 import com.competition.competition.dto.CardResponseDTO;
 import com.competition.competition.entity.Card;
+import com.competition.competition.entity.Pack;
+
+import java.util.stream.Collectors;
 
 public class CardResponseMapper {
     public static CardResponseDTO toCardResponse(Card card) {
         CardResponseDTO cardResponseDTO = new CardResponseDTO();
+        cardResponseDTO.setId(card.getId());
         cardResponseDTO.setName(card.getName());
         cardResponseDTO.setHp(card.getHp());
         cardResponseDTO.setArtist(card.getArtist());
@@ -14,11 +18,11 @@ public class CardResponseMapper {
         cardResponseDTO.setMarketPrice(card.getMarketPrice());
         cardResponseDTO.setRules(card.getRules());
         cardResponseDTO.setExpansionId(card.getExpansion().getId());
-        cardResponseDTO.setIdentifier(card.getIdentifier());
         cardResponseDTO.setCardNumber(card.getCardNumber());
         cardResponseDTO.setRarity(card.getRarity());
         cardResponseDTO.setCardImages(card.getCardImages());
         cardResponseDTO.setLegalities(card.getLegalities());
+        cardResponseDTO.setPullRates(card.getPullRates());
         cardResponseDTO.setEnergyTypes(card.getEnergyTypes());
         cardResponseDTO.setAttackEnergyTypes(card.getAttackEnergyTypes());
         cardResponseDTO.setWeakness(card.getWeakness());
@@ -31,7 +35,9 @@ public class CardResponseMapper {
         cardResponseDTO.setTrainerCardText(card.getTrainerCardText());
         cardResponseDTO.setSuperType(card.getSuperType());
         cardResponseDTO.setSubTypes(card.getSubTypes());
-
+        cardResponseDTO.setDustCost(card.getDustCost());
+        cardResponseDTO.setFoundInPacks(card.getFoundInPacks() != null ?
+                card.getFoundInPacks().stream().map(Pack::getId).collect(Collectors.toList()) : null);
         return cardResponseDTO;
     }
 }
