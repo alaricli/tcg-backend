@@ -25,6 +25,12 @@ public class ExpansionService {
                 .collect(Collectors.toList());
     }
 
+    public List<ExpansionResponseDTO> getAllPocketExpansions() {
+        return expansionRepository.findAllBySeries("Pocket").stream()
+                .map(ExpansionResponseMapper::toExpansionResponse)
+                .collect(Collectors.toList());
+    }
+
     public ExpansionResponseDTO getExpansionById(String id) {
         Expansion expansion = expansionRepository.findById(id).orElse(null);
         if (expansion == null) {

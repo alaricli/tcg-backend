@@ -21,6 +21,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link href="/sets">
+              <p className="hover:text-orange-400">Sets</p>
+            </Link>
+          </li>
+          <li>
             <Link href="/decks">
               <p className="hover:text-orange-400">Decks</p>
             </Link>

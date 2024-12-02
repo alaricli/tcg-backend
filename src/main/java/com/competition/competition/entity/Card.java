@@ -64,6 +64,7 @@ public class Card {
     private List<String> resistance;
     private Integer retreatCost;
     private Integer nationalPokedexNumber;
+    private String description;
     private boolean hasRuleBox;
     private boolean hasAbility;
     private boolean isPocket;
@@ -315,5 +316,13 @@ public class Card {
 
     public void setFoundInPacks(List<Pack> foundInPacks) {
         this.foundInPacks = foundInPacks;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

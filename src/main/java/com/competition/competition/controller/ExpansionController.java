@@ -45,6 +45,12 @@ public class ExpansionController {
         return ResponseEntity.ok(expansion);
     }
 
+    @GetMapping("/get/pocket")
+    public ResponseEntity<List<ExpansionResponseDTO>> getPocketExpansions() {
+        List<ExpansionResponseDTO> expansions = expansionService.getAllPocketExpansions();
+        return ResponseEntity.ok(expansions);
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteExpansionById(@PathVariable("id") String id) {
         try {
