@@ -32,9 +32,9 @@ public class CardRequestDTO {
     private List<String> foundInPacks;
     private Integer nationalPokedexNumber;
     private Integer retreatCost;
-    private boolean hasRuleBox;
-    private boolean hasAbility;
-    private boolean isPocket;
+    private Boolean hasRuleBox;
+    private Boolean hasAbility;
+    private Boolean isPocket;
     private String ability;
     private String trainerCardText;
     private Integer dustCost;
@@ -224,19 +224,19 @@ public class CardRequestDTO {
         this.retreatCost = retreatCost;
     }
 
-    public boolean isHasRuleBox() {
+    public Boolean isHasRuleBox() {
         return hasRuleBox;
     }
 
-    public void setHasRuleBox(boolean hasRuleBox) {
+    public void setHasRuleBox(Boolean hasRuleBox) {
         this.hasRuleBox = hasRuleBox;
     }
 
-    public boolean isHasAbility() {
+    public Boolean isHasAbility() {
         return hasAbility;
     }
 
-    public void setHasAbility(boolean hasAbility) {
+    public void setHasAbility(Boolean hasAbility) {
         this.hasAbility = hasAbility;
     }
 

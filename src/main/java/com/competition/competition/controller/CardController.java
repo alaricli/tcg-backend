@@ -2,12 +2,14 @@ package com.competition.competition.controller;
 
 import com.competition.competition.dto.CardRequestDTO;
 import com.competition.competition.dto.CardResponseDTO;
+import com.competition.competition.dto.CardResponseSimplifiedDTO;
 import com.competition.competition.entity.Card;
 import com.competition.competition.service.CardService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/card")
@@ -37,7 +39,7 @@ public class CardController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<CardResponseDTO> getCardById(@PathVariable("id") Long id) {
+    public ResponseEntity<CardResponseDTO> getCardById(@PathVariable("id") String id) {
         CardResponseDTO cardResponseDTO = cardService.getCardById(id);
         if (cardResponseDTO != null) {
             return ResponseEntity.ok(cardResponseDTO);
@@ -45,8 +47,25 @@ public class CardController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/cards")
+    public ResponseEntity<List<CardResponseSimplifiedDTO>> getSummarizedCardsFiltered(@RequestParam(required = false) Optional<String> expansionId,
+                                                                                      @RequestParam(required = false) Optional<String> packId,
+                                                                                      @RequestParam(required = false) Optional<String> name,
+                                                                                      @RequestParam(required = false) Optional<String> rarity,
+                                                                                      @RequestParam(required = false) Optional<Boolean> hasAbility,
+                                                                                      @RequestParam(required = false) Optional<Boolean> hasRuleBox,
+                                                                                      @RequestParam(required = false) Optional<String> energyType,
+                                                                                      @RequestParam(required = false) Optional<String> weakness,
+                                                                                      @RequestParam(required = false) Optional<Integer> retreatCost,
+                                                                                      @RequestParam(required = false) Optional<String> superType,
+                                                                                      @RequestParam(required = false) Optional<String> subType) {
+        List<CardResponseSimplifiedDTO> cards = cardService.getSummarizedCardsFiltered(
+                expansionId, packId, name, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType);
+        return ResponseEntity.ok(cards);
+    }
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCardById(@PathVariable("id") Long id) {
+    public ResponseEntity<String> deleteCardById(@PathVariable("id") String id) {
         try {
             boolean deleted = cardService.deleteCard(id);
             if (!deleted) {

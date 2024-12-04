@@ -2,6 +2,7 @@ package com.competition.competition.service;
 
 import com.competition.competition.dto.CardRequestDTO;
 import com.competition.competition.dto.CardResponseDTO;
+import com.competition.competition.dto.CardResponseSimplifiedDTO;
 import com.competition.competition.dto.mapper.CardRequestMapper;
 import com.competition.competition.dto.mapper.CardResponseMapper;
 import com.competition.competition.entity.Card;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,7 +43,35 @@ public class CardService {
         return cardRepository.findAll().stream().map(CardResponseMapper::toCardResponse).collect(Collectors.toList());
     }
 
-    public CardResponseDTO getCardById(Long id) {
+    public List<CardResponseSimplifiedDTO> getSummarizedCardsFiltered(Optional<String> expansionId,
+                                                                          Optional<String> packId,
+                                                                          Optional<String> name,
+                                                                          Optional<String> rarity,
+                                                                          Optional<Boolean> hasAbility,
+                                                                          Optional<Boolean> hasRuleBox,
+                                                                          Optional<String> energyType,
+                                                                          Optional<String> weakness,
+                                                                          Optional<Integer> retreatCost,
+                                                                          Optional<String> superType,
+                                                                          Optional<String> subType
+
+    ) {
+        return cardRepository.findSummarizedCardsFiltered(
+                expansionId.orElse(null),
+                name.orElse(null),
+                rarity.orElse(null),
+                packId.orElse(null),
+                hasAbility.orElse(null),
+                hasRuleBox.orElse(null),
+                energyType.orElse(null),
+                weakness.orElse(null),
+                retreatCost.orElse(null),
+                superType.orElse(null),
+                subType.orElse(null)
+        );
+    }
+
+    public CardResponseDTO getCardById(String id) {
         Card card = cardRepository.findById(id).orElse(null);
         if (card == null) {
             return null;
@@ -49,7 +79,7 @@ public class CardService {
         return CardResponseMapper.toCardResponse(card);
     }
 
-    public boolean deleteCard(Long id) {
+    public boolean deleteCard(String id) {
         Card card = cardRepository.findById(id).orElse(null);
         if (card == null) {
             return false;

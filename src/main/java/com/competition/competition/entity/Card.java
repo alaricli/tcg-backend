@@ -65,9 +65,9 @@ public class Card {
     private Integer retreatCost;
     private Integer nationalPokedexNumber;
     private String description;
-    private boolean hasRuleBox;
-    private boolean hasAbility;
-    private boolean isPocket;
+    private Boolean hasRuleBox;
+    private Boolean hasAbility;
+    private Boolean isPocket;
     @Column(length = 1000)
     private String ability;
     @ElementCollection(fetch = FetchType.LAZY)
@@ -254,19 +254,19 @@ public class Card {
         this.nationalPokedexNumber = nationalPokedexNumber;
     }
 
-    public boolean isHasRuleBox() {
+    public Boolean isHasRuleBox() {
         return hasRuleBox;
     }
 
-    public void setHasRuleBox(boolean hasRuleBox) {
+    public void setHasRuleBox(Boolean hasRuleBox) {
         this.hasRuleBox = hasRuleBox;
     }
 
-    public boolean isHasAbility() {
+    public Boolean isHasAbility() {
         return hasAbility;
     }
 
-    public void setHasAbility(boolean hasAbility) {
+    public void setHasAbility(Boolean hasAbility) {
         this.hasAbility = hasAbility;
     }
 
