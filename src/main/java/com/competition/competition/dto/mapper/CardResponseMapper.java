@@ -24,20 +24,22 @@ public class CardResponseMapper {
         cardResponseDTO.setLegalities(card.getLegalities());
         cardResponseDTO.setPullRates(card.getPullRates());
         cardResponseDTO.setEnergyTypes(card.getEnergyTypes());
+        cardResponseDTO.setAttacks(card.getAttacks());
         cardResponseDTO.setAttackEnergyTypes(card.getAttackEnergyTypes());
         cardResponseDTO.setWeakness(card.getWeakness());
         cardResponseDTO.setResistance(card.getResistance());
         cardResponseDTO.setNationalPokedexNumber(card.getNationalPokedexNumber());
         cardResponseDTO.setRetreatCost(card.getRetreatCost());
-        cardResponseDTO.setHasRuleBox(card.isHasRuleBox());
-        cardResponseDTO.setHasAbility(card.isHasAbility());
+        cardResponseDTO.setHasRuleBox(card.getHasRuleBox());
+        cardResponseDTO.setHasAbility(card.getHasAbility());
         cardResponseDTO.setAbility(card.getAbility());
         cardResponseDTO.setTrainerCardText(card.getTrainerCardText());
         cardResponseDTO.setSuperType(card.getSuperType());
         cardResponseDTO.setSubTypes(card.getSubTypes());
         cardResponseDTO.setDustCost(card.getDustCost());
-        cardResponseDTO.setFoundInPacks(card.getFoundInPacks() != null ?
-                card.getFoundInPacks().stream().map(Pack::getId).collect(Collectors.toList()) : null);
+        cardResponseDTO.setFoundInPacks(card.getFoundInPacks());
+        cardResponseDTO.setEvolvesFrom(card.getEvolvesFrom());
+        cardResponseDTO.setEvolvesTo(card.getEvolvesTo());
         return cardResponseDTO;
     }
 }

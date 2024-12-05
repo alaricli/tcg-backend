@@ -39,14 +39,8 @@ public class CardRequestDTO {
     private String trainerCardText;
     private Integer dustCost;
     private String description;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    private Integer evolvesFrom;
+    private Integer evolvesTo;
 
     public String getId() {
         return id;
@@ -168,6 +162,14 @@ public class CardRequestDTO {
         this.legalities = legalities;
     }
 
+    public PullRates getPullRates() {
+        return pullRates;
+    }
+
+    public void setPullRates(PullRates pullRates) {
+        this.pullRates = pullRates;
+    }
+
     public List<String> getEnergyTypes() {
         return energyTypes;
     }
@@ -208,6 +210,14 @@ public class CardRequestDTO {
         this.resistance = resistance;
     }
 
+    public List<String> getFoundInPacks() {
+        return foundInPacks;
+    }
+
+    public void setFoundInPacks(List<String> foundInPacks) {
+        this.foundInPacks = foundInPacks;
+    }
+
     public Integer getNationalPokedexNumber() {
         return nationalPokedexNumber;
     }
@@ -224,7 +234,7 @@ public class CardRequestDTO {
         this.retreatCost = retreatCost;
     }
 
-    public Boolean isHasRuleBox() {
+    public Boolean getHasRuleBox() {
         return hasRuleBox;
     }
 
@@ -232,12 +242,20 @@ public class CardRequestDTO {
         this.hasRuleBox = hasRuleBox;
     }
 
-    public Boolean isHasAbility() {
+    public Boolean getHasAbility() {
         return hasAbility;
     }
 
     public void setHasAbility(Boolean hasAbility) {
         this.hasAbility = hasAbility;
+    }
+
+    public Boolean getPocket() {
+        return isPocket;
+    }
+
+    public void setPocket(Boolean pocket) {
+        isPocket = pocket;
     }
 
     public String getAbility() {
@@ -256,22 +274,6 @@ public class CardRequestDTO {
         this.trainerCardText = trainerCardText;
     }
 
-    public PullRates getPullRates() {
-        return pullRates;
-    }
-
-    public void setPullRates(PullRates pullRates) {
-        this.pullRates = pullRates;
-    }
-
-    public boolean isPocket() {
-        return isPocket;
-    }
-
-    public void setPocket(boolean pocket) {
-        isPocket = pocket;
-    }
-
     public Integer getDustCost() {
         return dustCost;
     }
@@ -280,11 +282,27 @@ public class CardRequestDTO {
         this.dustCost = dustCost;
     }
 
-    public List<String> getFoundInPacks() {
-        return foundInPacks;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFoundInPacks(List<String> foundInPacks) {
-        this.foundInPacks = foundInPacks;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getEvolvesFrom() {
+        return evolvesFrom;
+    }
+
+    public void setEvolvesFrom(Integer evolvesFrom) {
+        this.evolvesFrom = evolvesFrom;
+    }
+
+    public Integer getEvolvesTo() {
+        return evolvesTo;
+    }
+
+    public void setEvolvesTo(Integer evolvesTo) {
+        this.evolvesTo = evolvesTo;
     }
 }

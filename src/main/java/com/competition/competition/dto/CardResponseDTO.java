@@ -39,14 +39,8 @@ public class CardResponseDTO {
     private String trainerCardText;
     private Integer dustCost;
     private String description;
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    private Integer evolvesFrom;
+    private Integer evolvesTo;
 
     public String getId() {
         return id;
@@ -144,6 +138,14 @@ public class CardResponseDTO {
         this.superType = superType;
     }
 
+    public List<String> getSubTypes() {
+        return subTypes;
+    }
+
+    public void setSubTypes(List<String> subTypes) {
+        this.subTypes = subTypes;
+    }
+
     public CardImages getCardImages() {
         return cardImages;
     }
@@ -160,6 +162,14 @@ public class CardResponseDTO {
         this.legalities = legalities;
     }
 
+    public PullRates getPullRates() {
+        return pullRates;
+    }
+
+    public void setPullRates(PullRates pullRates) {
+        this.pullRates = pullRates;
+    }
+
     public List<String> getEnergyTypes() {
         return energyTypes;
     }
@@ -168,12 +178,12 @@ public class CardResponseDTO {
         this.energyTypes = energyTypes;
     }
 
-    public List<String> getSubTypes() {
-        return subTypes;
+    public List<Attack> getAttacks() {
+        return attacks;
     }
 
-    public void setSubTypes(List<String> subTypes) {
-        this.subTypes = subTypes;
+    public void setAttacks(List<Attack> attacks) {
+        this.attacks = attacks;
     }
 
     public List<String> getAttackEnergyTypes() {
@@ -200,6 +210,14 @@ public class CardResponseDTO {
         this.resistance = resistance;
     }
 
+    public List<String> getFoundInPacks() {
+        return foundInPacks;
+    }
+
+    public void setFoundInPacks(List<String> foundInPacks) {
+        this.foundInPacks = foundInPacks;
+    }
+
     public Integer getNationalPokedexNumber() {
         return nationalPokedexNumber;
     }
@@ -216,7 +234,7 @@ public class CardResponseDTO {
         this.retreatCost = retreatCost;
     }
 
-    public Boolean isHasRuleBox() {
+    public Boolean getHasRuleBox() {
         return hasRuleBox;
     }
 
@@ -224,12 +242,20 @@ public class CardResponseDTO {
         this.hasRuleBox = hasRuleBox;
     }
 
-    public Boolean isHasAbility() {
+    public Boolean getHasAbility() {
         return hasAbility;
     }
 
     public void setHasAbility(Boolean hasAbility) {
         this.hasAbility = hasAbility;
+    }
+
+    public Boolean getPocket() {
+        return isPocket;
+    }
+
+    public void setPocket(Boolean pocket) {
+        isPocket = pocket;
     }
 
     public String getAbility() {
@@ -248,43 +274,35 @@ public class CardResponseDTO {
         this.trainerCardText = trainerCardText;
     }
 
-    public List<Attack> getAttacks() {
-        return attacks;
-    }
-
-    public void setAttacks(List<Attack> attacks) {
-        this.attacks = attacks;
-    }
-
-    public PullRates getPullRates() {
-        return pullRates;
-    }
-
-    public void setPullRates(PullRates pullRates) {
-        this.pullRates = pullRates;
-    }
-
-    public List<String> getFoundInPacks() {
-        return foundInPacks;
-    }
-
-    public void setFoundInPacks(List<String> foundInPacks) {
-        this.foundInPacks = foundInPacks;
-    }
-
-    public boolean isPocket() {
-        return isPocket;
-    }
-
-    public void setPocket(boolean pocket) {
-        isPocket = pocket;
-    }
-
     public Integer getDustCost() {
         return dustCost;
     }
 
     public void setDustCost(Integer dustCost) {
         this.dustCost = dustCost;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getEvolvesFrom() {
+        return evolvesFrom;
+    }
+
+    public void setEvolvesFrom(Integer evolvesFrom) {
+        this.evolvesFrom = evolvesFrom;
+    }
+
+    public Integer getEvolvesTo() {
+        return evolvesTo;
+    }
+
+    public void setEvolvesTo(Integer evolvesTo) {
+        this.evolvesTo = evolvesTo;
     }
 }

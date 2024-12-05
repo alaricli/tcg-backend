@@ -2,8 +2,10 @@ package com.competition.competition.entity.embeddable;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Embeddable
-public class Attack {
+public class Attack implements Serializable {
     private String name;
     private String text;
     // flattened list of energy cost in one string

@@ -35,13 +35,10 @@ public class Card {
     private Legalities legalities;
     @Embedded
     private PullRates pullRates;
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "card_pack", // Join table name
-            joinColumns = @JoinColumn(name = "card_id"), // Foreign key in join table referencing `Card`
-            inverseJoinColumns = @JoinColumn(name = "pack_id") // Foreign key in join table referencing `Pack`
-    )
-    private List<Pack> foundInPacks;
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "pack_ids", joinColumns = @JoinColumn(name = "card_id"))
+    @Column(name = "pack_ids")
+    private List<String> foundInPacks;
     private String superType;
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "energy_types", joinColumns = @JoinColumn(name = "card_id"))
@@ -77,14 +74,8 @@ public class Card {
     @Column(length = 1000)
     private String trainerCardText;
     private Integer dustCost;
-
-    public Integer getDustCost() {
-        return dustCost;
-    }
-
-    public void setDustCost(Integer dustCost) {
-        this.dustCost = dustCost;
-    }
+    private Integer evolvesFrom;
+    private Integer evolvesTo;
 
     public String getId() {
         return id;
@@ -190,6 +181,22 @@ public class Card {
         this.legalities = legalities;
     }
 
+    public PullRates getPullRates() {
+        return pullRates;
+    }
+
+    public void setPullRates(PullRates pullRates) {
+        this.pullRates = pullRates;
+    }
+
+    public List<String> getFoundInPacks() {
+        return foundInPacks;
+    }
+
+    public void setFoundInPacks(List<String> foundInPacks) {
+        this.foundInPacks = foundInPacks;
+    }
+
     public String getSuperType() {
         return superType;
     }
@@ -254,7 +261,15 @@ public class Card {
         this.nationalPokedexNumber = nationalPokedexNumber;
     }
 
-    public Boolean isHasRuleBox() {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getHasRuleBox() {
         return hasRuleBox;
     }
 
@@ -262,7 +277,7 @@ public class Card {
         this.hasRuleBox = hasRuleBox;
     }
 
-    public Boolean isHasAbility() {
+    public Boolean getHasAbility() {
         return hasAbility;
     }
 
@@ -270,11 +285,11 @@ public class Card {
         this.hasAbility = hasAbility;
     }
 
-    public boolean isPocket() {
+    public Boolean getPocket() {
         return isPocket;
     }
 
-    public void setPocket(boolean pocket) {
+    public void setPocket(Boolean pocket) {
         isPocket = pocket;
     }
 
@@ -302,27 +317,27 @@ public class Card {
         this.trainerCardText = trainerCardText;
     }
 
-    public PullRates getPullRates() {
-        return pullRates;
+    public Integer getDustCost() {
+        return dustCost;
     }
 
-    public void setPullRates(PullRates pullRates) {
-        this.pullRates = pullRates;
+    public void setDustCost(Integer dustCost) {
+        this.dustCost = dustCost;
     }
 
-    public List<Pack> getFoundInPacks() {
-        return foundInPacks;
+    public Integer getEvolvesFrom() {
+        return evolvesFrom;
     }
 
-    public void setFoundInPacks(List<Pack> foundInPacks) {
-        this.foundInPacks = foundInPacks;
+    public void setEvolvesFrom(Integer evolvesFrom) {
+        this.evolvesFrom = evolvesFrom;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getEvolvesTo() {
+        return evolvesTo;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setEvolvesTo(Integer evolvesTo) {
+        this.evolvesTo = evolvesTo;
     }
 }

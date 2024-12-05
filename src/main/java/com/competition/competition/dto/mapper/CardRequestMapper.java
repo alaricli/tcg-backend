@@ -15,8 +15,6 @@ import java.util.List;
 public class CardRequestMapper {
     @Autowired
     private ExpansionRepository expansionRepository;
-    @Autowired
-    private PackRepository packRepository;
 
     public Card requestToCard(CardRequestDTO cardRequest) {
         Card card = new Card();
@@ -43,18 +41,17 @@ public class CardRequestMapper {
         card.setAttackEnergyTypes(cardRequest.getAttackEnergyTypes());
         card.setWeakness(cardRequest.getWeakness());
         card.setResistance(cardRequest.getResistance());
-        card.setHasRuleBox(cardRequest.isHasRuleBox());
-        card.setHasAbility(cardRequest.isHasAbility());
+        card.setHasRuleBox(cardRequest.getHasRuleBox());
+        card.setHasAbility(cardRequest.getHasAbility());
         if (cardRequest.getExpansionId() != null) {
             Expansion expansion = expansionRepository.findById(cardRequest.getExpansionId()).orElse(null);
             card.setExpansion(expansion);
         }
-        if (cardRequest.getFoundInPacks() != null) {
-            List<Pack> packs = packRepository.findAllById(cardRequest.getFoundInPacks());
-            card.setFoundInPacks(packs);
-        }
+        card.setFoundInPacks(cardRequest.getFoundInPacks());
         card.setPullRates(cardRequest.getPullRates());
         card.setDustCost(cardRequest.getDustCost());
+        card.setEvolvesFrom(cardRequest.getEvolvesFrom());
+        card.setEvolvesTo(cardRequest.getEvolvesTo());
 
         return card;
     }

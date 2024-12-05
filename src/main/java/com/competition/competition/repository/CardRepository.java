@@ -1,6 +1,4 @@
 package com.competition.competition.repository;
-
-import com.competition.competition.dto.CardResponseDTO;
 import com.competition.competition.dto.CardResponseSimplifiedDTO;
 import com.competition.competition.entity.Card;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,15 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 // TODO: figure out search
+// TODO: figure out subtypes query
 
 @Repository
 public interface CardRepository extends JpaRepository<Card, String> {
     @Query("SELECT new com.competition.competition.dto.CardResponseSimplifiedDTO(c.id, c.name, c.cardImages.small, c.cardNumber) " +
             "FROM Card c " +
-            "JOIN Pack p ON p.id = c.id " +
+            "LEFT JOIN Pack p ON c.id = p.id " +
             "WHERE (:expansionId IS NULL OR c.expansion.id = :expansionId) " +
             "AND (:rarity IS NULL OR c.rarity = :rarity) " +
             "AND (:packId IS NULL OR p.id = :packId) " +
