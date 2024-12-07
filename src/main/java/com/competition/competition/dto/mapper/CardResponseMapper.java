@@ -2,9 +2,6 @@ package com.competition.competition.dto.mapper;
 
 import com.competition.competition.dto.CardResponseDTO;
 import com.competition.competition.entity.Card;
-import com.competition.competition.entity.Pack;
-
-import java.util.stream.Collectors;
 
 public class CardResponseMapper {
     public static CardResponseDTO toCardResponse(Card card) {
@@ -28,7 +25,7 @@ public class CardResponseMapper {
         cardResponseDTO.setAttackEnergyTypes(card.getAttackEnergyTypes());
         cardResponseDTO.setWeakness(card.getWeakness());
         cardResponseDTO.setResistance(card.getResistance());
-        cardResponseDTO.setNationalPokedexNumber(card.getNationalPokedexNumber());
+        cardResponseDTO.setNationalDexNumber(card.getNationalDexNumber());
         cardResponseDTO.setRetreatCost(card.getRetreatCost());
         cardResponseDTO.setHasRuleBox(card.getHasRuleBox());
         cardResponseDTO.setHasAbility(card.getHasAbility());

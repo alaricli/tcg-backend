@@ -4,6 +4,7 @@ import com.competition.competition.dto.ExpansionRequestDTO;
 import com.competition.competition.dto.ExpansionResponseDTO;
 import com.competition.competition.entity.Expansion;
 import com.competition.competition.service.ExpansionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,15 +53,15 @@ public class ExpansionController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteExpansionById(@PathVariable("id") String id) {
+    public ResponseEntity<String> deleteExpansionById(@PathVariable("id") String id) {
         try {
             boolean deleted = expansionService.deleteExpansion(id);
             if (deleted) {
-                return ResponseEntity.noContent().build();
+                return new ResponseEntity<>("deleted", HttpStatus.OK);
             }
-            return ResponseEntity.noContent().build();
+            return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
+            return new ResponseEntity<>("error" + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

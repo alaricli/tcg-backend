@@ -35,4 +35,17 @@ public class PackController {
         List<PackResponseDTO> returnPacks = packService.getAllPacks();
         return new ResponseEntity<>(returnPacks, HttpStatus.OK);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deletePack(@PathVariable String id) {
+        try {
+            boolean deleted = packService.deletePack(id);
+            if (deleted) {
+                return new ResponseEntity<>("deleted", HttpStatus.OK);
+            }
+            return new ResponseEntity<>("error", HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

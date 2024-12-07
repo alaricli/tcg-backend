@@ -30,7 +30,7 @@ public class CardResponseDTO {
     private List<String> weakness;
     private List<String> resistance;
     private List<String> foundInPacks;
-    private Integer nationalPokedexNumber;
+    private Integer nationalDexNumber;
     private Integer retreatCost;
     private Boolean hasRuleBox;
     private Boolean hasAbility;
@@ -218,12 +218,12 @@ public class CardResponseDTO {
         this.foundInPacks = foundInPacks;
     }
 
-    public Integer getNationalPokedexNumber() {
-        return nationalPokedexNumber;
+    public Integer getNationalDexNumber() {
+        return nationalDexNumber;
     }
 
-    public void setNationalPokedexNumber(Integer nationalPokedexNumber) {
-        this.nationalPokedexNumber = nationalPokedexNumber;
+    public void setNationalDexNumber(Integer nationalDexNumber) {
+        this.nationalDexNumber = nationalDexNumber;
     }
 
     public Integer getRetreatCost() {

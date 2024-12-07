@@ -3,13 +3,9 @@ package com.competition.competition.dto.mapper;
 import com.competition.competition.dto.CardRequestDTO;
 import com.competition.competition.entity.Card;
 import com.competition.competition.entity.Expansion;
-import com.competition.competition.entity.Pack;
 import com.competition.competition.repository.ExpansionRepository;
-import com.competition.competition.repository.PackRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class CardRequestMapper {
@@ -36,7 +32,7 @@ public class CardRequestMapper {
         card.setLegalities(cardRequest.getLegalities());
         card.setEnergyTypes(cardRequest.getEnergyTypes());
         card.setTrainerCardText(cardRequest.getTrainerCardText());
-        card.setNationalPokedexNumber(cardRequest.getNationalPokedexNumber());
+        card.setNationalDexNumber(cardRequest.getNationalDexNumber());
         card.setAttacks(cardRequest.getAttacks());
         card.setAttackEnergyTypes(cardRequest.getAttackEnergyTypes());
         card.setWeakness(cardRequest.getWeakness());

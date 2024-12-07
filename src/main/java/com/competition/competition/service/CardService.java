@@ -8,6 +8,7 @@ import com.competition.competition.dto.mapper.CardResponseMapper;
 import com.competition.competition.entity.Card;
 import com.competition.competition.repository.CardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -43,22 +44,27 @@ public class CardService {
         return cardRepository.findAll().stream().map(CardResponseMapper::toCardResponse).collect(Collectors.toList());
     }
 
-    public List<CardResponseSimplifiedDTO> getSummarizedCardsFiltered(Optional<String> expansionId,
-                                                                          Optional<String> packId,
-                                                                          Optional<String> name,
-                                                                          Optional<String> rarity,
-                                                                          Optional<Boolean> hasAbility,
-                                                                          Optional<Boolean> hasRuleBox,
-                                                                          Optional<String> energyType,
-                                                                          Optional<String> weakness,
-                                                                          Optional<Integer> retreatCost,
-                                                                          Optional<String> superType,
-                                                                          Optional<String> subType
-
+    public List<CardResponseSimplifiedDTO> getProcessedCards(Optional<String> expansionId,
+                                                             Optional<String> packId,
+                                                             Optional<String> searchText,
+                                                             Optional<String> rarity,
+                                                             Optional<Boolean> hasAbility,
+                                                             Optional<Boolean> hasRuleBox,
+                                                             Optional<String> energyType,
+                                                             Optional<String> weakness,
+                                                             Optional<Integer> retreatCost,
+                                                             Optional<String> superType,
+                                                             Optional<String> subType,
+                                                             Optional<String> sortType,
+                                                             Optional<String> sortDirection
     ) {
+        Sort.Direction direction = sortDirection.map(Sort.Direction::valueOf).orElse(Sort.Direction.ASC);
+        String sortBy = sortType.orElse("id");
+        Sort sort = Sort.by(direction, sortBy);
+
         return cardRepository.findSummarizedCardsFiltered(
                 expansionId.orElse(null),
-                name.orElse(null),
+                searchText.orElse(null),
                 rarity.orElse(null),
                 packId.orElse(null),
                 hasAbility.orElse(null),
@@ -67,7 +73,8 @@ public class CardService {
                 weakness.orElse(null),
                 retreatCost.orElse(null),
                 superType.orElse(null),
-                subType.orElse(null)
+                subType.orElse(null),
+                sort
         );
     }
 

@@ -32,7 +32,7 @@ public class CardController {
         return ResponseEntity.ok(createdCards);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/getAllOld")
     public ResponseEntity<List<CardResponseDTO>> getCards() {
         List<CardResponseDTO> cardResponseDTOS = cardService.getAllCards();
         return ResponseEntity.ok(cardResponseDTOS);
@@ -48,19 +48,22 @@ public class CardController {
     }
 
     @GetMapping("/cards")
-    public ResponseEntity<List<CardResponseSimplifiedDTO>> getSummarizedCardsFiltered(@RequestParam(required = false) Optional<String> expansionId,
-                                                                                      @RequestParam(required = false) Optional<String> packId,
-                                                                                      @RequestParam(required = false) Optional<String> name,
-                                                                                      @RequestParam(required = false) Optional<String> rarity,
-                                                                                      @RequestParam(required = false) Optional<Boolean> hasAbility,
-                                                                                      @RequestParam(required = false) Optional<Boolean> hasRuleBox,
-                                                                                      @RequestParam(required = false) Optional<String> energyType,
-                                                                                      @RequestParam(required = false) Optional<String> weakness,
-                                                                                      @RequestParam(required = false) Optional<Integer> retreatCost,
-                                                                                      @RequestParam(required = false) Optional<String> superType,
-                                                                                      @RequestParam(required = false) Optional<String> subType) {
-        List<CardResponseSimplifiedDTO> cards = cardService.getSummarizedCardsFiltered(
-                expansionId, packId, name, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType);
+    public ResponseEntity<List<CardResponseSimplifiedDTO>> getCardSummaries(@RequestParam(required = false) Optional<String> expansionId,
+                                                                            @RequestParam(required = false) Optional<String> packId,
+                                                                            @RequestParam(required = false) Optional<String> searchText,
+                                                                            @RequestParam(required = false) Optional<String> rarity,
+                                                                            @RequestParam(required = false) Optional<Boolean> hasAbility,
+                                                                            @RequestParam(required = false) Optional<Boolean> hasRuleBox,
+                                                                            @RequestParam(required = false) Optional<String> energyType,
+                                                                            @RequestParam(required = false) Optional<String> weakness,
+                                                                            @RequestParam(required = false) Optional<Integer> retreatCost,
+                                                                            @RequestParam(required = false) Optional<String> superType,
+                                                                            @RequestParam(required = false) Optional<String> subType,
+                                                                            @RequestParam(required = false) Optional<String> sortType,
+                                                                            @RequestParam(required = false) Optional<String> sortDirection
+    ) {
+        List<CardResponseSimplifiedDTO> cards = cardService.getProcessedCards(
+                expansionId, packId, searchText, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType, sortType, sortDirection);
         return ResponseEntity.ok(cards);
     }
 

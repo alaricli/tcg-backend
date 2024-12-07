@@ -45,4 +45,14 @@ public class PackService {
                 })
                 .toList();
     }
+
+    public Boolean deletePack(String packId) {
+        if (packRepository.existsById(packId)) {
+            packRepository.deleteById(packId);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

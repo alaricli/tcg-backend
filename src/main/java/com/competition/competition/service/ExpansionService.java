@@ -63,12 +63,12 @@ public class ExpansionService {
         return expansionRepository.saveAll(expansions);
     }
 
-    public boolean deleteExpansion(String id) {
-        Expansion expansion = expansionRepository.findById(id).orElse(null);
-        if (expansion == null) {
+    public boolean deleteExpansion(String expansionId) {
+        if (expansionRepository.existsById(expansionId)) {
+            expansionRepository.deleteById(expansionId);
+            return true;
+        } else {
             return false;
         }
-        expansionRepository.delete(expansion);
-        return true;
     }
 }
