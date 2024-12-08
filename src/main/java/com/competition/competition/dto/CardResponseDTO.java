@@ -41,6 +41,15 @@ public class CardResponseDTO {
     private String description;
     private Integer evolvesFrom;
     private Integer evolvesTo;
+    private String mainType;
+
+    public String getMainType() {
+        return mainType;
+    }
+
+    public void setMainType(String mainType) {
+        this.mainType = mainType;
+    }
 
     public String getId() {
         return id;

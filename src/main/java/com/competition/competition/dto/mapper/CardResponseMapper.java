@@ -37,6 +37,7 @@ public class CardResponseMapper {
         cardResponseDTO.setFoundInPacks(card.getFoundInPacks());
         cardResponseDTO.setEvolvesFrom(card.getEvolvesFrom());
         cardResponseDTO.setEvolvesTo(card.getEvolvesTo());
+        cardResponseDTO.setMainType(card.getMainType());
         return cardResponseDTO;
     }
 }

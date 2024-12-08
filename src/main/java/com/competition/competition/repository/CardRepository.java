@@ -16,10 +16,9 @@ import java.util.List;
 public interface CardRepository extends JpaRepository<Card, String> {
     @Query("SELECT new com.competition.competition.dto.CardResponseSimplifiedDTO(c.id, c.name, c.cardImages.small) " +
             "FROM Card c " +
-            "LEFT JOIN Pack p ON c.id = p.id " +
             "WHERE (:expansionId IS NULL OR c.expansion.id = :expansionId) " +
             "AND (:rarity IS NULL OR c.rarity = :rarity) " +
-            "AND (:packId IS NULL OR p.id = :packId) " +
+            "AND (:packId IS NULL OR :packId MEMBER OF c.foundInPacks) " +
             "AND (:searchText IS NULL OR c.name = :searchText) " +
 //            "AND (:searchText IS NULL OR LOWER(c.name) LIKE LOWER(CONCAT('%', :searchText, '%'))) " +
             "AND (:hasAbility IS NULL OR c.hasAbility = :hasAbility) " +

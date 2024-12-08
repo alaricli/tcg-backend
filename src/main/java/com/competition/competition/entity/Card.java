@@ -76,6 +76,7 @@ public class Card {
     private Integer dustCost;
     private Integer evolvesFrom;
     private Integer evolvesTo;
+    private String mainType;
 
     public String getId() {
         return id;
@@ -339,5 +340,13 @@ public class Card {
 
     public void setEvolvesTo(Integer evolvesTo) {
         this.evolvesTo = evolvesTo;
+    }
+
+    public String getMainType() {
+        return mainType;
+    }
+
+    public void setMainType(String mainType) {
+        this.mainType = mainType;
     }
 }

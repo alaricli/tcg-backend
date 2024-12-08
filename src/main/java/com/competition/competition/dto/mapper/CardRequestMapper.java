@@ -48,6 +48,8 @@ public class CardRequestMapper {
         card.setDustCost(cardRequest.getDustCost());
         card.setEvolvesFrom(cardRequest.getEvolvesFrom());
         card.setEvolvesTo(cardRequest.getEvolvesTo());
+        card.setPocket(cardRequest.getPocket());
+        card.setMainType(cardRequest.getMainType());
 
         return card;
     }

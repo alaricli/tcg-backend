@@ -58,6 +58,12 @@ public class CardService {
                                                              Optional<String> sortType,
                                                              Optional<String> sortDirection
     ) {
+        // can currently sort by
+        // id
+        // name
+        // rarity
+        // type
+        // natDex#
         Sort.Direction direction = sortDirection.map(Sort.Direction::valueOf).orElse(Sort.Direction.ASC);
         String sortBy = sortType.orElse("id");
         Sort sort = Sort.by(direction, sortBy);
