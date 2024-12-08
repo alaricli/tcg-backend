@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/card")
+@RequestMapping("/api")
 public class CardController {
     private final CardService cardService;
 
@@ -20,25 +20,13 @@ public class CardController {
         this.cardService = cardService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Card> addCard(@RequestBody CardRequestDTO cardRequestDTO) {
-        Card createdCard = cardService.createCard(cardRequestDTO);
-        return ResponseEntity.ok(createdCard);
-    }
-
-    @PostMapping("/add/bulk")
+    @PostMapping("/add/cards")
     public ResponseEntity<List<Card>> addCards(@RequestBody List<CardRequestDTO> cardRequestDTOList) {
         List<Card> createdCards = cardService.createCards(cardRequestDTOList);
         return ResponseEntity.ok(createdCards);
     }
 
-    @GetMapping("/getAllOld")
-    public ResponseEntity<List<CardResponseDTO>> getCards() {
-        List<CardResponseDTO> cardResponseDTOS = cardService.getAllCards();
-        return ResponseEntity.ok(cardResponseDTOS);
-    }
-
-    @GetMapping("/get/{id}")
+    @GetMapping("/get/card/{id}")
     public ResponseEntity<CardResponseDTO> getCardById(@PathVariable("id") String id) {
         CardResponseDTO cardResponseDTO = cardService.getCardById(id);
         if (cardResponseDTO != null) {
@@ -47,7 +35,7 @@ public class CardController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/cards")
+    @GetMapping("/get/cards")
     public ResponseEntity<List<CardResponseSimplifiedDTO>> getCardSummaries(@RequestParam(required = false) Optional<String> expansionId,
                                                                             @RequestParam(required = false) Optional<String> packId,
                                                                             @RequestParam(required = false) Optional<String> searchText,
@@ -67,7 +55,7 @@ public class CardController {
         return ResponseEntity.ok(cards);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/card/{id}")
     public ResponseEntity<String> deleteCardById(@PathVariable("id") String id) {
         try {
             boolean deleted = cardService.deleteCard(id);
@@ -79,4 +67,17 @@ public class CardController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    // old endpoints
+    //    @PostMapping("/add")
+//    public ResponseEntity<Card> addCard(@RequestBody CardRequestDTO cardRequestDTO) {
+//        Card createdCard = cardService.createCard(cardRequestDTO);
+//        return ResponseEntity.ok(createdCard);
+//    }
+
+    //    @GetMapping("/getAllOld")
+//    public ResponseEntity<List<CardResponseDTO>> getCards() {
+//        List<CardResponseDTO> cardResponseDTOS = cardService.getAllCards();
+//        return ResponseEntity.ok(cardResponseDTOS);
+//    }
 }
