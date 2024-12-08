@@ -69,15 +69,9 @@ public class CardController {
     }
 
     // old endpoints
-    //    @PostMapping("/add")
-//    public ResponseEntity<Card> addCard(@RequestBody CardRequestDTO cardRequestDTO) {
-//        Card createdCard = cardService.createCard(cardRequestDTO);
-//        return ResponseEntity.ok(createdCard);
-//    }
-
     //    @GetMapping("/getAllOld")
-//    public ResponseEntity<List<CardResponseDTO>> getCards() {
-//        List<CardResponseDTO> cardResponseDTOS = cardService.getAllCards();
-//        return ResponseEntity.ok(cardResponseDTOS);
-//    }
+    //    public ResponseEntity<List<CardResponseDTO>> getCards() {
+    //        List<CardResponseDTO> cardResponseDTOS = cardService.getAllCards();
+    //        return ResponseEntity.ok(cardResponseDTOS);
+    //    }
 }

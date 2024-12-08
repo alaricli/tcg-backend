@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/expansion")
+@RequestMapping("/api")
 public class ExpansionController {
     private final ExpansionService expansionService;
 
@@ -19,25 +19,19 @@ public class ExpansionController {
         this.expansionService = expansionService;
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Expansion> addExpansion(@RequestBody ExpansionRequestDTO expansionRequest) {
-        Expansion newExpansion = expansionService.createExpansion(expansionRequest);
-        return ResponseEntity.ok(newExpansion);
-    }
-
-    @PostMapping("/add/bulk")
+    @PostMapping("/add/expansions")
     public ResponseEntity<List<Expansion>> addExpansions(@RequestBody List<ExpansionRequestDTO> expansionRequests) {
         List<Expansion> newExpansions = expansionService.createExpansions(expansionRequests);
         return ResponseEntity.ok(newExpansions);
     }
 
-    @GetMapping("/get")
+    @GetMapping("/get/expansions")
     public ResponseEntity<List<ExpansionResponseDTO>> getAllExpansions() {
         List<ExpansionResponseDTO> expansions = expansionService.getAllExpansions();
         return ResponseEntity.ok(expansions);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get/expansion/{id}")
     public ResponseEntity<ExpansionResponseDTO> getExpansionById(@PathVariable("id") String id) {
         ExpansionResponseDTO expansion = expansionService.getExpansionById(id);
         if (expansion == null) {
@@ -46,13 +40,13 @@ public class ExpansionController {
         return ResponseEntity.ok(expansion);
     }
 
-    @GetMapping("/get/pocket")
+    @GetMapping("/get/expansions/pocket")
     public ResponseEntity<List<ExpansionResponseDTO>> getPocketExpansions() {
         List<ExpansionResponseDTO> expansions = expansionService.getAllPocketExpansions();
         return ResponseEntity.ok(expansions);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/expansion/{id}")
     public ResponseEntity<String> deleteExpansionById(@PathVariable("id") String id) {
         try {
             boolean deleted = expansionService.deleteExpansion(id);

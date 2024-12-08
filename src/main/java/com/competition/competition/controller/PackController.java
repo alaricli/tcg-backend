@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/pocket/pack")
+@RequestMapping("/api")
 public class PackController {
     private final PackService packService;
 
@@ -20,7 +20,7 @@ public class PackController {
         this.packService = packService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/add/packs")
     public ResponseEntity<?> addPacks(@RequestBody List<PackRequestDTO> packRequestDTOList) {
         try {
             List<Pack> newPacks = packService.createPacks(packRequestDTOList);
@@ -30,13 +30,13 @@ public class PackController {
         }
     }
 
-    @GetMapping("/get")
+    @GetMapping("/get/packs")
     public ResponseEntity<List<PackResponseDTO>> getPacks() {
         List<PackResponseDTO> returnPacks = packService.getAllPacks();
         return new ResponseEntity<>(returnPacks, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/delete/pack/{id}")
     public ResponseEntity<String> deletePack(@PathVariable String id) {
         try {
             boolean deleted = packService.deletePack(id);
