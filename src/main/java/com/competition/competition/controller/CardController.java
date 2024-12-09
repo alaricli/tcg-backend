@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -29,6 +28,7 @@ public class CardController {
     @GetMapping("/get/card/{id}")
     public ResponseEntity<CardResponseDTO> getCardById(@PathVariable("id") String id) {
         CardResponseDTO cardResponseDTO = cardService.getCardById(id);
+
         if (cardResponseDTO != null) {
             return ResponseEntity.ok(cardResponseDTO);
         }
@@ -36,22 +36,22 @@ public class CardController {
     }
 
     @GetMapping("/get/cards")
-    public ResponseEntity<List<CardResponseSimplifiedDTO>> getCardSummaries(@RequestParam(required = false) Optional<String> expansionId,
-                                                                            @RequestParam(required = false) Optional<String> packId,
-                                                                            @RequestParam(required = false) Optional<String> searchText,
-                                                                            @RequestParam(required = false) Optional<String> rarity,
-                                                                            @RequestParam(required = false) Optional<Boolean> hasAbility,
-                                                                            @RequestParam(required = false) Optional<Boolean> hasRuleBox,
-                                                                            @RequestParam(required = false) Optional<String> energyType,
-                                                                            @RequestParam(required = false) Optional<String> weakness,
-                                                                            @RequestParam(required = false) Optional<Integer> retreatCost,
-                                                                            @RequestParam(required = false) Optional<String> superType,
-                                                                            @RequestParam(required = false) Optional<String> subType,
-                                                                            @RequestParam(required = false) Optional<String> sortType,
-                                                                            @RequestParam(required = false) Optional<String> sortDirection
+    public ResponseEntity<List<CardResponseSimplifiedDTO>> getCardSummaries(@RequestParam(required = false) String expansionId,
+                                                                            @RequestParam(required = false) String packId,
+                                                                            @RequestParam(required = false) String searchText,
+                                                                            @RequestParam(required = false) String rarity,
+                                                                            @RequestParam(required = false) Boolean hasAbility,
+                                                                            @RequestParam(required = false) Boolean hasRuleBox,
+                                                                            @RequestParam(required = false) String energyType,
+                                                                            @RequestParam(required = false) String weakness,
+                                                                            @RequestParam(required = false) Integer retreatCost,
+                                                                            @RequestParam(required = false) String superType,
+                                                                            @RequestParam(required = false) String subType,
+                                                                            @RequestParam(required = false) String sortBy,
+                                                                            @RequestParam(required = false) String sortDirection
     ) {
-        List<CardResponseSimplifiedDTO> cards = cardService.getProcessedCards(
-                expansionId, packId, searchText, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType, sortType, sortDirection);
+        List<CardResponseSimplifiedDTO> cards = cardService.queryCards(
+                expansionId, packId, searchText, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType, sortBy, sortDirection);
         return ResponseEntity.ok(cards);
     }
 
@@ -67,11 +67,4 @@ public class CardController {
             return ResponseEntity.badRequest().build();
         }
     }
-
-    // old endpoints
-    //    @GetMapping("/getAllOld")
-    //    public ResponseEntity<List<CardResponseDTO>> getCards() {
-    //        List<CardResponseDTO> cardResponseDTOS = cardService.getAllCards();
-    //        return ResponseEntity.ok(cardResponseDTOS);
-    //    }
 }
