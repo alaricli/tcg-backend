@@ -19,3 +19,14 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: "PokemonEnergy";
+  src: url("/fonts/PokemonEnergy.ttf") format("truetype");
+  font-display: swap;
+}
+
+.energy-icon {
+  font-family: "PokemonEnergy", sans-serif;
+  font-size: 24px;
+}

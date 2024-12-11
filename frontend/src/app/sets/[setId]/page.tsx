@@ -37,7 +37,7 @@ async function fetchExpansionDetails(setId: string): Promise<Expansion | null> {
       name: "All Cards",
       expansionImages: {
         symbol: "",
-        logo: "",
+        logo: "/tcgpocketlogo.png",
       },
       legalities: null,
       printedTotal: 0,
@@ -78,6 +78,7 @@ export default function SetPage({
   const [expansionDetails, setExpansionDetails] = useState<Expansion | null>(
     null
   );
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const fetchAndSetCards = async () => {
@@ -138,23 +139,25 @@ export default function SetPage({
 
   return (
     <div className="min-h-screen">
-      <header className="bg-gradient-to-r from-indigo-500 to-pink-400 shadow-md p-6 flex items-center justify-between">
-        {expansionDetails?.expansionImages?.logo && (
-          <Image
-            src={expansionDetails.expansionImages.logo}
-            alt={`${expansionDetails.name} logo`}
-            className="object-cover"
-            height={100}
-            width={100}
-          />
-        )}
-        <div className="flex flex-col">
+      <header className="bg-gradient-to-r from-indigo-500 to-pink-400 shadow-md py-4 px-6 flex items-center justify-between w-full">
+        <div className="flex items-center h-24 w-24 overflow-hidden">
+          {expansionDetails?.expansionImages?.logo && (
+            <Image
+              src={expansionDetails.expansionImages.logo}
+              alt={`${expansionDetails.name} logo`}
+              className="object-contain w-full h-full"
+              height={100}
+              width={100}
+            />
+          )}
+        </div>
+        <div className="absolute left-1/2 transform -translate-x-1/2 text-center">
           <h1 className="text-3xl font-semibold text-white">
             {expansionDetails?.name || "Loading..."}
           </h1>
           <p className="text-gray-100">{expansionDetails?.expansionCode}</p>
         </div>
-        <div className="text-white">
+        <div className="text-white text-right">
           {expansionDetails?.total !== undefined &&
             expansionDetails.total > 0 && (
               <p>Set Total: {expansionDetails.total}</p>
@@ -197,6 +200,24 @@ export default function SetPage({
             </option>
           ))}
         </select>
+
+        <label className="block mb-2 text-sm font-medium text-gray-700">
+          Search:
+        </label>
+        <div>
+          <input
+            placeholder="search..."
+            className="border p-2 rounded-md"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+          />
+          <button
+            onClick={() => updateFilter("searchText", searchText)}
+            className="bg-blue-500 p-2"
+          >
+            Search
+          </button>
+        </div>
 
         <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
           Filter by Rarity:
@@ -328,22 +349,33 @@ export default function SetPage({
           <option value="5">5</option>
         </select>
 
-        {/* <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
           Sort By:
         </label>
         <select
-          onChange={(e) => updateFilter("sortType", e.target.value)}
+          onChange={(e) => updateFilter("sortBy", e.target.value)}
           className="p-2 border rounded-md"
         >
           <option value="">Default (id)</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select> */}
+          <option value="name">Name</option>
+          <option value="nationalDexNumber">Nat Dex Number</option>
+          <option value="rarity">Rarity</option>
+          <option value="type">Energy Type</option>
+          <option value="superType">Card Type</option>
+        </select>
+
+        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          Sort Direction:
+        </label>
+        <select
+          onChange={(e) => updateFilter("sortDirection", e.target.value)}
+          className="p-2 border rounded-md"
+        >
+          <option value="">Ascending</option>
+          <option value="DESC">Descending</option>
+        </select>
       </div>
+      {/* <p>{JSON.stringify(filters, null, 2)}</p> */}
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 p-6">

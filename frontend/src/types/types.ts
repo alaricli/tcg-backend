@@ -49,7 +49,7 @@ export interface Card {
   retreatCost: number;
   hasRuleBox: boolean;
   hasAbility: boolean;
-  ability: unknown | null; // Replace with appropriate type if you know
+  ability: string | null; // Replace with appropriate type if you know
   trainerCardText: string;
   dustCost: number;
   description: string | null;

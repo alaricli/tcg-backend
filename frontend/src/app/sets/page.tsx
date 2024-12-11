@@ -28,7 +28,7 @@ export default async function SetsPage() {
   const sets = await fetchSets();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen p-8">
       <h1 className="text-3xl font-semibold mb-6">Sets</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {sets.map((set) => (
@@ -40,7 +40,7 @@ export default async function SetsPage() {
           >
             <div
               key={set.id}
-              className="bg-white rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow"
+              className="bg-gray-100 text-gray-900 rounded-lg shadow-md p-6 hover:shadow-xl transition-shadow w-full h-full"
             >
               <div className="flex items-center mb-4">
                 {set.expansionImages.symbol && (
