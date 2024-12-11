@@ -1,15 +1,19 @@
 "use client";
 
 import { useState, useEffect, use } from "react";
-import { Card } from "@/types/types";
+import { Card, Expansion } from "@/types/types";
 import Image from "next/image";
+import Link from "next/link";
 
 async function fetchCards(
   setId: string,
   filters: Record<string, string>
 ): Promise<Card[]> {
   try {
-    const queryParams = new URLSearchParams({ setId, ...filters }).toString();
+    const queryParams = new URLSearchParams({
+      ...(setId && { setId }),
+      ...filters,
+    }).toString();
     const response = await fetch(
       `http://localhost:8080/api/get/cards?${queryParams}`
     );
@@ -25,34 +29,56 @@ async function fetchCards(
   }
 }
 
-// async function fetchPacks(
-//   setId: string
-// ): Promise<String[]> {
-//   try {
+async function fetchExpansionDetails(setId: string): Promise<Expansion | null> {
+  if (!setId || setId == "" || setId == "all") {
+    return {
+      id: "",
+      series: "",
+      name: "All Cards",
+      expansionImages: {
+        symbol: "",
+        logo: "",
+      },
+      legalities: null,
+      printedTotal: 0,
+      total: 0,
+      expansionCode: "",
+      releaseDate: "",
+    };
+  }
 
-//   }
-// }
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/get/expansion/${setId}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch expansion details");
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("Error fetching expansion details: ", error);
+    return null;
+  }
+}
 
 export default function SetPage({
   params: paramsPromise,
-  searchParams: searchParamsPromise,
 }: {
   params: Promise<{ setId: string }>;
-  searchParams: Promise<{ data: string }>;
 }) {
-  const params = use(paramsPromise); // Unwrap params
-  const searchParams = use(searchParamsPromise); // Unwrap searchParams
+  const params = use(paramsPromise || { setId: "" });
 
-  const { setId: defaultSetId } = params;
-  const { data } = searchParams;
-  const setData = JSON.parse(decodeURIComponent(data));
+  const { setId: initialSetId = "" } = params;
 
-  // States for filters and cards
-  const [setId, setSetId] = useState(defaultSetId);
+  const [setId, setSetId] = useState(initialSetId);
   const [filters, setFilters] = useState<Record<string, string>>({});
   const [cards, setCards] = useState<Card[]>([]);
+  const [expansionDetails, setExpansionDetails] = useState<Expansion | null>(
+    null
+  );
 
-  // Fetch cards when setId or filters change
   useEffect(() => {
     const fetchAndSetCards = async () => {
       const fetchedCards = await fetchCards(setId, filters);
@@ -61,13 +87,13 @@ export default function SetPage({
     fetchAndSetCards();
   }, [setId, filters]);
 
-  // Handler for updating filters
-  // const updateFilter = (filterKey: string, filterValue: string) => {
-  //   setFilters((prevFilters) => ({
-  //     ...prevFilters,
-  //     [filterKey]: filterValue,
-  //   }));
-  // };
+  useEffect(() => {
+    const fetchAndSetExpansionDetails = async () => {
+      const fetchedDetails = await fetchExpansionDetails(setId);
+      setExpansionDetails(fetchedDetails);
+    };
+    fetchAndSetExpansionDetails();
+  }, [setId]);
 
   const updateFilter = (filterKey: string, filterValue: string) => {
     setFilters((prevFilters) => {
@@ -81,43 +107,95 @@ export default function SetPage({
     });
   };
 
+  const packOptions: Record<string, { value: string; label: string }[]> = {
+    A1: [
+      { value: "A1-1", label: "Genetic Apex: Mewtwo Pack" },
+      { value: "A1-2", label: "Genetic Apex: Charizard Pack" },
+      { value: "A1-3", label: "Genetic Apex: Pikachu Pack" },
+    ],
+    "P-A": [
+      { value: "PA1-1", label: "Promo Pack A Series Vol.1" },
+      { value: "PA1-2", label: "Promo Pack A Series Vol.2" },
+    ],
+    default: [
+      { value: "A1-1", label: "Genetic Apex: Mewtwo Pack" },
+      { value: "A1-2", label: "Genetic Apex: Charizard Pack" },
+      { value: "A1-3", label: "Genetic Apex: Pikachu Pack" },
+      { value: "PA1-1", label: "Promo Pack A Series Vol.1" },
+      { value: "PA1-2", label: "Promo Pack A Series Vol.2" },
+      { value: "M", label: "Missions" },
+      { value: "Shop", label: "Shop" },
+      { value: "WP", label: "Wonder Pick" },
+    ],
+  };
+
+  const getPackOptions = (setId: string) => {
+    if (packOptions[setId]) {
+      return packOptions[setId];
+    }
+    return packOptions.default;
+  };
+
   return (
     <div className="min-h-screen">
       <header className="bg-gradient-to-r from-indigo-500 to-pink-400 shadow-md p-6 flex items-center justify-between">
-        {setData.setLogo && (
+        {expansionDetails?.expansionImages?.logo && (
           <Image
-            src={setData.setLogo}
-            alt={`${setData.name} logo`}
+            src={expansionDetails.expansionImages.logo}
+            alt={`${expansionDetails.name} logo`}
             className="object-cover"
             height={100}
             width={100}
           />
         )}
-        <div className="flex space-y-2 space-x-2">
+        <div className="flex flex-col">
           <h1 className="text-3xl font-semibold text-white">
-            {setData.setName}
+            {expansionDetails?.name || "Loading..."}
           </h1>
-          <p className="text-gray-100">({setData.setCode})</p>
+          <p className="text-gray-100">{expansionDetails?.expansionCode}</p>
         </div>
-        <div className="flex flex-col text-white">
-          <p>Set Total: {setData.setTotal}</p>
-          <p>Release Date: {setData.setReleaseDate}</p>
+        <div className="text-white">
+          {expansionDetails?.total !== undefined &&
+            expansionDetails.total > 0 && (
+              <p>Set Total: {expansionDetails.total}</p>
+            )}
+          {expansionDetails?.releaseDate && (
+            <p>Release Date: {expansionDetails.releaseDate}</p>
+          )}
         </div>
       </header>
 
       {/* Filter Section */}
-      <div className="p-6 bg-white shadow-md flex">
+      <div className="p-6 bg-white shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         <label className="block mb-2 text-sm font-medium text-gray-700">
           Select Set ID:
         </label>
         <select
           value={setId}
-          onChange={(e) => setSetId(e.target.value)}
+          onChange={(e) => {
+            updateFilter("expansionId", e.target.value);
+            setSetId(e.target.value);
+          }}
           className="p-2 border rounded-md"
         >
           <option value="">All</option>
           <option value="A1">Genetic Apex</option>
           <option value="P-A">Promo A</option>
+        </select>
+
+        <label className="block mb-2 text-sm font-medium text-gray-700">
+          Select Pack:
+        </label>
+        <select
+          onChange={(e) => updateFilter("packId", e.target.value)}
+          className="p-2 border rounded-md"
+        >
+          <option value="">All</option>
+          {getPackOptions(setId).map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
         </select>
 
         <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
@@ -249,6 +327,22 @@ export default function SetPage({
           <option value="4">4</option>
           <option value="5">5</option>
         </select>
+
+        {/* <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          Sort By:
+        </label>
+        <select
+          onChange={(e) => updateFilter("sortType", e.target.value)}
+          className="p-2 border rounded-md"
+        >
+          <option value="">Default (id)</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select> */}
       </div>
 
       {/* Cards Section */}
@@ -258,19 +352,25 @@ export default function SetPage({
             key={card.id}
             className="rounded-lg p-4 w-64 flex flex-col items-center shadow-md"
           >
-            <div>
-              <Image
-                src={card.cardImages.small}
-                alt={`${card.name} image`}
-                className="object-cover rounded-lg"
-                height={250}
-                width={250}
-              />
-              <div className="flex justify-between w-full p-4">
-                <p className="text-lg font-semibold">{card.name}</p>
-                <p className="text-sm text-gray-500">{card.id}</p>
+            <Link
+              href={{
+                pathname: `/cards/${card.id}`,
+              }}
+            >
+              <div>
+                <Image
+                  src={card.cardImages.small}
+                  alt={`${card.name} image`}
+                  className="object-cover rounded-lg"
+                  height={250}
+                  width={250}
+                />
+                <div className="flex justify-between w-full p-4">
+                  <p className="text-lg font-semibold">{card.name}</p>
+                  <p className="text-sm text-gray-500">{card.id}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>

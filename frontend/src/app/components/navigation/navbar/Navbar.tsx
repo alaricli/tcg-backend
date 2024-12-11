@@ -13,20 +13,7 @@ const Navbar = () => {
           <li>
             <Link
               href={{
-                pathname: `/sets/A1`,
-                query: {
-                  data: encodeURIComponent(
-                    JSON.stringify({
-                      setId: "A1",
-                      setName: "Genetic Apex",
-                      setCode: "A1",
-                      setReleaseDate: "2024/10/30",
-                      setTotal: 286,
-                      setLogo:
-                        "https://archives.bulbagarden.net/media/upload/7/77/A1_Set_Logo_EN.png",
-                    })
-                  ),
-                },
+                pathname: `/sets/all`,
               }}
             >
               <p className="hover:text-orange-400">Cards</p>

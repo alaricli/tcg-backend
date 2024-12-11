@@ -36,18 +36,6 @@ export default async function SetsPage() {
             key={set.id}
             href={{
               pathname: `/sets/${set.id}`,
-              query: {
-                data: encodeURIComponent(
-                  JSON.stringify({
-                    setId: set.id,
-                    setName: set.name,
-                    setCode: set.expansionCode,
-                    setReleaseDate: set.releaseDate,
-                    setTotal: set.total,
-                    setLogo: set.expansionImages.logo,
-                  })
-                ),
-              },
             }}
           >
             <div

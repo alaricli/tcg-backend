@@ -19,8 +19,8 @@ export interface Card {
   hp: number;
   artist: string;
   regulationMark: string;
-  price: null | number;
-  marketPrice: null | number;
+  price: number | null;
+  marketPrice: number | null;
   rules: string[];
   expansionId: string;
   cardNumber: number;
@@ -31,21 +31,30 @@ export interface Card {
     small: string;
     large: string;
   };
-  legalities: null | object;
-  pullRates: null | object;
+  legalities: unknown | null; // Replace with appropriate type if you know
+  pullRates: unknown | null; // Replace with appropriate type if you know
   energyTypes: string[];
-  attacks: null | object;
+  attacks: {
+    name: string;
+    text: string;
+    cost: string;
+    numericalEnergyCost: number;
+    damage: string;
+  }[];
   attackEnergyTypes: string[];
   weakness: string[];
   resistance: string[];
   foundInPacks: string[];
-  nationalPokedexNumber: number;
+  nationalDexNumber: number;
   retreatCost: number;
   hasRuleBox: boolean;
   hasAbility: boolean;
-  ability: null | string;
+  ability: unknown | null; // Replace with appropriate type if you know
   trainerCardText: string;
   dustCost: number;
-  description: null | string;
-  pocket: boolean;
+  description: string | null;
+  evolvesFrom: string | null;
+  evolvesTo: number | null;
+  mainType: string;
+  pocket: unknown | null; // Replace with appropriate type if you know
 }
