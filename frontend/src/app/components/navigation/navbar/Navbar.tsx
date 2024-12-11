@@ -11,12 +11,24 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/articles">
-              <p className="hover:text-orange-400">Articles</p>
-            </Link>
-          </li>
-          <li>
-            <Link href="/cards">
+            <Link
+              href={{
+                pathname: `/sets/A1`,
+                query: {
+                  data: encodeURIComponent(
+                    JSON.stringify({
+                      setId: "A1",
+                      setName: "Genetic Apex",
+                      setCode: "A1",
+                      setReleaseDate: "2024/10/30",
+                      setTotal: 286,
+                      setLogo:
+                        "https://archives.bulbagarden.net/media/upload/7/77/A1_Set_Logo_EN.png",
+                    })
+                  ),
+                },
+              }}
+            >
               <p className="hover:text-orange-400">Cards</p>
             </Link>
           </li>
@@ -25,7 +37,7 @@ const Navbar = () => {
               <p className="hover:text-orange-400">Sets</p>
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link href="/decks">
               <p className="hover:text-orange-400">Decks</p>
             </Link>
@@ -35,6 +47,11 @@ const Navbar = () => {
               <p className="hover:text-orange-400">Meta</p>
             </Link>
           </li>
+          <li>
+            <Link href="/articles">
+              <p className="hover:text-orange-400">Articles</p>
+            </Link>
+          </li> */}
         </ul>
       </div>
     </nav>

@@ -70,11 +70,10 @@ public class CardService {
                     FROM PACK_IDS p
                     WHERE p.card_id = c.id
                         AND p.pack_ids = :packId
-                        )
-                """);
-        if (searchText != null)
-            queryBuilder.append("""
-                        AND (
+                )
+        """);
+        if (searchText != null) queryBuilder.append("""
+                            AND (
                             LOWER(c.name) LIKE LOWER(CONCAT('%', :searchText, '%'))
                             OR LOWER(c.artist) LIKE LOWER(CONCAT('%', :searchText, '%'))
                             OR LOWER(c.main_type) LIKE LOWER(CONCAT('%', :searchText, '%'))
@@ -100,8 +99,8 @@ public class CardService {
                     FROM CARD_SUBTYPES cs
                     WHERE cs.card_id = c.id
                         AND cs.subtypes = :subType
-                        )
-                """);
+                )
+        """);
 
         String sortColumn = switch (sortBy == null ? "CAST(c.card_number AS INTEGER)" : sortBy) {
             case "name" -> "c.name";
@@ -125,7 +124,7 @@ public class CardService {
             default -> "CAST(c.card_number AS INTEGER)";
         };
         String safeSortDirection = "DESC".equalsIgnoreCase(sortDirection) ? "DESC" : "ASC";
-        queryBuilder.append(" ORDER BY ").append(sortColumn).append(" ").append(safeSortDirection);
+        queryBuilder.append(" GROUP BY c.id, c.name, c.small ").append(" ORDER BY ").append(sortColumn).append(" ").append(safeSortDirection);
 
         Query query = em.createNativeQuery(queryBuilder.toString(), CardResponseSimplifiedDTO.class);
 
