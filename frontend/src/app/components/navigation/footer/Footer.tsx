@@ -48,22 +48,22 @@ const Footer = () => {
           <div>
             <ul>
               <li>
-                <Link href="/">
+                <Link href="/about">
                   <p className="hover:text-orange-400">About</p>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <a href="mailto:alaricli@outlook.com">
                   <p className="hover:text-orange-400">Contact</p>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/privacy">
                   <p className="hover:text-orange-400">Privacy</p>
                 </Link>
               </li>
               <li>
-                <Link href="/">
+                <Link href="/terms">
                   <p className="hover:text-orange-400">Terms</p>
                 </Link>
               </li>
