@@ -79,6 +79,7 @@ export default function SetPage({
     null
   );
   const [searchText, setSearchText] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     const fetchAndSetCards = async () => {
@@ -168,214 +169,225 @@ export default function SetPage({
         </div>
       </header>
 
-      {/* Filter Section */}
-      <div className="p-6 bg-white shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <label className="block mb-2 text-sm font-medium text-gray-700">
-          Select Set ID:
-        </label>
-        <select
-          value={setId}
-          onChange={(e) => {
-            updateFilter("expansionId", e.target.value);
-            setSetId(e.target.value);
-          }}
-          className="p-2 border rounded-md"
+      <div className="flex">
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className="w-full bg-gray-700 text-white py-2"
         >
-          <option value="">All</option>
-          <option value="A1">Genetic Apex</option>
-          <option value="P-A">Promo A</option>
-        </select>
-
-        <label className="block mb-2 text-sm font-medium text-gray-700">
-          Select Pack:
-        </label>
-        <select
-          onChange={(e) => updateFilter("packId", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          {getPackOptions(setId).map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-
-        <label className="block mb-2 text-sm font-medium text-gray-700">
-          Search:
-        </label>
-        <div>
-          <input
-            placeholder="search..."
-            className="border p-2 rounded-md"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-          />
-          <button
-            onClick={() => updateFilter("searchText", searchText)}
-            className="bg-blue-500 p-2"
-          >
-            Search
-          </button>
-        </div>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Rarity:
-        </label>
-        <select
-          onChange={(e) => updateFilter("rarity", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="Common">Common</option>
-          <option value="Uncommon">Uncommon</option>
-          <option value="Rare">Rare</option>
-          <option value="Double Rare">Double Rare</option>
-          <option value="Art Rare">Art Rare</option>
-          <option value="Super Rare">Super Rare</option>
-          <option value="Special Art Rare">Special Art Rare</option>
-          <option value="Immersive Rare">Immersive Rare</option>
-          <option value="Crown Rare">Crown Rare</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Type:
-        </label>
-        <select
-          onChange={(e) => updateFilter("energyType", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="Fire">Fire</option>
-          <option value="Water">Water</option>
-          <option value="Grass">Grass</option>
-          <option value="Lightning">Lightning</option>
-          <option value="Psychic">Psychic</option>
-          <option value="Fighting">Fighting</option>
-          <option value="Darkness">Darkness</option>
-          <option value="Metal">Metal</option>
-          <option value="Fairy">Fairy</option>
-          <option value="Dragon">Dragon</option>
-          <option value="Colorless">Colorless</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Weakness:
-        </label>
-        <select
-          onChange={(e) => updateFilter("weakness", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="Fire">Fire</option>
-          <option value="Water">Water</option>
-          <option value="Grass">Grass</option>
-          <option value="Lightning">Lightning</option>
-          <option value="Psychic">Psychic</option>
-          <option value="Fighting">Fighting</option>
-          <option value="Darkness">Darkness</option>
-          <option value="Metal">Metal</option>
-          <option value="Fairy">Fairy</option>
-          <option value="Dragon">Dragon</option>
-          <option value="Colorless">Colorless</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Ability:
-        </label>
-        <select
-          onChange={(e) => updateFilter("hasAbility", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Rule Box (ex):
-        </label>
-        <select
-          onChange={(e) => updateFilter("hasRuleBox", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="true">Yes</option>
-          <option value="false">No</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Card Category:
-        </label>
-        <select
-          onChange={(e) => updateFilter("superType", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="Pokémon">Pokémon</option>
-          <option value="Trainer">Trainer</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Card Type:
-        </label>
-        <select
-          onChange={(e) => updateFilter("subType", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="Basic">Basic</option>
-          <option value="Stage 1">Stage 1</option>
-          <option value="Stage 2">Stage 2</option>
-          <option value="Item">Item</option>
-          <option value="ex">ex</option>
-          <option value="Supporter">Supporter</option>
-          <option value="Fossil">Fossil</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Filter by Retreat Cost:
-        </label>
-        <select
-          onChange={(e) => updateFilter("retreatCost", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">All</option>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Sort By:
-        </label>
-        <select
-          onChange={(e) => updateFilter("sortBy", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">Default (id)</option>
-          <option value="name">Name</option>
-          <option value="nationalDexNumber">Nat Dex Number</option>
-          <option value="rarity">Rarity</option>
-          <option value="type">Energy Type</option>
-          <option value="superType">Card Type</option>
-        </select>
-
-        <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-          Sort Direction:
-        </label>
-        <select
-          onChange={(e) => updateFilter("sortDirection", e.target.value)}
-          className="p-2 border rounded-md"
-        >
-          <option value="">Ascending</option>
-          <option value="DESC">Descending</option>
-        </select>
+          Toggle Filters
+          <div>{showFilters ? <span>↑</span> : <span>↓</span>}</div>
+        </button>
       </div>
-      {/* <p>{JSON.stringify(filters, null, 2)}</p> */}
+
+      {/* Filter Section */}
+      {showFilters && (
+        <div className="p-6 bg-white shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Select Set ID:
+          </label>
+          <select
+            value={setId}
+            onChange={(e) => {
+              updateFilter("expansionId", e.target.value);
+              setSetId(e.target.value);
+            }}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="A1">Genetic Apex</option>
+            <option value="P-A">Promo A</option>
+          </select>
+
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Select Pack:
+          </label>
+          <select
+            onChange={(e) => updateFilter("packId", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            {getPackOptions(setId).map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+
+          <label className="block mb-2 text-sm font-medium text-gray-700">
+            Search:
+          </label>
+          <div>
+            <input
+              placeholder="search..."
+              className="border p-2 rounded-md"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+            />
+            <button
+              onClick={() => updateFilter("searchText", searchText)}
+              className="bg-blue-500 p-2"
+            >
+              Search
+            </button>
+          </div>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Rarity:
+          </label>
+          <select
+            onChange={(e) => updateFilter("rarity", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="Common">Common</option>
+            <option value="Uncommon">Uncommon</option>
+            <option value="Rare">Rare</option>
+            <option value="Double Rare">Double Rare</option>
+            <option value="Art Rare">Art Rare</option>
+            <option value="Super Rare">Super Rare</option>
+            <option value="Special Art Rare">Special Art Rare</option>
+            <option value="Immersive Rare">Immersive Rare</option>
+            <option value="Crown Rare">Crown Rare</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Type:
+          </label>
+          <select
+            onChange={(e) => updateFilter("energyType", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="Fire">Fire</option>
+            <option value="Water">Water</option>
+            <option value="Grass">Grass</option>
+            <option value="Lightning">Lightning</option>
+            <option value="Psychic">Psychic</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Darkness">Darkness</option>
+            <option value="Metal">Metal</option>
+            <option value="Fairy">Fairy</option>
+            <option value="Dragon">Dragon</option>
+            <option value="Colorless">Colorless</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Weakness:
+          </label>
+          <select
+            onChange={(e) => updateFilter("weakness", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="Fire">Fire</option>
+            <option value="Water">Water</option>
+            <option value="Grass">Grass</option>
+            <option value="Lightning">Lightning</option>
+            <option value="Psychic">Psychic</option>
+            <option value="Fighting">Fighting</option>
+            <option value="Darkness">Darkness</option>
+            <option value="Metal">Metal</option>
+            <option value="Fairy">Fairy</option>
+            <option value="Dragon">Dragon</option>
+            <option value="Colorless">Colorless</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Ability:
+          </label>
+          <select
+            onChange={(e) => updateFilter("hasAbility", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Rule Box (ex):
+          </label>
+          <select
+            onChange={(e) => updateFilter("hasRuleBox", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Card Category:
+          </label>
+          <select
+            onChange={(e) => updateFilter("superType", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="Pokémon">Pokémon</option>
+            <option value="Trainer">Trainer</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Card Type:
+          </label>
+          <select
+            onChange={(e) => updateFilter("subType", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="Basic">Basic</option>
+            <option value="Stage 1">Stage 1</option>
+            <option value="Stage 2">Stage 2</option>
+            <option value="Item">Item</option>
+            <option value="ex">ex</option>
+            <option value="Supporter">Supporter</option>
+            <option value="Fossil">Fossil</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Filter by Retreat Cost:
+          </label>
+          <select
+            onChange={(e) => updateFilter("retreatCost", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">All</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Sort By:
+          </label>
+          <select
+            onChange={(e) => updateFilter("sortBy", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">Default (id)</option>
+            <option value="name">Name</option>
+            <option value="nationalDexNumber">Nat Dex Number</option>
+            <option value="rarity">Rarity</option>
+            <option value="type">Energy Type</option>
+            <option value="superType">Card Type</option>
+          </select>
+
+          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+            Sort Direction:
+          </label>
+          <select
+            onChange={(e) => updateFilter("sortDirection", e.target.value)}
+            className="p-2 border rounded-md"
+          >
+            <option value="">Ascending</option>
+            <option value="DESC">Descending</option>
+          </select>
+        </div>
+      )}
 
       {/* Cards Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 p-6">
