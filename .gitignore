@@ -30,4 +30,8 @@ docker-compose.yml
 .vscode
 frontend-admin/node_modules
 frontend/node_modules
-frontend/.next
+frontend/.next!/src/test/resources/application-test.properties
+!/src/test/resources/application-test.properties
+!/src/main/resources/application-prod.properties
+!/src/main/resources/
+!/src/test/resources/
