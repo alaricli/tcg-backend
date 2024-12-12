@@ -40,34 +40,46 @@ export default async function CardPage({
         <Image
           src={cardDetails.cardImages.large}
           alt={cardDetails.name}
-          className="w-full h-auto max-w-xs rounded-md shadow-md"
+          className="w-full h-auto max-w-sm rounded-md shadow-md"
           width={250}
           height={250}
         />
       </div>
 
       {/* Right Section: Details */}
-      <div className="w-1/3 p-6 mt-20 space-y-4">
+      <div className="w-1/3 p-4 flex flex-col justify-center space-y-4">
         {/* Card Name */}
-        <h1 className="text-2xl font-bold">
-          {cardDetails.name}
-          {(cardDetails.superType === "Pokémon" ||
-            cardDetails.superType === "Energy") && (
-            <div>
-              <p className="energy-icon">
+        <div className="flex items-center space-x-4">
+          <h1 className="text-2xl font-bold leading-none flex items-center space-x-4">
+            <span>{cardDetails.name}</span>
+
+            {(cardDetails.superType === "Pokémon" ||
+              cardDetails.subTypes.includes("Fossil")) && (
+              <span className="text-xl leading-none">HP: {cardDetails.hp}</span>
+            )}
+
+            {(cardDetails.superType === "Pokémon" ||
+              cardDetails.superType === "Energy") && (
+              <span className="energy-icon leading-none relative top-0.5">
                 {getEnergySymbol(cardDetails.mainType)}
-              </p>
-            </div>
-          )}{" "}
-          {(cardDetails.superType === "Pokémon" ||
-            cardDetails.subTypes.includes("Fossil")) && (
-            <p>
-              <strong>HP:</strong> {cardDetails.hp}
-            </p>
-          )}
-        </h1>
+              </span>
+            )}
+          </h1>
+        </div>
 
         {/* Shared Basic Information */}
+        <div className="flex">
+          <span className="mr-1">{cardDetails.superType} - </span>
+          <span>
+            {cardDetails.subTypes.map((subType, index) => (
+              <span key={index}>
+                {index > 0 && ", "}
+                {subType}
+              </span>
+            ))}
+          </span>
+        </div>
+
         <div>
           <p>
             <strong>Rarity:</strong> {cardDetails.rarity}
@@ -75,34 +87,55 @@ export default async function CardPage({
           <p>
             <strong>Expansion:</strong> {cardDetails.expansionId}
           </p>
+          {cardDetails.dustCost != 0 && (
+            <p>
+              <strong>Found in Packs:</strong>{" "}
+              <span>
+                {cardDetails.foundInPacks.map((pack, index) => (
+                  <span key={index}>
+                    {index > 0 && ", "}
+                    {pack}
+                  </span>
+                ))}
+              </span>
+            </p>
+          )}
+          {cardDetails.dustCost != 0 && (
+            <p>
+              <strong>Dust Cost:</strong> {cardDetails.dustCost}
+            </p>
+          )}
+          <p>
+            <strong>Illustrated By:</strong> {cardDetails.artist}
+          </p>
         </div>
 
         {/* Attacks */}
         {cardDetails.superType === "Pokémon" && (
           <div>
-            {cardDetails.hasAbility && (
+            {cardDetails.hasAbility === true && (
               <div>
-                <h2>Ability:</h2>
-                {cardDetails.ability}
+                <h2 className="text-lg font-semibold">Ability:</h2>
+                <div className="p-4 border rounded-md my-2">
+                  {cardDetails.ability}
+                </div>
               </div>
             )}
             <h2 className="text-lg font-semibold">Attacks:</h2>
             {cardDetails.attacks.map((attack, index) => (
               <div key={index} className="p-4 border rounded-md my-2">
-                <p>
-                  <strong>Name:</strong> {attack.name}
-                </p>
-                <p>
-                  <strong>Damage:</strong> {attack.damage}
-                </p>
-                <div className="flex space-x-2">
-                  <strong>Cost:</strong>
-                  {attack.cost.split(",").map((cost, index) => (
-                    <span key={index} className="energy-icon">
-                      {getEnergySymbol(cost)}
-                    </span>
-                  ))}
+                <div className="font-semibold">{attack.name}</div>
+                <div className="flex justify-between mt-2">
+                  <div className="flex space-x-1">
+                    {attack.cost.split(",").map((cost, index) => (
+                      <span key={index} className="energy-icon">
+                        {getEnergySymbol(cost)}
+                      </span>
+                    ))}
+                  </div>
+                  <p>{attack.damage}</p>
                 </div>
+                <div>{attack.text}</div>
               </div>
             ))}
           </div>
@@ -110,10 +143,8 @@ export default async function CardPage({
 
         {/* Trainer Card Text */}
         {cardDetails.superType === "Trainer" && (
-          <div className="p-6 bg-blue-100 rounded-md shadow-md">
-            <h2 className="text-xl font-bold text-blue-800">Text</h2>
-            <p className="text-lg mt-4 text-gray-700">
-              <strong className="block mb-2"></strong>{" "}
+          <div>
+            <p className="p-4 border rounded-md my-2">
               {cardDetails.trainerCardText}
             </p>
           </div>
@@ -123,10 +154,10 @@ export default async function CardPage({
         {cardDetails.superType === "Pokémon" && (
           <div>
             <p>
-              <strong>Weakness:</strong>
-              <p className="energy-icon">
+              <strong className="mr-1">Weakness:</strong>
+              <span className="energy-icon relative top-0.5">
                 {getEnergySymbol(cardDetails.weakness[0])}
-              </p>
+              </span>
             </p>
             <p>
               <strong>Resistance:</strong> {cardDetails.resistance}

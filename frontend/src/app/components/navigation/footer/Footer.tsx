@@ -17,13 +17,13 @@ const Footer = () => {
                   <p className="hover:text-orange-400">Home</p>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/articles">
                   <p className="hover:text-orange-400">Articles</p>
                 </Link>
-              </li>
+              </li> */}
               <li>
-                <Link href="/cards">
+                <Link href="/sets/all">
                   <p className="hover:text-orange-400">Cards</p>
                 </Link>
               </li>
@@ -32,7 +32,7 @@ const Footer = () => {
                   <p className="hover:text-orange-400">Sets</p>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/decks">
                   <p className="hover:text-orange-400">Decks</p>
                 </Link>
@@ -41,7 +41,7 @@ const Footer = () => {
                 <Link href="/meta">
                   <p className="hover:text-orange-400">Meta</p>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           {/* Column 3: About Data */}

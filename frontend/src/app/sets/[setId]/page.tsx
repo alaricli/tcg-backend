@@ -138,9 +138,19 @@ export default function SetPage({
     return packOptions.default;
   };
 
+  const headerColorOptions: Record<string, string> = {
+    A1: "bg-gradient-to-r from-[rgb(173,40,200)] via-[rgb(142,28,233)] to-[rgb(22,20,171)]",
+    "P-A":
+      "bg-gradient-to-r from-[rgb(41,93,230)] via-[rgb(26,21,95)] to-[rgb(17,47,193)]",
+    default: "bg-gradient-to-r from-[rgb(255,223,0)] to-[rgb(0,105,180)]",
+  };
+
   return (
     <div className="min-h-screen">
-      <header className="bg-gradient-to-r from-indigo-500 to-pink-400 shadow-md py-4 px-6 flex items-center justify-between w-full">
+      <header
+        className={`${headerColorOptions[setId] || headerColorOptions.default}
+        shadow-md py-4 px-6 flex items-center justify-between w-full`}
+      >
         <div className="flex items-center h-24 w-24 overflow-hidden">
           {expansionDetails?.expansionImages?.logo && (
             <Image
@@ -172,17 +182,19 @@ export default function SetPage({
       <div className="flex">
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className="w-full bg-gray-700 text-white py-2"
+          className="w-full bg-gray-700 text-white py-2 font-semibold"
         >
           Toggle Filters
-          <div>{showFilters ? <span>↑</span> : <span>↓</span>}</div>
+          <div>
+            <span className="font-semibold">{showFilters ? "▲" : "▼"}</span>
+          </div>
         </button>
       </div>
 
       {/* Filter Section */}
       {showFilters && (
-        <div className="p-6 bg-white shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          <label className="block mb-2 text-sm font-medium text-gray-700">
+        <div className="p-6 shadow-md grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <label className="block mb-2 text-sm font-medium">
             Select Set ID:
           </label>
           <select
@@ -191,19 +203,19 @@ export default function SetPage({
               updateFilter("expansionId", e.target.value);
               setSetId(e.target.value);
             }}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="A1">Genetic Apex</option>
             <option value="P-A">Promo A</option>
           </select>
 
-          <label className="block mb-2 text-sm font-medium text-gray-700">
+          <label className="block mb-2 text-sm font-medium ">
             Select Pack:
           </label>
           <select
             onChange={(e) => updateFilter("packId", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             {getPackOptions(setId).map((option) => (
@@ -213,30 +225,28 @@ export default function SetPage({
             ))}
           </select>
 
-          <label className="block mb-2 text-sm font-medium text-gray-700">
-            Search:
-          </label>
-          <div>
+          <label className="block mb-2 text-sm font-medium">Search:</label>
+          <div className="flex items-center border w-full bg-white shadow-sm rounded-md ">
             <input
-              placeholder="search..."
-              className="border p-2 rounded-md"
+              placeholder="Search..."
+              className="p-2 flex-grow outline-none text-gray-900"
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
             />
             <button
               onClick={() => updateFilter("searchText", searchText)}
-              className="bg-blue-500 p-2"
+              className="bg-blue-500 p-2 rounded-r-md hover:bg-blue-600 transition"
             >
               Search
             </button>
           </div>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Rarity:
           </label>
           <select
             onChange={(e) => updateFilter("rarity", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="Common">Common</option>
@@ -250,12 +260,12 @@ export default function SetPage({
             <option value="Crown Rare">Crown Rare</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Type:
           </label>
           <select
             onChange={(e) => updateFilter("energyType", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="Fire">Fire</option>
@@ -271,12 +281,12 @@ export default function SetPage({
             <option value="Colorless">Colorless</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Weakness:
           </label>
           <select
             onChange={(e) => updateFilter("weakness", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="Fire">Fire</option>
@@ -292,48 +302,48 @@ export default function SetPage({
             <option value="Colorless">Colorless</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Ability:
           </label>
           <select
             onChange={(e) => updateFilter("hasAbility", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Rule Box (ex):
           </label>
           <select
             onChange={(e) => updateFilter("hasRuleBox", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="true">Yes</option>
             <option value="false">No</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Card Category:
           </label>
           <select
             onChange={(e) => updateFilter("superType", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="Pokémon">Pokémon</option>
             <option value="Trainer">Trainer</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Card Type:
           </label>
           <select
             onChange={(e) => updateFilter("subType", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="Basic">Basic</option>
@@ -345,12 +355,12 @@ export default function SetPage({
             <option value="Fossil">Fossil</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
+          <label className="block mt-4 mb-2 text-sm font-medium ">
             Filter by Retreat Cost:
           </label>
           <select
             onChange={(e) => updateFilter("retreatCost", e.target.value)}
-            className="p-2 border rounded-md"
+            className="p-2 border rounded-md text-gray-900"
           >
             <option value="">All</option>
             <option value="0">0</option>
@@ -361,31 +371,31 @@ export default function SetPage({
             <option value="5">5</option>
           </select>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-            Sort By:
-          </label>
-          <select
-            onChange={(e) => updateFilter("sortBy", e.target.value)}
-            className="p-2 border rounded-md"
-          >
-            <option value="">Default (id)</option>
-            <option value="name">Name</option>
-            <option value="nationalDexNumber">Nat Dex Number</option>
-            <option value="rarity">Rarity</option>
-            <option value="type">Energy Type</option>
-            <option value="superType">Card Type</option>
-          </select>
+          <div className="flex mb-2 text-sm font-medium space-x-4">
+            <label className="whitespace-nowrap">Sort By:</label>
+            <select
+              onChange={(e) => updateFilter("sortBy", e.target.value)}
+              className="p-2 border rounded-md text-gray-900 w-full"
+            >
+              <option value="">Default (id)</option>
+              <option value="name">Name</option>
+              <option value="nationalDexNumber">Nat Dex Number</option>
+              <option value="rarity">Rarity</option>
+              <option value="type">Energy Type</option>
+              <option value="superType">Card Type</option>
+            </select>
+          </div>
 
-          <label className="block mt-4 mb-2 text-sm font-medium text-gray-700">
-            Sort Direction:
-          </label>
-          <select
-            onChange={(e) => updateFilter("sortDirection", e.target.value)}
-            className="p-2 border rounded-md"
-          >
-            <option value="">Ascending</option>
-            <option value="DESC">Descending</option>
-          </select>
+          <div className="flex mb-2 text-sm font-medium space-x-4">
+            <label className="whitespace-nowrap">Sort Direction:</label>
+            <select
+              onChange={(e) => updateFilter("sortDirection", e.target.value)}
+              className="p-2 border rounded-md text-gray-900 w-full"
+            >
+              <option value="">Ascending</option>
+              <option value="DESC">Descending</option>
+            </select>
+          </div>
         </div>
       )}
 
@@ -409,7 +419,7 @@ export default function SetPage({
                   height={250}
                   width={250}
                 />
-                <div className="flex justify-between w-full p-4">
+                <div className="flex justify-between w-full p-2 mt-2">
                   <p className="text-lg font-semibold">{card.name}</p>
                   <p className="text-sm text-gray-500">{card.id}</p>
                 </div>
