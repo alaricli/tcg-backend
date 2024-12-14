@@ -24,14 +24,11 @@ hs_err_pid*
 replay_pid*
 
 src/main/resources/application.properties
-target/classes/application.properties
 docker-compose.yml
-.idea/!/src/main/java/com/competition/competition/controller/TestController.java
+.idea
 .vscode
 frontend-admin/node_modules
-frontend/node_modules
 frontend/.next!/src/test/resources/application-test.properties
-!/src/test/resources/application-test.properties
-!/src/main/resources/application-prod.properties
 !/src/main/resources/
 !/src/test/resources/
+target
