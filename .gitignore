@@ -1,3 +1,6 @@
+# Ignore macOS system files
+.DS_Store
+
 # Compiled class file
 *.class
 
@@ -32,5 +35,3 @@ frontend/.next!/src/test/resources/application-test.properties
 !/src/main/resources/
 !/src/test/resources/
 target
-
-.DS_Store
