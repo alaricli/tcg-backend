@@ -11,9 +11,12 @@ public class Deck {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "archetype_id", nullable = false)
+    private Archetype archetype;
     private String name;
+    private String author;
     private Float totalPrice;
-    private Integer wins;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
@@ -47,19 +50,27 @@ public class Deck {
         this.totalPrice = totalPrice;
     }
 
-    public Integer getWins() {
-        return wins;
-    }
-
-    public void setWins(Integer wins) {
-        this.wins = wins;
-    }
-
     public List<Card> getCards() {
         return cards;
     }
 
     public void setCards(List<Card> cards) {
         this.cards = cards;
+    }
+
+    public Archetype getArchetype() {
+        return archetype;
+    }
+
+    public void setArchetype(Archetype archetype) {
+        this.archetype = archetype;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }

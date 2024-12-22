@@ -20,7 +20,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configs = new CorsConfiguration();
-        configs.setAllowedOrigins(Arrays.asList("http://localhost", "https://www.ptcgpocket.net", "https://ptcgpocket.net"));
+        configs.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://www.ptcgpocket.net", "https://ptcgpocket.net"));
         configs.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configs.setAllowedHeaders(Arrays.asList("*"));
         configs.setAllowCredentials(true);
