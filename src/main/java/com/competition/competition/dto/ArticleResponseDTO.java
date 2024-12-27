@@ -1,29 +1,19 @@
-package com.competition.competition.entity;
+package com.competition.competition.dto;
 
-import jakarta.persistence.*;
+import com.competition.competition.entity.ArticleContent;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "article_id"))
-    @Column(name = "tags")
-    private List<String> tags;
+public class ArticleResponseDTO {
+    public Long id;
+    private String title;
     private String created_at;
     private String updated_at;
     private String author;
     private String slug;
-    private String title;
     private String image;
-
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("position ASC")
-    private List<ArticleContent> contents = new ArrayList<>();
+    private List<String> tags;
+    private List<ArticleContentResponseDTO> contents;
 
     public Long getId() {
         return id;
@@ -31,6 +21,14 @@ public class Article {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCreated_at() {
@@ -65,28 +63,20 @@ public class Article {
         this.slug = slug;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public List<ArticleContent> getContents() {
-        return contents;
-    }
-
-    public void setContents(List<ArticleContent> contents) {
-        this.contents = contents;
-    }
-
     public List<String> getTags() {
         return tags;
     }
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public List<ArticleContentResponseDTO> getContents() {
+        return contents;
+    }
+
+    public void setContents(List<ArticleContentResponseDTO> contents) {
+        this.contents = contents;
     }
 
     public String getImage() {

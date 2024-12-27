@@ -1,36 +1,26 @@
-package com.competition.competition.entity;
+package com.competition.competition.dto;
 
-import jakarta.persistence.*;
+import com.competition.competition.entity.ArticleContent;
+import jakarta.persistence.Column;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-public class Article {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "article_id"))
-    @Column(name = "tags")
-    private List<String> tags;
+public class ArticleRequestDTO {
+    private String title;
     private String created_at;
     private String updated_at;
     private String author;
-    private String slug;
-    private String title;
     private String image;
+    private String slug;
+    private List<String> tags;
+    private List<ArticleContent> contents;
 
-    @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OrderBy("position ASC")
-    private List<ArticleContent> contents = new ArrayList<>();
-
-    public Long getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCreated_at() {
@@ -65,12 +55,12 @@ public class Article {
         this.slug = slug;
     }
 
-    public String getTitle() {
-        return title;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
     public List<ArticleContent> getContents() {
@@ -79,14 +69,6 @@ public class Article {
 
     public void setContents(List<ArticleContent> contents) {
         this.contents = contents;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
     }
 
     public String getImage() {

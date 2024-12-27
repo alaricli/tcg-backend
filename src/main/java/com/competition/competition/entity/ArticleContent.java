@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 public class ArticleContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "article_content_id")
     private Long id;
     @ManyToOne
     @JoinColumn(name = "article_id", nullable = false)

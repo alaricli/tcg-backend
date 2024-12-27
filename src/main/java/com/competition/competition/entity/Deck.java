@@ -9,7 +9,6 @@ import java.util.List;
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "archetype_id", nullable = false)
@@ -18,13 +17,8 @@ public class Deck {
     private String author;
     private Float totalPrice;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "deck_card",
-            joinColumns = @JoinColumn(name = "deck_id"),
-            inverseJoinColumns = @JoinColumn(name = "card_id")
-    )
-    private List<Card> cards;
+    @OneToMany(mappedBy = "deck", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DeckCard> cards;
 
     public Long getId() {
         return id;
@@ -50,11 +44,11 @@ public class Deck {
         this.totalPrice = totalPrice;
     }
 
-    public List<Card> getCards() {
+    public List<DeckCard> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
+    public void setCards(List<DeckCard> cards) {
         this.cards = cards;
     }
 

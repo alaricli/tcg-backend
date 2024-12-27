@@ -1,35 +1,17 @@
-package com.competition.competition.entity;
-
-import jakarta.persistence.*;
+package com.competition.competition.dto;
 
 import java.util.List;
 
-@Entity
-public class Archetype {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ArchetypeResponseDTO {
     private Long id;
     private String name;
     private String tier;
-    @Column(unique = true, nullable = false)
     private Integer ranking;
     private Integer wins;
     private String image;
     private String category;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "archetype_pokemons", joinColumns = @JoinColumn(name = "archetype_id"))
-    @Column(name = "archetype_pokemons")
     private List<String> pokemons;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "archetype_pokemonsImages", joinColumns = @JoinColumn(name = "archetype_id"))
-    @Column(name = "archetype_pokemonsImages")
     private List<String> pokemonsImages;
-
-    @ElementCollection(fetch = FetchType.LAZY)
-    @CollectionTable(name = "archetype_energy_types_icons", joinColumns = @JoinColumn(name = "card_id"))
-    @Column(name = "archetype_energy_types_icons")
     private List<String> energyTypesIcons;
 
     public Long getId() {
@@ -100,8 +82,8 @@ public class Archetype {
         return energyTypesIcons;
     }
 
-    public void setEnergyTypesIcons(List<String> energyTypes) {
-        this.energyTypesIcons = energyTypes;
+    public void setEnergyTypesIcons(List<String> energyTypesIcons) {
+        this.energyTypesIcons = energyTypesIcons;
     }
 
     public String getCategory() {
