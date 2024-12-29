@@ -29,6 +29,7 @@ public class ArticleService {
             article.setSlug(request.getSlug());
             article.setAuthor(request.getAuthor());
             article.setImage(request.getImage());
+            article.setBlurb(request.getBlurb());
 
             List<ArticleContent> contents = request.getContents().stream().map(articleContent -> {
                 ArticleContent content = new ArticleContent();
@@ -89,6 +90,8 @@ public class ArticleService {
         response.setSlug(article.getSlug());
         response.setAuthor(article.getAuthor());
         response.setImage(article.getImage());
+        response.setTags(article.getTags());
+        response.setBlurb(article.getBlurb());
         return response;
     }
 
@@ -101,6 +104,8 @@ public class ArticleService {
         response.setSlug(article.getSlug());
         response.setAuthor(article.getAuthor());
         response.setImage(article.getImage());
+        response.setTags(article.getTags());
+        response.setBlurb(article.getBlurb());
         return response;
     }
 

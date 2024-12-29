@@ -32,6 +32,11 @@ public class DeckService {
             deck.setName(deckRequest.getName());
             deck.setAuthor(deckRequest.getAuthor());
             deck.setTotalPrice(deckRequest.getTotalPrice());
+            deck.setImage(deckRequest.getImage());
+            deck.setDescription(deckRequest.getDescription());
+            deck.setVariant(deckRequest.getVariant());
+            deck.setVariant_pokemons(deckRequest.getVariant_pokemons());
+            deck.setVariant_pokemons_images(deckRequest.getVariant_pokemons_images());
 
             List<DeckCard> deckCards = deckRequest.getCards().stream().map(cardRequest -> {
                 DeckCard deckCard = new DeckCard();
@@ -50,6 +55,17 @@ public class DeckService {
 
     public List<DeckResponseDTO> getDecks() {
         List<Deck> decks = deckRepository.findAll();
+        List<DeckResponseDTO> deckResponses = new ArrayList<>();
+        for (Deck deck : decks) {
+            DeckResponseDTO deckResponse = DeckResponseMapper.map(deck);
+            deckResponses.add(deckResponse);
+        }
+
+        return deckResponses;
+    }
+
+    public List<DeckResponseDTO> getDecksByArchetype(Long archetypeId) {
+        List<Deck> decks = deckRepository.findByArchetypeId(archetypeId);
         List<DeckResponseDTO> deckResponses = new ArrayList<>();
         for (Deck deck : decks) {
             DeckResponseDTO deckResponse = DeckResponseMapper.map(deck);

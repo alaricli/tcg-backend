@@ -31,6 +31,12 @@ public class DeckController {
         return new ResponseEntity<>(decks, HttpStatus.OK);
     }
 
+    @GetMapping("/get/decks/{archetypeId}")
+    public ResponseEntity<List<DeckResponseDTO>> getDecksByArchetypeId(@PathVariable Long archetypeId) {
+        List<DeckResponseDTO> decks = deckService.getDecksByArchetype(archetypeId);
+        return new ResponseEntity<>(decks, HttpStatus.OK);
+    }
+
     @GetMapping("/get/deck/{id}")
     public ResponseEntity<DeckResponseDTO> getDeckById(@PathVariable Long id) {
         DeckResponseDTO deck = deckService.getDeck(id);

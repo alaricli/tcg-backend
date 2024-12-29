@@ -17,6 +17,9 @@ public class CardResponseDTO {
     private Double marketPrice;
     private List<String> rules;
     private String expansionId; // Reference to the expansion by ID
+    private String expansionName;
+    private String expansionLogo;
+    private String expansionSymbol;
     private Integer cardNumber;
     private String rarity;
     private String superType;
@@ -313,5 +316,29 @@ public class CardResponseDTO {
 
     public void setEvolvesTo(Integer evolvesTo) {
         this.evolvesTo = evolvesTo;
+    }
+
+    public String getExpansionName() {
+        return expansionName;
+    }
+
+    public void setExpansionName(String expansionName) {
+        this.expansionName = expansionName;
+    }
+
+    public String getExpansionLogo() {
+        return expansionLogo;
+    }
+
+    public void setExpansionLogo(String expansionLogo) {
+        this.expansionLogo = expansionLogo;
+    }
+
+    public String getExpansionSymbol() {
+        return expansionSymbol;
+    }
+
+    public void setExpansionSymbol(String expansionSymbol) {
+        this.expansionSymbol = expansionSymbol;
     }
 }

@@ -38,6 +38,9 @@ public class CardResponseMapper {
         cardResponseDTO.setEvolvesFrom(card.getEvolvesFrom());
         cardResponseDTO.setEvolvesTo(card.getEvolvesTo());
         cardResponseDTO.setMainType(card.getMainType());
+        cardResponseDTO.setExpansionLogo(card.getExpansion().getExpansionImages().getLogo());
+        cardResponseDTO.setExpansionSymbol(card.getExpansion().getExpansionImages().getSymbol());
+        cardResponseDTO.setExpansionName(card.getExpansion().getName());
         return cardResponseDTO;
     }
 }

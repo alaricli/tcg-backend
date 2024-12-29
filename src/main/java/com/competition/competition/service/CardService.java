@@ -37,6 +37,32 @@ public class CardService {
         return cardRepository.saveAll(cards);
     }
 
+    public List<CardResponseSimplifiedDTO> getAllSimplifiedCards() {
+        List<Card> cards = cardRepository.findAll();
+        List<CardResponseSimplifiedDTO> simplifiedCards = new ArrayList<>();
+
+        for (Card card : cards) {
+            CardResponseSimplifiedDTO cardResponseSimplifiedDTO = new CardResponseSimplifiedDTO(
+                    card.getId(), card.getName(), card.getCardImages().getSmall()
+            );
+            simplifiedCards.add(cardResponseSimplifiedDTO);
+        }
+
+        return simplifiedCards;
+    }
+
+    public List<CardResponseDTO> getAllCards() {
+        List<Card> cards = cardRepository.findAll();
+        List<CardResponseDTO> simplifiedCards = new ArrayList<>();
+
+        for (Card card : cards) {
+            CardResponseDTO cardResponseDTO = CardResponseMapper.toCardResponse(card);
+            simplifiedCards.add(cardResponseDTO);
+        }
+
+        return simplifiedCards;
+    }
+
     public List<CardResponseSimplifiedDTO> queryCards(String expansionId,
                                                       String packId,
                                                       String searchText,
@@ -49,7 +75,9 @@ public class CardService {
                                                       String superType,
                                                       String subType,
                                                       String sortBy,
-                                                      String sortDirection
+                                                      String sortDirection,
+                                                      Integer page,
+                                                      Integer pageSize
     ) {
         StringBuilder queryBuilder = new StringBuilder("""
                     SELECT c.id, c.name, c.small
@@ -89,7 +117,7 @@ public class CardService {
         if (rarity != null) queryBuilder.append(" AND LOWER(c.rarity) = LOWER(:rarity)");
         if (hasAbility != null) queryBuilder.append(" AND c.has_ability = :hasAbility");
         if (hasRuleBox != null) queryBuilder.append(" AND c.has_rule_box = :hasRuleBox");
-        if (energyType != null) queryBuilder.append(" AND c.main_type = :energyType");
+        if (energyType != null) queryBuilder.append(" AND e.energy_types = :energyType");
         if (weakness != null) queryBuilder.append(" AND w.weakness_types = :weakness");
         if (retreatCost != null) queryBuilder.append(" AND c.retreat_cost = :retreatCost");
         if (superType != null) queryBuilder.append(" AND c.super_type = :superType");
@@ -139,6 +167,10 @@ public class CardService {
         if (retreatCost != null) query.setParameter("retreatCost", retreatCost);
         if (superType != null) query.setParameter("superType", superType);
         if (subType != null) query.setParameter("subType", subType);
+
+        int offset = (page - 1) * pageSize;
+        query.setFirstResult(offset);
+        query.setMaxResults(pageSize);
 
         return query.getResultList();
     }

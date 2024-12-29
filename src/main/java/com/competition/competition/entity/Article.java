@@ -3,6 +3,7 @@ package com.competition.competition.entity;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,12 +15,13 @@ public class Article {
     @CollectionTable(name = "tags", joinColumns = @JoinColumn(name = "article_id"))
     @Column(name = "tags")
     private List<String> tags;
-    private String created_at;
-    private String updated_at;
+    private Date created_at;
+    private Date updated_at;
     private String author;
     private String slug;
     private String title;
     private String image;
+    private String blurb;
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("position ASC")
@@ -33,19 +35,19 @@ public class Article {
         this.id = id;
     }
 
-    public String getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
 
@@ -95,5 +97,13 @@ public class Article {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getBlurb() {
+        return blurb;
+    }
+
+    public void setBlurb(String blurb) {
+        this.blurb = blurb;
     }
 }

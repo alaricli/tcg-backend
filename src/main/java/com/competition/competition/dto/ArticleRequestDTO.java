@@ -1,19 +1,28 @@
 package com.competition.competition.dto;
 
 import com.competition.competition.entity.ArticleContent;
-import jakarta.persistence.Column;
 
+import java.util.Date;
 import java.util.List;
 
 public class ArticleRequestDTO {
     private String title;
-    private String created_at;
-    private String updated_at;
+    private Date created_at;
+    private Date updated_at;
     private String author;
     private String image;
     private String slug;
+    private String blurb;
     private List<String> tags;
     private List<ArticleContent> contents;
+
+    public String getBlurb() {
+        return blurb;
+    }
+
+    public void setBlurb(String blurb) {
+        this.blurb = blurb;
+    }
 
     public String getTitle() {
         return title;
@@ -23,19 +32,19 @@ public class ArticleRequestDTO {
         this.title = title;
     }
 
-    public String getCreated_at() {
+    public Date getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
 
-    public String getUpdated_at() {
+    public Date getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(String updated_at) {
+    public void setUpdated_at(Date updated_at) {
         this.updated_at = updated_at;
     }
 

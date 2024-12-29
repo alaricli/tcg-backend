@@ -35,6 +35,16 @@ public class CardController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/get/all/cards/simplified")
+    public ResponseEntity<List<CardResponseSimplifiedDTO>> getAllCardsSimplified() {
+        return ResponseEntity.ok(cardService.getAllSimplifiedCards());
+    }
+
+    @GetMapping("/get/all/cards/full")
+    public ResponseEntity<List<CardResponseDTO>> getAllCardsFull() {
+        return ResponseEntity.ok(cardService.getAllCards());
+    }
+
     @GetMapping("/get/cards")
     public ResponseEntity<List<CardResponseSimplifiedDTO>> getCardSummaries(@RequestParam(required = false) String expansionId,
                                                                             @RequestParam(required = false) String packId,
@@ -48,10 +58,12 @@ public class CardController {
                                                                             @RequestParam(required = false) String superType,
                                                                             @RequestParam(required = false) String subType,
                                                                             @RequestParam(required = false) String sortBy,
-                                                                            @RequestParam(required = false) String sortDirection
+                                                                            @RequestParam(required = false) String sortDirection,
+                                                                            @RequestParam(defaultValue = "1") Integer page,
+                                                                            @RequestParam(defaultValue = "40") Integer pageSize
     ) {
         List<CardResponseSimplifiedDTO> cards = cardService.queryCards(
-                expansionId, packId, searchText, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType, sortBy, sortDirection);
+                expansionId, packId, searchText, rarity, hasAbility, hasRuleBox, energyType, weakness, retreatCost, superType, subType, sortBy, sortDirection, page, pageSize);
         return ResponseEntity.ok(cards);
     }
 

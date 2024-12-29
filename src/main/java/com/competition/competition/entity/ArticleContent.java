@@ -12,6 +12,7 @@ public class ArticleContent {
     @JoinColumn(name = "article_id", nullable = false)
     private Article article;
     private String contentType;
+    @Column(columnDefinition = "TEXT")
     private String content;
     private Integer position;
 

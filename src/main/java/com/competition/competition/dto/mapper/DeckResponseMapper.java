@@ -17,6 +17,11 @@ public class DeckResponseMapper {
         deckResponseDTO.setArchetypeId(deck.getArchetype().getId());
         deckResponseDTO.setCards(mapCards(deck.getCards()));
         deckResponseDTO.setTotalPrice(deck.getTotalPrice());
+        deckResponseDTO.setImage(deck.getImage());
+        deckResponseDTO.setDescription(deck.getDescription());
+        deckResponseDTO.setVariant(deck.getVariant());
+        deckResponseDTO.setVariant_pokemons(deck.getVariant_pokemons());
+        deckResponseDTO.setVariant_pokemons_images(deck.getVariant_pokemons_images());
 
         return deckResponseDTO;
     }
