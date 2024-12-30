@@ -1,2 +1,3 @@
-# professorsresearchtcg.com
-building a web application for archiving competition play information regarding the Pokemon TCG card game
+# tcg-backend
+
+Building web applications for archiving competition play information, discussing strategies and querying other information regarding the Pokémon TCG card game.
